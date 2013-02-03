@@ -1,0 +1,2 @@
+serviceClass: com.airshiplay.mobile.client.GreetingService
+path: 8F707CA32D8F23A33118478D7E84463C.gwt.rpc
