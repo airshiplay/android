@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainUI"
-            android:label="@string/title_activity_main_ui" >
+            android:label="@string/title_activity_main_ui" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
         </activity>
 
         <receiver
-            android:name="com.airshiplay.mobile.battery.control.BatteryBroadcastReceiver"
+            android:name=".BatteryBroadcastReceiver"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
