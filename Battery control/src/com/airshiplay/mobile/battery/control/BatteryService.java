@@ -17,7 +17,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
@@ -28,7 +27,8 @@ import android.widget.Toast;
  * @version 1.0
  * @since 1.0 2013-2-4
  */
-public class BatteryService extends Service {
+public class BatteryService extends Service implements View.OnTouchListener,
+		View.OnClickListener, View.OnLongClickListener {
 
 	private static final String tag = "BatteryService";
 	private int statusBarHeight;// 状态栏高度
@@ -41,6 +41,13 @@ public class BatteryService extends Service {
 	private int scale;
 	private int status;
 	private TextView content;
+	float[] temp = new float[] { 0f, 0f };
+	private float mTouchX;
+	private float mTouchY;
+	private float y;
+	private float x;
+	private float mStartX;
+	private float mStartY;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -59,31 +66,60 @@ public class BatteryService extends Service {
 		 * LayoutParams.FLAG_NOT_FOCUSABLE:该浮动窗不会获得焦点，但可以获得拖动
 		 * PixelFormat.TRANSPARENT：悬浮窗透明
 		 */
-		layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, LayoutParams.TYPE_SYSTEM_ERROR, LayoutParams.FLAG_NOT_FOCUSABLE,
-				PixelFormat.TRANSPARENT);
+		layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT, LayoutParams.TYPE_SYSTEM_ERROR,
+				LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSPARENT);
 		layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
 
-		view.setOnTouchListener(new OnTouchListener() {
-			float[] temp = new float[] { 0f, 0f };
-
-			public boolean onTouch(View v, MotionEvent event) {
-				layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-				int eventaction = event.getAction();
-				switch (eventaction) {
-				case MotionEvent.ACTION_DOWN: // 按下事件，记录按下时手指在悬浮窗的XY坐标值
-					temp[0] = event.getX();
-					temp[1] = event.getY();
-					break;
-
-				case MotionEvent.ACTION_MOVE:
-					refreshView((int) (event.getRawX() - temp[0]), (int) (event.getRawY() - temp[1]));
-					break;
-				}
-				return true;
-			}
-		});
+		view.setOnTouchListener(this);
+		view.setOnClickListener(this);
 		mBatteryChangedReceiver = new BatteryChangedReceiver();
-		registerReceiver(mBatteryChangedReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+		registerReceiver(mBatteryChangedReceiver, new IntentFilter(
+				Intent.ACTION_BATTERY_CHANGED));
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
+		int eventaction = event.getAction();
+		Rect frame = new Rect();
+		v.getWindowVisibleDisplayFrame(frame);
+		int statusBarHeight = frame.top;
+		x = event.getRawX();
+		y = event.getRawY() - statusBarHeight;
+		switch (eventaction) {
+		case MotionEvent.ACTION_DOWN: // 按下事件，记录按下时手指在悬浮窗的XY坐标值
+			mTouchX = event.getX();
+			mTouchY = event.getY();
+			mStartX = x;
+			mStartY = y;
+			break;
+
+		case MotionEvent.ACTION_MOVE:
+			updateViewPosition();
+			break;
+		case MotionEvent.ACTION_UP:
+			updateViewPosition();
+			mTouchX = mTouchY = 0;
+			if ((x - mStartX) < 5 && (y - mStartY) < 5) {
+				v.performClick();
+			}
+			break;
+		}
+		return true;
+
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
+
+		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+		startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY)
+				.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 	}
 
 	@Override
@@ -101,7 +137,8 @@ public class BatteryService extends Service {
 		if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
 			level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
 			scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
-			status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
+			status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
+					BatteryManager.BATTERY_STATUS_UNKNOWN);
 			double value = (level * 1.0 / scale);
 			switch (status) {
 			case BatteryManager.BATTERY_STATUS_CHARGING:
@@ -120,23 +157,34 @@ public class BatteryService extends Service {
 				content.setText(R.string.battery_status_unknown);
 				break;
 			}
-			content.setText(content.getText().toString() + NumberFormat.getPercentInstance().format(value));
+			content.setText(content.getText().toString()
+					+ NumberFormat.getPercentInstance().format(value));
 		} else if (Intent.ACTION_BATTERY_LOW.equals(intent.getAction())) {
-			Toast.makeText(this, R.string.battery_low, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.battery_low, Toast.LENGTH_LONG)
+					.show();
 		} else if (Intent.ACTION_BATTERY_OKAY.equals(intent.getAction())) {
 			Toast.makeText(this, R.string.battery_ok, Toast.LENGTH_LONG).show();
 		} else if (Intent.ACTION_POWER_CONNECTED.equals(intent.getAction())) {
-			Toast.makeText(this, R.string.power_connected, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.power_connected, Toast.LENGTH_LONG)
+					.show();
 		} else if (Intent.ACTION_POWER_DISCONNECTED.equals(intent.getAction())) {
-			Toast.makeText(this, R.string.power_disconnected, Toast.LENGTH_LONG).show();
-		}else if(Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())){
-			
-		}else if(Intent.ACTION_PACKAGE_REPLACED.equals(intent.getAction())){
-			
-		}else if(Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())){
-			
+			Toast.makeText(this, R.string.power_disconnected, Toast.LENGTH_LONG)
+					.show();
+		} else if (Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())) {
+
+		} else if (Intent.ACTION_PACKAGE_REPLACED.equals(intent.getAction())) {
+
+		} else if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+
 		}
 		Log.d(tag, intent.getAction());
+	}
+
+	private void updateViewPosition() {
+		// 更新浮动窗口位置参数
+		layoutParams.x = (int) (x - mTouchX);
+		layoutParams.y = (int) (y - mTouchY);
+		refresh(); // 刷新显示
 	}
 
 	/**
@@ -199,4 +247,5 @@ public class BatteryService extends Service {
 		}
 
 	}
+
 }

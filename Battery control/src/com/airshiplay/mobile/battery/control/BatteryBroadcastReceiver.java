@@ -3,8 +3,6 @@ package com.airshiplay.mobile.battery.control;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * @author lig
@@ -12,7 +10,7 @@ import android.widget.Toast;
  * @since 1.0 2013-2-4
  */
 public class BatteryBroadcastReceiver extends BroadcastReceiver {
-	private static final String tag = "BatteryBroadcastReceiver";
+	//private static final String tag = "BatteryBroadcastReceiver";
  
 	@Override
 	public void onReceive(Context context, Intent intent) {
