@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 
 /**
- * @author li
- *
+ * @author lig
+ * @version 1.0
+ * @since 1.0 2013-2-4
  */
 public class MainUI extends Activity {
 
@@ -15,6 +16,7 @@ public class MainUI extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		//startService(new Intent(this,BatteryService.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 	}
 
 	@Override

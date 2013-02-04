@@ -3,6 +3,16 @@
     <string name="app_name">Battery control</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main_ui">MainUI</string>
-
+    <string name="title_activity_main_ui">电池控制</string>
+    
+    <string name="init">初始化</string>
+	<string name="battery_low">电量过低</string>
+	<string name="battery_ok">电池充满</string>
+	<string name="power_connected">电源连接</string>
+	<string name="power_disconnected">电源未连接</string>
+	<string name="battery_status_changing">充电中</string>
+	<string name="battery_status_dischanging">放电中</string>
+	<string name="battery_status_full">充电完成</string>
+	<string name="battery_status_not_changing">未充电</string>
+	<string name="battery_status_unknown">未知状态</string>
 </resources>
