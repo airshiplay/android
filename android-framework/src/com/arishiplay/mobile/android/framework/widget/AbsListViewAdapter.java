@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
  * @version 1.0
  * @since 1.0
  */
-public class AbsListViewAdapter extends BaseAdapter {
+public abstract class AbsListViewAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
