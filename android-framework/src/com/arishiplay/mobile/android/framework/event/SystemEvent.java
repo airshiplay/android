@@ -2,11 +2,12 @@ package com.arishiplay.mobile.android.framework.event;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import android.util.SparseArray;
 
 import com.arishiplay.mobile.android.framework.util.Log;
+import com.arishiplay.mobile.android.framework.util.LogFactory;
 
 /**
  * 自定义事件,在各个Activity中实现接收处理
@@ -38,11 +39,11 @@ public class SystemEvent {
 	public static final int EVENT_TYPE_RING_PLAYSTATE = 22;
 	public static final int EVENT_TYPE_RING_STOP = 21;
 
-	private static final Log log = Log.LogFactory.getLog(SystemEvent.class);
+	private static final Log log = LogFactory.getLog(SystemEvent.class);
 
-	private static Map<Integer, List<WeakReference<EventListener>>> mEventMap = new HashMap<Integer, List<WeakReference<EventListener>>>();
+	private static SparseArray<List<WeakReference<EventListener>>> mEventMap = new SparseArray<List<WeakReference<EventListener>>>();
 
-	private static Map<Integer, List<WeakReference<PreEventListener>>> mPreEventMap = new HashMap<Integer, List<WeakReference<PreEventListener>>>();
+	private static SparseArray<List<WeakReference<PreEventListener>>> mPreEventMap = new SparseArray<List<WeakReference<PreEventListener>>>();
 
 	public static void addListener(int eventType, EventListener eventListener) {
 		List<WeakReference<EventListener>> list = mEventMap.get(eventType);
@@ -50,10 +51,13 @@ public class SystemEvent {
 			list = new ArrayList<WeakReference<EventListener>>();
 		list.add(new WeakReference<EventListener>(eventListener));
 		mEventMap.put(eventType, list);
+		log.debug("addListener-eventType="+eventType);
 	}
 
-	public static void addPreListener(int eventType, PreEventListener preEventListener) {
-		List<WeakReference<PreEventListener>> list = mPreEventMap.get(eventType);
+	public static void addPreListener(int eventType,
+			PreEventListener preEventListener) {
+		List<WeakReference<PreEventListener>> list = mPreEventMap
+				.get(eventType);
 		if (list == null)
 			list = new ArrayList<WeakReference<PreEventListener>>();
 		list.add(new WeakReference<PreEventListener>(preEventListener));
@@ -70,7 +74,8 @@ public class SystemEvent {
 			if (type != eventType)
 				throw new RuntimeException("Event type does not match!");
 		}
-		List<WeakReference<PreEventListener>> preEventList = mPreEventMap.get(eventType);
+		List<WeakReference<PreEventListener>> preEventList = mPreEventMap
+				.get(eventType);
 		if (preEventList != null) {
 			for (int i = 0; i < preEventList.size(); i++) {
 				PreEventListener preEvent = preEventList.get(i).get();
@@ -101,8 +106,10 @@ public class SystemEvent {
 		}
 	}
 
-	public static void removePreListener(int eventType, PreEventListener preEventListener) {
-		List<WeakReference<PreEventListener>> list = mPreEventMap.get(eventType);
+	public static void removePreListener(int eventType,
+			PreEventListener preEventListener) {
+		List<WeakReference<PreEventListener>> list = mPreEventMap
+				.get(eventType);
 		if (list == null)
 			return;
 		for (int i = 0; i < list.size(); i++) {
@@ -114,19 +121,27 @@ public class SystemEvent {
 	}
 
 	public abstract interface EventListener {
-		public abstract void onEvent(int eventType, SystemEvent.EventTypeData eventTypeData);
+		public abstract void onEvent(int eventType,
+				SystemEvent.EventTypeData eventTypeData);
 	}
 
 	public abstract interface PreEventListener {
-		public abstract void onPreEvent(int eventType, SystemEvent.EventTypeData eventTypeData);
+		public abstract void onPreEvent(int eventType,
+				SystemEvent.EventTypeData eventTypeData);
 	}
 
 	public abstract interface EventTypeData {
 		public abstract int getEventType();
 	}
 
-	public class EventTypeInstall implements SystemEvent.EventTypeData {
+	public static class EventTypeInstall implements SystemEvent.EventTypeData {
 		public String packageName;
+
+		/**
+ * 
+ */
+		public EventTypeInstall() {
+		}
 
 		public int getEventType() {
 			return EVENT_TYPE_INSTALL;

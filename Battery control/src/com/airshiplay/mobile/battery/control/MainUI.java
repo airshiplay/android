@@ -1,8 +1,10 @@
 package com.airshiplay.mobile.battery.control;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.Display;
 import android.view.Menu;
 import android.view.Window;
@@ -20,6 +22,7 @@ public class MainUI extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		startService(new Intent(this,BatteryService.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+	
 		
 		Display display = getWindowManager().getDefaultDisplay(); // 为获取屏幕宽、高
 		Window window = getWindow();

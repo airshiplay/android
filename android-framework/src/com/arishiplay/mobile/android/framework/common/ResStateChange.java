@@ -39,6 +39,7 @@ public class ResStateChange {
 				return;
 			ProgressBar progressButton = (ProgressBar) this.view.findViewWithTag(this.info.resId);
 			if (state == DownloadTask.STATE_PAUSED) {
+				progressButton.setProgress(0);
 			}
 
 			if ((state == DownloadTask.STATE_NET_ERROR) || (state == DownloadTask.STATE_FILE_ERROR)) {
