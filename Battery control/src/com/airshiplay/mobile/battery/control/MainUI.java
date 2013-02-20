@@ -28,8 +28,7 @@ public class MainUI extends Activity {
 		l.getDrawable(2).setLevel(5000);
 
 		startService(new Intent(this,BatteryService.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-	
-		
+
 		Display display = getWindowManager().getDefaultDisplay(); // 为获取屏幕宽、高
 		Window window = getWindow();
 		LayoutParams windowLayoutParams = window.getAttributes(); // 获取对话框当前的参数值
