@@ -2,8 +2,10 @@ package com.airshiplay.mobile.battery.control;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 
 /**
  * @author lig
@@ -16,6 +18,11 @@ public class MainUI extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		TextView view=(TextView)findViewById(R.id.text);
+		LayerDrawable l=(LayerDrawable) view.getBackground();
+		l.getDrawable(1).setLevel(8000);
+		l.getDrawable(2).setLevel(5000);
+
 		startService(new Intent(this,BatteryService.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 	}
 
