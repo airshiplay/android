@@ -8,7 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import android.os.Message;
 
+import com.arishiplay.mobile.android.framework.bean.AppBean;
 import com.arishiplay.mobile.android.framework.util.Log;
+import com.arishiplay.mobile.android.framework.util.LogFactory;
 
 /**
  * @author lig
@@ -16,7 +18,7 @@ import com.arishiplay.mobile.android.framework.util.Log;
  * @since 1.0 2013-2-6
  */
 public class DownloadTask {
-	private static Log log = Log.LogFactory.getLog(DownloadTask.class);
+	private static Log log = LogFactory.getLog(DownloadTask.class);
 
 	public static final int STATE_WAIT = 0;
 	public static final int STATE_CONNETING = 1;
@@ -25,7 +27,7 @@ public class DownloadTask {
 	public static final int STATE_FINISHED = 4;
 	public static final int STATE_NET_ERROR = 5;
 	public static final int STATE_FILE_ERROR = 6;
-
+AppBean bean;
 	int percent;
 	long loadSize;
 	long size;

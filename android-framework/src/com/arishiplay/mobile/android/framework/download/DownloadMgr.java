@@ -18,6 +18,7 @@ public class DownloadMgr {
 	static Context mCtx;
 
 	public static DownloadTask addTask(DownloadTask task) {
+		taskMap.put(task.bean.resId, task);
 		return task;
 	}
 

@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">MainUI</string>
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_update_at">更新于：</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">更多</string>
+
+    <!--  -->
+    <string name="overefresh_pulltorefresh">下拉可以刷新</string>
+    <string name="overefresh_releasetorefresh">松开可以刷新</string>
+    <string name="overefresh_update">更新于</string>
+    <string name="overefresh_loading">加载中…</string>
+
 </resources>
