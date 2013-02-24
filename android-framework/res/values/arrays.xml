@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="auto_delete">
+        <item>1天</item>
+        <item>3天</item>
+        <item>7天</item>
+        <item>2周</item>
+        <item>1个月</item>
+    </string-array>
+    <string-array name="large_tips_item">
+        <item>始终提醒</item>
+        <item>剩余文件大小超过5MB</item>
+        <item>剩余文件大小超过10MB</item>
+        <item>剩余文件大小超过50MB</item>
+        <item>不提醒</item>
+    </string-array>
+    <string-array name="large_tips">
+        <item>始终提醒</item>
+        <item>5MB</item>
+        <item>10MB</item>
+        <item>50MB</item>
+        <item>不提醒</item>
+    </string-array>
+    <string-array name="load_tips">
+        <item>节省流量模式可以在非WIFI环境下不加载应用图标和截图</item>
+        <item>您可以方便的通过左右滑动来切换相邻列表的显示</item>
+        <item>点击右下角的管理就可以看见“手机话费充值”啦</item>
+        <item>“连接到PC端”可以通过WIFI与您电脑上的助手连接，管理您的设备</item>
+        <item>推荐应用就可以每天积攒积分换礼品</item>
+    </string-array>
+    <string-array name="sync_auto_setting_items">
+        <item>1天</item>
+        <item>2天</item>
+        <item>1周</item>
+        <item>2周</item>
+        <item>1个月</item>
+        <item>2个月</item>
+    </string-array>
+</resources>

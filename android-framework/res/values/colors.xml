@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="android_gray">@android:color/darker_gray</color>
+    <color name="android_gray1">@android:color/darker_gray</color>
+    <color name="android_white">#ffffffff</color>
+    <color name="android_light_blue">#ff317cd3</color>
+    <color name="android_black">#ff000000</color>
+    <color name="android_gray">#ff808080</color>
+    <color name="android_download">#ff97c7f7</color>
+    <color name="android_dark_blue">#ff062438</color>
+    <color name="android_red">#ffff0000</color>
+    <color name="android_green">#ff00ff00</color>
+    <color name="android_blue">#ff00bfff</color>
+    <color name="android_transparent">#00000000</color>
+    <color name="android_orange">#ffff8040</color>
+    <color name="android_yellow">#ffffff00</color>
+    <color name="android_backgroud">#fff6f6f6</color>
 </resources>

@@ -38,7 +38,8 @@ public class PullToRefreshListView extends ListView {
 	/** 刷新完成 */
 	protected static final int DONE = 3;
 	protected static final int RATIO = 2;
-
+	protected int mRefreshState = DONE;
+	
 	protected RotateAnimation mAnimation = null;
 	protected ImageView mArrowImageView = null;
 	protected Context mContext = null;
@@ -54,7 +55,6 @@ public class PullToRefreshListView extends ListView {
 	protected TextView mLastUpdatedTextView = null;
 	protected P2RListViewStateListener mListener = null;
 	protected ProgressBar mProgressBar = null;
-	protected int mRefreshState = DONE;
 	protected RotateAnimation mReverseAnimation = null;
 	protected int mStartY;
 	protected TextView mTipsTextView = null;
@@ -171,7 +171,7 @@ public class PullToRefreshListView extends ListView {
 		this.mLastMotionY = ev.getY();
 		if ((REFRESHING != this.mRefreshState) && (this.mIsRecored)) {
 			if (this.mRefreshState == RELEASE_TO_REFRESH) {
-				setSelection(0);
+				setSelection(1);
 				if ((y - this.mStartY) / 2 >= this.mHeadContentHeight
 						|| y - this.mStartY <= 0) {
 					if (y - this.mStartY > 0)
@@ -184,7 +184,7 @@ public class PullToRefreshListView extends ListView {
 				changeHeaderViewState();
 			}
 			if (PULL_TO_REFRESH == this.mRefreshState) {
-				setSelection(0);
+				setSelection(1);
 				if ((y - this.mStartY) / 2 < this.mHeadContentHeight) {
 					if (y - this.mStartY <= 0) {
 						this.mRefreshState = DONE;
@@ -291,7 +291,7 @@ public class PullToRefreshListView extends ListView {
 				this.mProgressBar.setVisibility(View.VISIBLE);
 				this.mArrowImageView.clearAnimation();
 				this.mArrowImageView.setVisibility(View.GONE);
-				this.mTipsTextView.setText(2131297173);
+				this.mTipsTextView.setText(R.string.overefresh_loading);
 				this.mLastUpdatedTextView.setVisibility(View.VISIBLE);
 			}
 			break;
@@ -311,7 +311,8 @@ public class PullToRefreshListView extends ListView {
 						.setPadding(0, this.mHeadContentHeight * -1, 0, 0);
 				this.mProgressBar.setVisibility(View.GONE);
 				this.mArrowImageView.clearAnimation();
-				this.mArrowImageView.setImageResource(2130837971);
+				this.mArrowImageView
+						.setImageResource(R.drawable.overefresh_arrow_down);
 				this.mTipsTextView.setText("");
 				this.mLastUpdatedTextView.setVisibility(View.VISIBLE);
 			}
@@ -330,6 +331,9 @@ public class PullToRefreshListView extends ListView {
 		}
 	}
 
+	/**
+	 * 请求加载数据
+	 */
 	protected void onLoading() {
 		if (this.mListener != null) {
 			this.mListener
@@ -337,39 +341,44 @@ public class PullToRefreshListView extends ListView {
 		}
 	}
 
-	public void onLoadingComplete() {
-		this.mRefreshState = DONE;
-		SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat(
-				"MM-dd HH:mm");
-		Date localDate = new Date();
-		String str1 = localSimpleDateFormat.format(localDate);
-		TextView localTextView = this.mLastUpdatedTextView;
-		String str2 = String.valueOf(this.mContext
-				.getString(R.string.overefresh_update));
-		String str3 = str2 + str1;
-		localTextView.setText(str3);
-		changeHeaderViewState();
-		onRecover();
-	}
-
+	/**
+	 * pull，请求加载数据
+	 */
 	protected void onPull() {
 		if (this.mListener != null)
 			this.mListener.onStateChanged(P2RListViewStateListener.STATE_PULL);
 	}
 
+	/**
+	 * 恢复，加载数据
+	 */
 	protected void onRecover() {
 		if (this.mListener != null)
 			this.mListener
 					.onStateChanged(P2RListViewStateListener.STATE_RECOVER);
 	}
 
-	public void setListener(
-			P2RListViewStateListener paramP2RListViewStateListener) {
-		this.mListener = paramP2RListViewStateListener;
+	/**
+	 * 数据加载完成
+	 */
+	public void onLoadingComplete() {
+		this.mRefreshState = DONE;
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"MM-dd HH:mm");
+		mLastUpdatedTextView.setText(String.valueOf(this.mContext
+				.getString(R.string.overefresh_update))
+				+ simpleDateFormat.format(new Date()));
+		changeHeaderViewState();
+		onRecover();
 	}
 
-	public void setPullEnable(boolean paramBoolean) {
-		this.mIsPullAble = paramBoolean;
+	public void setListener(
+			P2RListViewStateListener p2RListViewStateListener) {
+		this.mListener = p2RListViewStateListener;
+	}
+
+	public void setPullEnable(boolean isPullAble) {
+		this.mIsPullAble = isPullAble;
 	}
 
 	public void setRecover() {
@@ -390,6 +399,6 @@ public class PullToRefreshListView extends ListView {
 		public static final int STATE_PULL = 0;
 		public static final int STATE_RECOVER = 2;
 
-		public abstract void onStateChanged(int state);
+		public abstract void onStateChanged(int listViewState);
 	}
 }

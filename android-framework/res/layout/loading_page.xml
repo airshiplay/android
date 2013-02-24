@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/loading_view"
+        android:layout_width="240.0dip"
+        android:layout_height="150.0dip"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:background="@drawable/loading_page_bg"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/gf_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@anim/loading_gif" />
+
+        <ImageView
+            android:id="@+id/loading_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/list_load_notice"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="220.0dip"
+            android:text="@string/loading_text"
+            android:textColor="@android:color/white"
+            android:textSize="15.0sp" />
+
+        <TextView
+            android:id="@+id/notic_text"
+            android:layout_width="250.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5.0dip"
+            android:lineSpacingExtra="2.0dip"
+            android:lineSpacingMultiplier="1.1"
+            android:maxWidth="220.0dip"
+            android:textColor="@android:color/white"
+            android:textSize="15.0sp" />
+    </LinearLayout>
+
+</LinearLayout>
