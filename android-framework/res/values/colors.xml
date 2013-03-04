@@ -14,4 +14,6 @@
     <color name="android_orange">#ffff8040</color>
     <color name="android_yellow">#ffffff00</color>
     <color name="android_backgroud">#fff6f6f6</color>
+     <color name="solid_white">#ffffffff</color>
+    <color name="secondary_text">#ff999999</color>
 </resources>
