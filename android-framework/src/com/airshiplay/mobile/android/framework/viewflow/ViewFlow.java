@@ -614,7 +614,14 @@ public class ViewFlow extends AdapterView<Adapter> {
 		logBuffer();
 		requestLayout();
 	}
+	  public boolean isScrolling()
+	  {
 
+	    if (this.mTouchState == TOUCH_STATE_SCROLLING)
+	      return true;
+	    return false;
+
+	  }
 	private void postViewSwitched(int direction) {
 		if (direction == 0)
 			return;
