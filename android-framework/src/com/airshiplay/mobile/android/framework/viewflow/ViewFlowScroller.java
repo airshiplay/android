@@ -55,8 +55,9 @@ public class ViewFlowScroller extends ScrollView {
 							.contains(ev.getRawX(), ev.getRawY());
 					if (contain) {
 						contain = this.mViewFlow.isScrolling();
-						if (this.mViewFlow.isScrolling())
+						if (contain)
 							return false;
+						return super.onInterceptTouchEvent(ev);
 					}
 				}
 			} catch (IllegalArgumentException e) {

@@ -6,20 +6,16 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="16"/>
+    <uses-sdk
+        android:minSdkVersion="4"
+        android:targetSdkVersion="16" />
 
     <application android:label="@string/app_name" >
         <activity
             android:name="com.airshiplay.mobile.android.framework.MainUI"
             android:label="@string/app_name" >
-            
         </activity>
         <activity android:name="com.airshiplay.mobile.android.framework.PullToRefreshUI" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <receiver android:name="com.airshiplay.mobile.android.framework.receiver.PackageChangeReceiver" >
@@ -35,6 +31,16 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.airshiplay.mobile.android.framework.example.viewflow.ScrollViewFlowExample"
+            android:label="@string/title_activity_scroll_view_flow_example" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

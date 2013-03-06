@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="user_image_size">48.0dip</dimen>
     <dimen name="mini_user_image_size">32.0dip</dimen>
     <dimen name="list_row_padding">10.0dip</dimen>
@@ -27,4 +28,7 @@
     <dimen name="onebox_news_image">60.0dip</dimen>
     <dimen name="bounceTravelDistance">5.0dip</dimen>
     <dimen name="tap_to_refresh_height">64.0dip</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
 </resources>

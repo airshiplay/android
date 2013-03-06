@@ -28,6 +28,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Scroller;
 
 import com.airshiplay.mobile.android.framework.R;
@@ -42,10 +43,15 @@ import com.airshiplay.mobile.android.framework.R;
  */
 public class ViewFlow extends AdapterView<Adapter> {
 
-	private static final int SNAP_VELOCITY = 1000;
+	private static final int SNAP_VELOCITY = 300;
 	private static final int INVALID_SCREEN = -1;
 	private final static int TOUCH_STATE_REST = 0;
 	private final static int TOUCH_STATE_SCROLLING = 1;
+
+	private static final int SCROLL_MODE_RESET = 0;
+	private static final int SCROLL_MODE_HORIZONTAL = 1;
+	private static final int SCROLL_MODE_VERTICLE = 2;
+	private int scrollMode;
 
 	private LinkedList<View> mLoadedViews;
 	private LinkedList<View> mRecycledViews;
@@ -56,6 +62,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 	private VelocityTracker mVelocityTracker;
 	private int mTouchState = TOUCH_STATE_REST;
 	private float mLastMotionX;
+	private float mLastMotionY;
 	private int mTouchSlop;
 	private int mMaximumVelocity;
 	private int mCurrentScreen;
@@ -91,7 +98,8 @@ public class ViewFlow extends AdapterView<Adapter> {
 		 * @param view
 		 *            the {@link View} currently in focus.
 		 * @param position
-		 *            The position in the adapter of the {@link View} currently in focus.
+		 *            The position in the adapter of the {@link View} currently
+		 *            in focus.
 		 */
 		void onSwitched(View view, int position);
 
@@ -138,7 +146,8 @@ public class ViewFlow extends AdapterView<Adapter> {
 	public void onConfigurationChanged(Configuration newConfig) {
 		if (newConfig.orientation != mLastOrientation) {
 			mLastOrientation = newConfig.orientation;
-			getViewTreeObserver().addOnGlobalLayoutListener(orientationChangeListener);
+			getViewTreeObserver().addOnGlobalLayoutListener(
+					orientationChangeListener);
 		}
 	}
 
@@ -149,7 +158,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		
+
 		final int width = MeasureSpec.getSize(widthMeasureSpec);
 		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		if (widthMode != MeasureSpec.EXACTLY && !isInEditMode()) {
@@ -392,14 +401,18 @@ public class ViewFlow extends AdapterView<Adapter> {
 		if (direction > 0) {
 			if (mLazyInit.contains(LazyInit.RIGHT)) {
 				mLazyInit.remove(LazyInit.RIGHT);
-				if (mCurrentBufferIndex+1 < mLoadedViews.size())
-					mViewInitializeListener.onViewLazyInitialize(mLoadedViews.get(mCurrentBufferIndex + 1), mCurrentAdapterIndex + 1);
+				if (mCurrentBufferIndex + 1 < mLoadedViews.size())
+					mViewInitializeListener.onViewLazyInitialize(
+							mLoadedViews.get(mCurrentBufferIndex + 1),
+							mCurrentAdapterIndex + 1);
 			}
 		} else {
 			if (mLazyInit.contains(LazyInit.LEFT)) {
 				mLazyInit.remove(LazyInit.LEFT);
 				if (mCurrentBufferIndex > 0)
-					mViewInitializeListener.onViewLazyInitialize(mLoadedViews.get(mCurrentBufferIndex - 1), mCurrentAdapterIndex - 1);
+					mViewInitializeListener.onViewLazyInitialize(
+							mLoadedViews.get(mCurrentBufferIndex - 1),
+							mCurrentAdapterIndex - 1);
 			}
 		}
 	}
@@ -467,8 +480,9 @@ public class ViewFlow extends AdapterView<Adapter> {
 		int dx = (mCurrentScreen * getWidth()) - mScroller.getCurrX();
 		mScroller.startScroll(mScroller.getCurrX(), mScroller.getCurrY(), dx,
 				0, 0);
-		if(dx == 0)
-			onScrollChanged(mScroller.getCurrX() + dx, mScroller.getCurrY(), mScroller.getCurrX() + dx, mScroller.getCurrY());
+		if (dx == 0)
+			onScrollChanged(mScroller.getCurrX() + dx, mScroller.getCurrY(),
+					mScroller.getCurrX() + dx, mScroller.getCurrY());
 		if (uiThread)
 			invalidate();
 		else
@@ -490,6 +504,11 @@ public class ViewFlow extends AdapterView<Adapter> {
 		mViewInitializeListener = l;
 	}
 
+	public void resetScrollMode() {
+		if (this.scrollMode == SCROLL_MODE_VERTICLE)
+			this.scrollMode = SCROLL_MODE_RESET;
+	}
+
 	@Override
 	public Adapter getAdapter() {
 		return mAdapter;
@@ -499,7 +518,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 	public void setAdapter(Adapter adapter) {
 		setAdapter(adapter, 0);
 	}
-	
+
 	public void setAdapter(Adapter adapter, int initialPosition) {
 		if (mAdapter != null) {
 			mAdapter.unregisterDataSetObserver(mDataSetObserver);
@@ -514,20 +533,20 @@ public class ViewFlow extends AdapterView<Adapter> {
 		}
 		if (mAdapter == null || mAdapter.getCount() == 0)
 			return;
-		
-		setSelection(initialPosition);		
+
+		setSelection(initialPosition);
 	}
-	
+
 	@Override
 	public View getSelectedView() {
 		return (mCurrentBufferIndex < mLoadedViews.size() ? mLoadedViews
 				.get(mCurrentBufferIndex) : null);
 	}
 
-    @Override
-    public int getSelectedItemPosition() {
-        return mCurrentAdapterIndex;
-    }
+	@Override
+	public int getSelectedItemPosition() {
+		return mCurrentAdapterIndex;
+	}
 
 	/**
 	 * Set the FlowIndicator
@@ -555,15 +574,48 @@ public class ViewFlow extends AdapterView<Adapter> {
 		return (mRecycledViews.isEmpty() ? null : mRecycledViews.remove(0));
 	}
 
+	public void setScrollModeReset(View paramView) {
+		if (paramView == null)
+			return;
+		paramView.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_UP)
+					resetScrollMode();
+				return false;
+			}
+		});
+
+	}
+
+	public void setScrollModeReset(ListView listView,
+			final View.OnTouchListener onTouchListener) {
+		if (listView == null)
+			return;
+		listView.setOnTouchListener(new View.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_UP)
+					resetScrollMode();
+				if (onTouchListener != null)
+					onTouchListener.onTouch(v, event);
+				return false;
+			}
+		});
+
+	}
+
 	@Override
 	public void setSelection(int position) {
 		mNextScreen = INVALID_SCREEN;
 		mScroller.forceFinished(true);
 		if (mAdapter == null)
 			return;
-		
+
 		position = Math.max(position, 0);
-		position = Math.min(position, mAdapter.getCount()-1);
+		position = Math.min(position, mAdapter.getCount() - 1);
 
 		recycleViews();
 
@@ -573,12 +625,12 @@ public class ViewFlow extends AdapterView<Adapter> {
 		if (mViewInitializeListener != null)
 			mViewInitializeListener.onViewLazyInitialize(currentView, position);
 
-		for(int offset = 1; mSideBuffer - offset >= 0; offset++) {
+		for (int offset = 1; mSideBuffer - offset >= 0; offset++) {
 			int leftIndex = position - offset;
 			int rightIndex = position + offset;
-			if(leftIndex >= 0)
+			if (leftIndex >= 0)
 				mLoadedViews.addFirst(makeAndAddView(leftIndex, false));
-			if(rightIndex < mAdapter.getCount())
+			if (rightIndex < mAdapter.getCount())
 				mLoadedViews.addLast(makeAndAddView(rightIndex, true));
 		}
 
@@ -608,20 +660,22 @@ public class ViewFlow extends AdapterView<Adapter> {
 			if (i == mCurrentAdapterIndex) {
 				mCurrentBufferIndex = mLoadedViews.size() - 1;
 				if (mViewInitializeListener != null)
-					mViewInitializeListener.onViewLazyInitialize(mLoadedViews.getLast(), mCurrentAdapterIndex);
+					mViewInitializeListener.onViewLazyInitialize(
+							mLoadedViews.getLast(), mCurrentAdapterIndex);
 			}
 		}
 		logBuffer();
 		requestLayout();
 	}
-	  public boolean isScrolling()
-	  {
 
-	    if (this.mTouchState == TOUCH_STATE_SCROLLING)
-	      return true;
-	    return false;
+	public boolean isScrolling() {
 
-	  }
+		if (this.mTouchState == TOUCH_STATE_SCROLLING)
+			return true;
+		return false;
+
+	}
+
 	private void postViewSwitched(int direction) {
 		if (direction == 0)
 			return;
@@ -698,7 +752,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 
 	private View makeAndAddView(int position, boolean addToEnd, View convertView) {
 		View view = mAdapter.getView(position, convertView, this);
-		if(view != convertView)
+		if (view != convertView)
 			mRecycledViews.add(convertView);
 		return setupChild(view, addToEnd, view == convertView);
 	}
@@ -728,11 +782,12 @@ public class ViewFlow extends AdapterView<Adapter> {
 
 	private void logBuffer() {
 
-		Log.d("viewflow", "Size of mLoadedViews: " + mLoadedViews.size() +
-				", Size of mRecycledViews: " + mRecycledViews.size() +
-				", X: " + mScroller.getCurrX() + ", Y: " + mScroller.getCurrY());
+		Log.d("viewflow",
+				"Size of mLoadedViews: " + mLoadedViews.size()
+						+ ", Size of mRecycledViews: " + mRecycledViews.size()
+						+ ", X: " + mScroller.getCurrX() + ", Y: "
+						+ mScroller.getCurrY());
 		Log.d("viewflow", "IndexInAdapter: " + mCurrentAdapterIndex
 				+ ", IndexInBuffer: " + mCurrentBufferIndex);
 	}
 }
-
