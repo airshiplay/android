@@ -7,8 +7,14 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.airshiplay.mobile.android.framework.R;
-import com.airshiplay.mobile.android.framework.widget.SlidingLayout;
+import com.airshiplay.mobile.android.framework.sliding.SlidingLayout;
 
+/**
+ * @author airshiplay
+ * @Create Date 2013-3-7
+ * @version 1.0
+ * @since 1.0
+ */
 public class SlidingLayoutDemo extends Activity implements View.OnClickListener{
 	private SlidingLayout mSlidingLayout;
 	private View content;

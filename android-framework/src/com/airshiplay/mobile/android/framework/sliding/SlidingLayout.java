@@ -1,4 +1,4 @@
-package com.airshiplay.mobile.android.framework.widget;
+package com.airshiplay.mobile.android.framework.sliding;
 
 import com.airshiplay.mobile.android.framework.R;
 import com.airshiplay.mobile.android.framework.util.Devices;
@@ -13,6 +13,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
+/**
+ * @author airshiplay
+ * @Create Date 2013-3-7
+ * @version 1.0
+ * @since 1.0
+ */
 public class SlidingLayout extends ViewGroup implements
 		GestureDetector.OnGestureListener {
 	public static final int DURATION = 500;

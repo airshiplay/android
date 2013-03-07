@@ -5,8 +5,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.airshiplay.mobile.android.framework.R;
-import com.airshiplay.mobile.android.framework.widget.SlidingLayout;
+import com.airshiplay.mobile.android.framework.sliding.SlidingLayout;
 
+/**
+ * @author airshiplay
+ * @Create Date 2013-3-7
+ * @version 1.0
+ * @since 1.0
+ */
 public class SlidingHandler implements View.OnClickListener,
 		SlidingLayout.SidebarListener {
 	private Activity main = null;

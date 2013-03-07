@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.airshiplay.mobile.android.framework.widget.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.airshiplay.mobile.android.framework.sliding.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/slidinglayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -31,4 +31,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</com.airshiplay.mobile.android.framework.widget.SlidingLayout>
+</com.airshiplay.mobile.android.framework.sliding.SlidingLayout>
