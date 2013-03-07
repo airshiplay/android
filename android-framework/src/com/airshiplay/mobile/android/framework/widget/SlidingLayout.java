@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
-public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestureListener {
+public class SlidingLayout extends ViewGroup implements
+		GestureDetector.OnGestureListener {
 	public static final int DURATION = 500;
 	protected Animation mAnimation = null;
 	protected Animation.AnimationListener mCloseListener = null;
@@ -30,8 +31,8 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 		super(context);
 	}
 
-	public SlidingLayout(Context paramContext, AttributeSet paramAttributeSet) {
-		super(paramContext, paramAttributeSet);
+	public SlidingLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
 	}
 
 	public void closeSidebar() {
@@ -48,10 +49,13 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 		if (!this.mDetector.onTouchEvent(ev)) {
 			bool = super.dispatchTouchEvent(ev);
 		} else {
-			if (ev.getAction() == 0) {
+			if (ev.getAction() == MotionEvent.ACTION_DOWN) {
 				int i = (int) ev.getX();
 				int j = (int) ev.getY();
-				if ((this.mContent.getLeft() < i) && (this.mContent.getRight() > i) && (this.mContent.getTop() < j) && (this.mContent.getBottom() > j))
+				if ((this.mContent.getLeft() < i)
+						&& (this.mContent.getRight() > i)
+						&& (this.mContent.getTop() < j)
+						&& (this.mContent.getBottom() > j))
 					closeSidebar();
 			}
 			bool = true;
@@ -60,7 +64,7 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 	}
 
 	public void firstShow() {
-		this.mSideBar.setVisibility(0);
+		this.mSideBar.setVisibility(View.VISIBLE);
 		this.mOpened = true;
 		requestLayout();
 		if (this.mListener != null)
@@ -71,24 +75,32 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 		return this.mOpened;
 	}
 
-	protected void measureChild(View paramView, int paramInt1, int paramInt2) {
-		if (this.mSideBar == paramView) {
-			int i = View.MeasureSpec.getMode(paramInt1);
-			super.measureChild(paramView, View.MeasureSpec.makeMeasureSpec((int) (0.9D * getMeasuredWidth()), i), paramInt2);
+	@Override
+	protected void measureChild(View child, int parentWidthMeasureSpec,
+			int parentHeightMeasureSpec) {
+		if (this.mSideBar == child) {
+			super.measureChild(child, View.MeasureSpec.makeMeasureSpec(
+					(int) (0.9D * getMeasuredWidth()),
+					View.MeasureSpec.getMode(parentWidthMeasureSpec)),
+					parentHeightMeasureSpec);
 			return;
 		}
-		super.measureChild(paramView, paramInt1, paramInt2);
+		super.measureChild(child, parentWidthMeasureSpec,
+				parentHeightMeasureSpec);
 	}
 
+	@Override
 	public boolean onDown(MotionEvent ev) {
 		int x = (int) ev.getX();
 		int y = (int) ev.getY();
-		if ((this.mContent.getLeft() < x) && (this.mContent.getRight() > x) && 
-				(this.mContent.getTop() + SystemUtils.dp2px(42.0F) < y) && (this.mContent.getBottom() > y))
+		if ((this.mContent.getLeft() < x) && (this.mContent.getRight() > x)
+				&& (this.mContent.getTop() + SystemUtils.dp2px(42.0F) < y)
+				&& (this.mContent.getBottom() > y))
 			return true;
 		return false;
 	}
 
+	@Override
 	public void onFinishInflate() {
 		super.onFinishInflate();
 		this.mSideBar = findViewById(R.id.sidebar);
@@ -143,31 +155,38 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 		};
 	}
 
-	public boolean onFling(MotionEvent paramMotionEvent1, MotionEvent paramMotionEvent2, float paramFloat1, float paramFloat2) {
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
 		boolean bool = true;
-		if ((paramFloat1 > 0.0F) && (Math.abs(paramFloat1) > Math.abs(paramFloat2))) {
+		if ((velocityX > 0.0F) && (Math.abs(velocityX) > Math.abs(velocityY))) {
 			closeSidebar();
 			return bool;
-		}
-		int i = (int) paramMotionEvent1.getX();
-		int j = (int) paramMotionEvent1.getY();
-		if ((this.mContent.getLeft() >= i) || (this.mContent.getRight() <= i) || (this.mContent.getTop() >= j) || (this.mContent.getBottom() <= j))
+		}// MotionEvent e1, MotionEvent e2, float velocityX, float velocityY
+		int x = (int) e1.getX();
+		int y = (int) e1.getY();
+		if ((this.mContent.getLeft() >= x) || (this.mContent.getRight() <= x)
+				|| (this.mContent.getTop() >= y)
+				|| (this.mContent.getBottom() <= y))
 			bool = false;
 		return bool;
 	}
 
-	public boolean onInterceptTouchEvent(MotionEvent paramMotionEvent) {
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		boolean bool = false;
 		if (!isOpening())
 			return bool;
-		int i = paramMotionEvent.getAction();
-		if ((i == 1) || (i == 0)) {
-			int j = (int) paramMotionEvent.getX();
-			int k = (int) paramMotionEvent.getY();
-			if ((this.mContent.getLeft() < j) && (this.mContent.getRight() > j) && (this.mContent.getTop() < k) && (this.mContent.getBottom() > k)) {
-				if (i == 0)
+		int action = ev.getAction();
+		if ((action == MotionEvent.ACTION_UP)
+				|| (action == MotionEvent.ACTION_DOWN)) {
+			int x = (int) ev.getX();
+			int y = (int) ev.getY();
+			if ((this.mContent.getLeft() < x) && (this.mContent.getRight() > x)
+					&& (this.mContent.getTop() < y)
+					&& (this.mContent.getBottom() > y)) {//触点位于content时
+				if (action == MotionEvent.ACTION_DOWN)
 					this.mPressed = true;
-				if ((this.mPressed) && (i == 1) && (this.mListener != null)) {
+				if ((this.mPressed) && (action == MotionEvent.ACTION_UP)
+						&& (this.mListener != null)) {
 					this.mPressed = false;
 					bool = this.mListener.onContentTouchedWhenOpening();
 				} else {
@@ -178,41 +197,46 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 		return bool;
 	}
 
-	protected void onLayout(boolean paramBoolean, int paramInt1, int paramInt2, int paramInt3, int paramInt4) {
-		this.mSideBar.layout(paramInt3 - this.mSidebarWidth, 0, paramInt3, 0 + this.mSideBar.getMeasuredHeight());
+	protected void onLayout(boolean changed, int l, int t,
+			int r, int b) {
+		this.mSideBar.layout(r - this.mSidebarWidth, 0, r,
+				0 + this.mSideBar.getMeasuredHeight());
 		if (this.mOpened) {
-			this.mContent.layout(paramInt1 - this.mSidebarWidth, 0, paramInt3 - this.mSidebarWidth, paramInt4);
+			this.mContent.layout(l - this.mSidebarWidth, 0, r
+					- this.mSidebarWidth, b);
 			return;
 		}
-		this.mContent.layout(paramInt1, 0, paramInt3, paramInt4);
-
+		this.mContent.layout(l, 0, r, b);
 	}
 
-	public void onLongPress(MotionEvent paramMotionEvent) {
+	public void onLongPress(MotionEvent e) {
 	}
 
-	public void onMeasure(int paramInt1, int paramInt2) {
-		super.onMeasure(paramInt1, paramInt2);
-		super.measureChildren(paramInt1, paramInt2);
+	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		super.measureChildren(widthMeasureSpec, heightMeasureSpec);
 		this.mSidebarWidth = (13 * Devices.size[0] / 20);
 	}
 
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
 		boolean bool = false;
 		if ((e1 == null) || (e2 == null))
 			return bool;
 
-		int i = (int) e1.getX();
-		int j = (int) e1.getY();
-		if ((this.mContent.getLeft() < i) && (this.mContent.getRight() > i) && (this.mContent.getTop() < j) && (this.mContent.getBottom() > j))
+		int x = (int) e1.getX();
+		int y = (int) e1.getY();
+		if ((this.mContent.getLeft() < x) && (this.mContent.getRight() > x)
+				&& (this.mContent.getTop() < y)
+				&& (this.mContent.getBottom() > y))//触点位于content时
 			bool = true;
 		return bool;
 	}
 
-	public void onShowPress(MotionEvent paramMotionEvent) {
+	public void onShowPress(MotionEvent e) {
 	}
 
-	public boolean onSingleTapUp(MotionEvent paramMotionEvent) {
+	public boolean onSingleTapUp(MotionEvent e) {
 		return false;
 	}
 
@@ -230,25 +254,26 @@ public class SlidingLayout extends ViewGroup implements GestureDetector.OnGestur
 			this.mListener.onSidebarClosed();
 	}
 
-	public void setListener(SlidingLayout.SidebarListener paramSidebarListener) {
-		this.mListener = paramSidebarListener;
+	public void setListener(SlidingLayout.SidebarListener sidebarListener) {
+		this.mListener = sidebarListener;
 	}
 
 	public void toggleSidebar() {
 		if (this.mContent.getAnimation() != null)
 			return;
 		if (this.mOpened) {
-			this.mAnimation = new TranslateAnimation(0.0F, this.mSidebarWidth, 0.0F, 0.0F);
+			this.mAnimation = new TranslateAnimation(0.0F, this.mSidebarWidth,
+					0.0F, 0.0F);
 			this.mAnimation.setAnimationListener(this.mCloseListener);
 		} else {
-			this.mAnimation = new TranslateAnimation(0.0F, -this.mSidebarWidth, 0.0F, 0.0F);
+			this.mAnimation = new TranslateAnimation(0.0F, -this.mSidebarWidth,
+					0.0F, 0.0F);
 			this.mAnimation.setAnimationListener(this.mOpenListener);
 		}
 		this.mAnimation.setDuration(500L);
 		this.mAnimation.setFillAfter(true);
 		this.mAnimation.setFillEnabled(true);
 		this.mContent.startAnimation(this.mAnimation);
-
 	}
 
 	public abstract interface SidebarListener {
