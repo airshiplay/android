@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.airshiplay.mobile.android.framework.widget.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slidinglayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/sidebar"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        layout="@layout/manage_sidebar" />
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:orientation="vertical" />
+        
+    </LinearLayout>
+
+</com.airshiplay.mobile.android.framework.widget.SlidingLayout>

@@ -55,25 +55,25 @@ public class TouchInterceptor extends ListView {
 	private WindowManager mWindowManager;
 	private WindowManager.LayoutParams mWindowParams;
 
-	public TouchInterceptor(Context paramContext, AttributeSet paramAttributeSet) {
-		this(paramContext, paramAttributeSet, 0);
+	public TouchInterceptor(Context context, AttributeSet attrs) {
+		this(context, attrs, 0);
 	}
 
-	public TouchInterceptor(Context paramContext,
-			AttributeSet paramAttributeSet, int paramInt) {
-		super(paramContext, paramAttributeSet, paramInt);
+	public TouchInterceptor(Context context,
+			AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
 		this.mTempRect = new Rect();
-		this.mTouchSlop = ViewConfiguration.get(paramContext)
+		this.mTouchSlop = ViewConfiguration.get(context)
 				.getScaledTouchSlop();
-		if (paramAttributeSet != null) {
+		if (attrs != null) {
 			TypedArray a = getContext().obtainStyledAttributes(
-					paramAttributeSet, R.styleable.TouchInterceptor, 0, 0);
-			this.mItemHeightNormal = a.getDimensionPixelSize(0, 0);
-			this.mItemHeightExpanded = a.getDimensionPixelSize(1,
+					attrs, R.styleable.TouchInterceptor, 0, 0);
+			this.mItemHeightNormal = a.getDimensionPixelSize(R.styleable.TouchInterceptor_normal_height, 0);
+			this.mItemHeightExpanded = a.getDimensionPixelSize(R.styleable.TouchInterceptor_expanded_height,
 					mItemHeightNormal);
-			this.grabberId = a.getResourceId(2, 0);
-			this.dragndropBackgroundColor = a.getColor(3, 1719697536);
-			this.mRemoveMode = a.getInt(4, 0);
+			this.grabberId = a.getResourceId(R.styleable.TouchInterceptor_grabber, 0);
+			this.dragndropBackgroundColor = a.getColor(R.styleable.TouchInterceptor_dragndrop_background, 1719697536);
+			this.mRemoveMode = a.getInt(R.styleable.TouchInterceptor_remove_mode, 0);
 			a.recycle();
 		}
 	}

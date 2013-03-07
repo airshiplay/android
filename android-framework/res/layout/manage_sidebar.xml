@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/manage_sidebar_background" >
+
+    <LinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/user_account"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginLeft="15.0dip"
+            android:layout_marginRight="15.0dip"
+            android:layout_marginTop="12.0dip"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="50.0dip"
+                android:layout_height="50.0dip"
+                android:scaleType="fitXY"
+              />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_toRightOf="@id/user_image"
+                android:singleLine="true"
+              
+                android:textColor="@color/android_white"
+                android:textSize="20.0sp" />
+
+            <TextView
+                android:id="@+id/user_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/user_name"
+                android:layout_below="@id/user_name"
+                android:layout_marginLeft="5.0dip"
+                android:layout_marginTop="3.0dip"
+                android:drawablePadding="3.0dip"
+                android:singleLine="true"
+            
+                android:textSize="13.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
