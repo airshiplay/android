@@ -38,12 +38,25 @@
           
         </activity>
         <activity android:name="com.airshiplay.mobile.android.framework.example.sliding.SlidingLayoutDemo">
+            
+        </activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.LauncherActivity">
               <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshExpandableListActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshGridActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshHorizontalScrollViewActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListFragmentActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListInViewPagerActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshScrollViewActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshViewPagerActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebView2Activity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebViewActivity"></activity>
     </application>
 
 </manifest>
