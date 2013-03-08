@@ -10,7 +10,7 @@
         android:minSdkVersion="4"
         android:targetSdkVersion="16" />
 
-    <application android:label="@string/app_name" android:name="com.airshiplay.mobile.android.framework.FrameWorkApplication">
+    <application android:label="@string/app_name" android:name="com.airshiplay.mobile.android.framework.application.FWApplication">
         <activity
             android:name="com.airshiplay.mobile.android.framework.MainUI"
             android:label="@string/app_name" >

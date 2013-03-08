@@ -1,4 +1,4 @@
-package com.airshiplay.mobile.android.framework;
+package com.airshiplay.mobile.android.framework.application;
 
 import android.app.Application;
 import android.view.WindowManager;
@@ -11,11 +11,11 @@ import com.airshiplay.mobile.android.framework.util.Devices;
  * @version 1.0
  * @since 1.0
  */
-public class FrameWorkApplication extends Application {
+public class FWApplication extends Application {
 	private WindowManager.LayoutParams winLayoutParams = new WindowManager.LayoutParams();
-	private static FrameWorkApplication instance;
+	private static FWApplication instance;
 
-	public static FrameWorkApplication getInstance() {
+	public static FWApplication getInstance() {
 		return instance;
 	}
 
