@@ -3,6 +3,9 @@
  */
 package com.airshiplay.mobile.android.framework.data;
 
+import com.airshiplay.mobile.android.framework.data.local.LocalDataFetcher;
+import com.airshiplay.mobile.android.framework.data.remote.NetFetcherImp;
+
 
 /**
  * 获取数据helper

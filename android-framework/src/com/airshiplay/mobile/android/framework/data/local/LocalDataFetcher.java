@@ -1,9 +1,10 @@
 /**
  * 
  */
-package com.airshiplay.mobile.android.framework.data;
+package com.airshiplay.mobile.android.framework.data.local;
 
-import com.airshiplay.mobile.android.framework.data.NetFetcherImp.IFetchHandler;
+import com.airshiplay.mobile.android.framework.data.remote.NetFetcherImp;
+import com.airshiplay.mobile.android.framework.data.remote.NetFetcherImp.IFetchHandler;
 import com.airshiplay.mobile.android.framework.net.JSONUtil;
 
 /**

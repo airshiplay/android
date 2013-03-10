@@ -72,13 +72,13 @@ public class PullToRefreshUI extends Activity {
 				FetchDataHelper.request(url, new BaseFetchHandle<List<String>>() {
 
 					@Override
-					protected void onReceivedData(String value)
+					protected List<String> onReceivedData(String value)
 							throws Exception {
 						List<String> object=new ArrayList<String>();
 						for(int i=0;i<30;i++){
 							object.add("init data:"+i);
 						}
-						sendSuccessMessage(object);
+						return object;
 					}
 
 					@Override

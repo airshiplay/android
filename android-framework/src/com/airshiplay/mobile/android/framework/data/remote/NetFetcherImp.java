@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.airshiplay.mobile.android.framework.data;
+package com.airshiplay.mobile.android.framework.data.remote;
 
 import com.airshiplay.mobile.android.framework.net.JSONUtil;
 
@@ -33,8 +33,7 @@ public class NetFetcherImp implements Runnable {
 			e.printStackTrace();
 			if (this.mFetchHandler != null)
 				this.mFetchHandler.sendErrorMessage(e);
-			else
-				requestCallback(65436);
+			requestCallback(65436);
 		}
 	}
 
