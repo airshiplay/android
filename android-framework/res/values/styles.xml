@@ -8,5 +8,17 @@
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:text">Sample Item</item>
     </style>
-
+    <style name="platform_forum_list_view" parent="@android:style/Widget.ListView">
+        <item name="android:scrollbarSize">5.0dip</item>
+        
+        <item name="android:focusable">true</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:drawSelectorOnTop">false</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:cacheColorHint">@color/android_transparent</item>
+       
+        <item name="android:dividerHeight">2.0dip</item>
+        <item name="android:fastScrollEnabled">false</item>
+    </style><!-- <item name="android:scrollbarThumbVertical">@drawable/mc_forum_scrollbar_vertical_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/mc_forum_scrollbar_vertical_track</item>  <item name="android:divider">@drawable/mc_forum_line1</item>-->
 </resources>

@@ -15,7 +15,7 @@ import com.airshiplay.mobile.android.framework.sliding.SlidingLayout;
  * @version 1.0
  * @since 1.0
  */
-public class SlidingLayoutDemo extends Activity implements View.OnClickListener{
+public class SlidingLayoutDemo extends Activity implements View.OnClickListener {
 	private SlidingLayout mSlidingLayout;
 	private View content;
 	private View mSideBar;
@@ -25,8 +25,7 @@ public class SlidingLayoutDemo extends Activity implements View.OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.slidinglayout);
 		content = getWindow().findViewById(android.R.id.content);
 		initContentView();
@@ -36,13 +35,22 @@ public class SlidingLayoutDemo extends Activity implements View.OnClickListener{
 	void initContentView() {
 		mSlidingLayout = (SlidingLayout) findViewById(R.id.slidinglayout);
 		mSideBar = findViewById(R.id.sidebar);
-		rightView =findViewById(R.id.manage_btn);
+		rightView = findViewById(R.id.manage_btn);
 	}
 
 	void setContentView() {
 		new SlidingHandler(this, mSlidingLayout);
 		mSlidingLayout.firstShow();
 		rightView.setOnClickListener(this);
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (mSlidingLayout.isOpening()) {
+			mSlidingLayout.toggleSidebar();
+			return;
+		}
+		super.onBackPressed();
 	}
 
 	@Override

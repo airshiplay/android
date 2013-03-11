@@ -38,7 +38,7 @@ public class SystemEvent {
 	public static final int EVENT_TYPE_PICTURE_CHANGE = 18;
 	public static final int EVENT_TYPE_RING_PLAYSTATE = 22;
 	public static final int EVENT_TYPE_RING_STOP = 21;
-
+	public static final int EVENT_TYPE_RESTART=22;
 	private static final Log log = LogFactory.getLog(SystemEvent.class);
 
 	private static SparseArray<List<WeakReference<EventListener>>> mEventMap = new SparseArray<List<WeakReference<EventListener>>>();
