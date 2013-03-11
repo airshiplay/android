@@ -31,11 +31,29 @@ import android.view.WindowManager;
 public class TelephoneUtil {
 
 	public static boolean isNetworkAvailable(Context context) {
-		NetworkInfo localNetworkInfo = ((ConnectivityManager) context
-				.getSystemService("connectivity")).getActiveNetworkInfo();
-		return (localNetworkInfo != null)
-				&& (localNetworkInfo.isAvailable() && localNetworkInfo
-						.isConnected());
+		try {
+			NetworkInfo networkInfo = ((ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE))
+					.getActiveNetworkInfo();
+			return (networkInfo != null)
+					&& (networkInfo.isAvailable() && networkInfo.isConnected());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean isWifiEnable(Context context) {
+		try {
+			NetworkInfo networkInfo = ((ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE))
+					.getActiveNetworkInfo();
+			return (networkInfo != null)
+					&& (networkInfo.isAvailable() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public static int getAndroidSDKVersion() {

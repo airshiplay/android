@@ -3,7 +3,7 @@
  */
 package com.airshiplay.mobile.android.framework.net;
 
-import com.airshiplay.mobile.android.framework.data.NetFetcherImp;
+import com.airshiplay.mobile.android.framework.data.remote.NetFetcherImp;
 
 import android.os.Handler;
 import android.os.Message;
@@ -36,13 +36,15 @@ public abstract class BaseFetchHandle<T> implements NetFetcherImp.IFetchHandler 
 	}
 
 	/**
-	 * 后台解析，网络请求返回的数据 ;解析成功后发送 {@link #sendSuccessMessage(Object)}
+	 * 后台解析，对网络请求返回的数据进行解析,返回相应的数据格式。解析成功通过{@link #onSuccess(Object)}处理; 解析失败通过
+	 * {@link #onFailure(Throwable)}处理。
+	 * 
 	 * 
 	 * @param value
 	 *            网络请求 返回的字符串
 	 * @throws Exception
 	 */
-	protected abstract void onReceivedData(String value) throws Exception;
+	protected abstract T onReceivedData(String value) throws Exception;
 
 	/**
 	 * handler 失败
@@ -61,7 +63,8 @@ public abstract class BaseFetchHandle<T> implements NetFetcherImp.IFetchHandler 
 	@Override
 	public void sendCompletedMessage(String value) {
 		try {
-			onReceivedData(value);
+			T t = onReceivedData(value);
+			sendSuccessMessage(t);
 		} catch (Exception e) {
 			sendErrorMessage(e);
 		}
