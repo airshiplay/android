@@ -8,17 +8,31 @@
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:text">Sample Item</item>
     </style>
+
     <style name="platform_forum_list_view" parent="@android:style/Widget.ListView">
         <item name="android:scrollbarSize">5.0dip</item>
-        
         <item name="android:focusable">true</item>
         <item name="android:listSelector">@android:color/transparent</item>
         <item name="android:drawSelectorOnTop">false</item>
         <item name="android:scrollingCache">false</item>
         <item name="android:cacheColorHint">@color/android_transparent</item>
-       
         <item name="android:dividerHeight">2.0dip</item>
         <item name="android:fastScrollEnabled">false</item>
-    </style><!-- <item name="android:scrollbarThumbVertical">@drawable/mc_forum_scrollbar_vertical_thumb</item>
-        <item name="android:scrollbarTrackVertical">@drawable/mc_forum_scrollbar_vertical_track</item>  <item name="android:divider">@drawable/mc_forum_line1</item>-->
+    </style>
+    <!--
+ <item name="android:scrollbarThumbVertical">@drawable/mc_forum_scrollbar_vertical_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/mc_forum_scrollbar_vertical_track</item>  <item name="android:divider">@drawable/mc_forum_line1</item>
+    -->
+    <style name="ActivityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
+    </style>
+    <style name="ActivityAnimation1" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_right_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_left_out</item>
+    </style>
 </resources>
