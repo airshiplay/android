@@ -5,7 +5,7 @@
 
     <!-- The PullToRefreshScrollView replaces a standard PullToRefreshScrollView widget. -->
 
-    <com.airshiplay.mobile.android.framework.pulltorefresh.extras.viewpager.PullToRefreshViewPager
+    <com.airshiplay.framework.pulltorefresh.extras.viewpager.PullToRefreshViewPager
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pull_refresh_viewpager"
         android:layout_width="fill_parent"

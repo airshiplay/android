@@ -91,7 +91,7 @@ public class WheelView extends View {
 	
 	// The number of first item in layout
 	private int firstItem;
-	private int mOrientation;
+	private int mOrientation=1;
 	// View adapter
 	private WheelViewAdapter viewAdapter;
 	

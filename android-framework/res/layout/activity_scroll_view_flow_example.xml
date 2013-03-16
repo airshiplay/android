@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ScrollViewFlowExample" >
 
-    <com.airshiplay.mobile.android.framework.viewflow.ViewFlowScroller
+    <com.airshiplay.framework.viewflow.ViewFlowScroller
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -18,11 +18,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <com.airshiplay.mobile.android.framework.viewflow.ViewFlow
+            <com.airshiplay.framework.viewflow.ViewFlow
                 android:id="@+id/viewflow"
                 android:layout_width="match_parent"
                 android:layout_height="240dp" android:background="@color/android_blue">
-            </com.airshiplay.mobile.android.framework.viewflow.ViewFlow>
+            </com.airshiplay.framework.viewflow.ViewFlow>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,6 +40,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hello_world" />
         </LinearLayout>
-    </com.airshiplay.mobile.android.framework.viewflow.ViewFlowScroller>
+    </com.airshiplay.framework.viewflow.ViewFlowScroller>
 
 </LinearLayout>

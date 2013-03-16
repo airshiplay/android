@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/com.airshiplay.mobile.android.framework"
+	xmlns:app="http://schemas.android.com/apk/res/com.airshiplay.framework"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	<com.airshiplay.mobile.android.framework.viewflow.CircleFlowIndicator
+	<com.airshiplay.framework.viewflow.CircleFlowIndicator
 		android:padding="10dip"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
@@ -12,8 +12,8 @@
 		android:layout_gravity="center_horizontal"
 		app:inactiveType="fill"
 		app:fadeOut="1000" />
-	<com.airshiplay.mobile.android.framework.viewflow.ViewFlow
+	<com.airshiplay.framework.viewflow.ViewFlow
 		android:id="@+id/viewflow" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" app:sidebuffer="3"></com.airshiplay.mobile.android.framework.viewflow.ViewFlow>
+		android:layout_height="fill_parent" app:sidebuffer="3"></com.airshiplay.framework.viewflow.ViewFlow>
 
 </FrameLayout>
