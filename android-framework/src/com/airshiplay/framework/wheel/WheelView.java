@@ -149,18 +149,28 @@ public class WheelView extends View {
             notifyScrollingListenersAboutStart();
         }
         
-        public void onScroll(int distance) {
-            doScroll(distance);
-            
-            int height = getHeight();
-            if (scrollingOffset > height) {
-                scrollingOffset = height;
-                scroller.stopScrolling();
-            } else if (scrollingOffset < -height) {
-                scrollingOffset = -height;
-                scroller.stopScrolling();
-            }
-        }
+		public void onScroll(int distance) {
+			doScroll(distance);
+			if (mOrientation == HORIZONTAL) {
+				int width = getWidth();
+				if (scrollingOffset > width) {
+					scrollingOffset = width;
+					scroller.stopScrolling();
+				} else if (scrollingOffset < -width) {
+					scrollingOffset = -width;
+					scroller.stopScrolling();
+				}
+			} else {
+				int height = getHeight();
+				if (scrollingOffset > height) {
+					scrollingOffset = height;
+					scroller.stopScrolling();
+				} else if (scrollingOffset < -height) {
+					scrollingOffset = -height;
+					scroller.stopScrolling();
+				}
+			}
+		}
         
         public void onFinished() {
             if (isScrollingPerformed) {
@@ -581,8 +591,8 @@ public class WheelView extends View {
 
 		// TODO: make it static
 		itemsLayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	    itemsLayout.measure(MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.UNSPECIFIED), 
-	                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+	    itemsLayout.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+	    		MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.UNSPECIFIED));
 		int height = itemsLayout.getMeasuredHeight();
 
 		if (mode == MeasureSpec.EXACTLY) {
@@ -756,13 +766,13 @@ public class WheelView extends View {
 		    case MotionEvent.ACTION_UP:
 			if (!isScrollingPerformed) {
 				if (mOrientation == HORIZONTAL) {
-					int distance = (int) event.getX() - getWidth() / 2;
-					if (distance > 0) {
-						distance += getItemWidth() / 2;
+					int distanceX = (int) event.getX() - getWidth() / 2;
+					if (distanceX > 0) {
+						distanceX += getItemWidth() / 2;
 					} else {
-						distance -= getItemWidth() / 2;
+						distanceX -= getItemWidth() / 2;
 					}
-					int items = distance / getItemWidth();
+					int items = distanceX / getItemWidth();
 					if (items != 0 && isValidItemIndex(currentItem + items)) {
 						notifyClickListenersAboutClick(currentItem + items);
 					}
