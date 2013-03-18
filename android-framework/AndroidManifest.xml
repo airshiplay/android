@@ -4,13 +4,19 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-sdk
         android:minSdkVersion="4"
         android:targetSdkVersion="16" />
 
-    <application android:label="@string/app_name" android:name="com.airshiplay.mobile.android.framework.application.FWApplication">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+
+    <application
+        android:name="com.airshiplay.mobile.android.framework.application.FWApplication"
+        android:label="@string/app_name" >
         <activity
             android:name="com.airshiplay.mobile.android.framework.MainUI"
             android:label="@string/app_name" >
@@ -34,28 +40,19 @@
 
         <activity
             android:name="com.airshiplay.mobile.android.framework.example.viewflow.ScrollViewFlowExample"
-            android:label="@string/title_activity_scroll_view_flow_example" >
-          
-        </activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.sliding.SlidingLayoutDemo">
-            
-        </activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.LauncherActivity">
-           
-        </activity>
-
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshExpandableListActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshGridActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshHorizontalScrollViewActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListFragmentActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListInViewPagerActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshScrollViewActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshViewPagerActivity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebView2Activity"></activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebViewActivity"></activity>
-        
-        
+            android:label="@string/title_activity_scroll_view_flow_example" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.sliding.SlidingLayoutDemo" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.LauncherActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshExpandableListActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshGridActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshHorizontalScrollViewActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListFragmentActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListInViewPagerActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshScrollViewActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshViewPagerActivity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebView2Activity" />
+        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebViewActivity" />
         <activity android:name="com.airshiplay.mobile.android.framework.platform.PlatformLoginListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,7 +60,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name="com.airshiplay.mobile.android.framework.platform.PlatformLoginActivity"></activity>
+        <activity android:name="com.airshiplay.mobile.android.framework.platform.PlatformLoginActivity" >
+        </activity>
     </application>
 
 </manifest>
