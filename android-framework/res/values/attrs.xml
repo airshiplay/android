@@ -141,5 +141,14 @@
         <attr name="ptrDrawableTop" format="reference" />
         <attr name="ptrDrawableBottom" format="reference" />
     </declare-styleable>
-    
+    <declare-styleable name="Wheel">
+        <attr name="orientation" />
+    </declare-styleable>
+        <!-- Standard orientation constant. -->
+    <attr name="orientation">
+        <!-- Defines an horizontal widget. -->
+        <enum name="horizontal" value="0" />
+        <!-- Defines a vertical widget. -->
+        <enum name="vertical" value="1" />
+    </attr>
 </resources>

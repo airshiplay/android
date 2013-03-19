@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.airshiplay.mobile.android.framework"
+    package="com.airshiplay.framework"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,16 +15,18 @@
     <uses-permission android:name="android.permission.BATTERY_STATS" />
 
     <application
-        android:name="com.airshiplay.mobile.android.framework.application.FWApplication"
-        android:label="@string/app_name" >
+        android:name="com.airshiplay.framework.application.FWApplication"
+        android:allowBackup="false"
+        android:label="@string/app_name"
+        android:theme="@style/appTheme" >
         <activity
-            android:name="com.airshiplay.mobile.android.framework.MainUI"
+            android:name="com.airshiplay.framework.MainUI"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.PullToRefreshUI" >
+        <activity android:name="com.airshiplay.framework.PullToRefreshUI" >
         </activity>
 
-        <receiver android:name="com.airshiplay.mobile.android.framework.receiver.PackageChangeReceiver" >
+        <receiver android:name="com.airshiplay.framework.receiver.PackageChangeReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
@@ -39,28 +41,68 @@
         </receiver>
 
         <activity
-            android:name="com.airshiplay.mobile.android.framework.example.viewflow.ScrollViewFlowExample"
-            android:label="@string/title_activity_scroll_view_flow_example" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.sliding.SlidingLayoutDemo" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.LauncherActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshExpandableListActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshGridActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshHorizontalScrollViewActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListFragmentActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshListInViewPagerActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshScrollViewActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshViewPagerActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebView2Activity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.example.pulltorefresh.PullToRefreshWebViewActivity" />
-        <activity android:name="com.airshiplay.mobile.android.framework.platform.PlatformLoginListActivity" >
+            android:name="com.airshiplay.framework.example.viewflow.ScrollViewFlowExample"
+            android:label="@string/title_activity_scroll_view_flow_example" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.sliding.SlidingLayoutDemo" >
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.pulltorefresh.LauncherActivity"
+            android:label="@string/pulltorefreshactivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.airshiplay.mobile.android.framework.platform.PlatformLoginActivity" >
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshExpandableListActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshGridActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshHorizontalScrollViewActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshListActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshListFragmentActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshListInViewPagerActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshScrollViewActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshViewPagerActivity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshWebView2Activity" >
+        </activity>
+        <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshWebViewActivity" >
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.wheel.WheelDemo"
+            android:label="WheelDemo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.airshiplay.framework.platform.PlatformLoginActivity" >
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.wheel.TimeActivity"
+            android:label="time" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="framework.wheel.WHEEL_SAMPLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.wheel.WheelTest"
+            android:label="wheeltest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="framework.wheel.WHEEL_SAMPLE" />
+            </intent-filter>
         </activity>
     </application>
 

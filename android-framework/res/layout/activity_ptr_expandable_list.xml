@@ -6,7 +6,7 @@
 
     <!-- The PullToRefreshExpandableListView replaces a standard ExpandableListView widget. -->
 
-    <com.airshiplay.mobile.android.framework.pulltorefresh.PullToRefreshExpandableListView
+    <com.airshiplay.framework.pulltorefresh.PullToRefreshExpandableListView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pull_refresh_expandable_list"
         android:layout_width="fill_parent"
