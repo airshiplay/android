@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.airshiplay.framework.bean.BaseBean;
+
 import android.content.Context;
+import android.os.Handler;
 
 /**
  * 下载管理
@@ -16,10 +19,15 @@ import android.content.Context;
 public class DownloadMgr {
 	static Map<String, DownloadTask> taskMap = new ConcurrentHashMap<String, DownloadTask>();
 	static Context mCtx;
+	public static Handler no_wifi = new Handler();
 
 	public static DownloadTask addTask(DownloadTask task) {
-		taskMap.put(task.bean.resId, task);
+		taskMap.put(task.bean.getResId(), task);
 		return task;
+	}
+
+	public static<T extends BaseBean> DownloadTask addTask(T bean) {
+		return null;
 	}
 
 	static void apkInstall(DownloadTask task) {
@@ -34,7 +42,7 @@ public class DownloadMgr {
 
 	}
 
-	public static DownloadTask findTask(String key) {
+	public static DownloadTask findTask(String resId) {
 		return null;
 	}
 

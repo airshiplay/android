@@ -9,8 +9,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import android.os.Message;
 
 import com.airshiplay.framework.bean.AppBean;
+import com.airshiplay.framework.bean.BaseBean;
 import com.airshiplay.framework.util.Log;
 import com.airshiplay.framework.util.LogFactory;
+import com.airshiplay.framework.util.PreferenceUtil;
+import com.airshiplay.framework.util.TelephoneUtil;
 
 /**
  * @author lig
@@ -27,7 +30,7 @@ public class DownloadTask {
 	public static final int STATE_FINISHED = 4;
 	public static final int STATE_NET_ERROR = 5;
 	public static final int STATE_FILE_ERROR = 6;
-AppBean bean;
+	BaseBean bean;
 	int percent;
 	long loadSize;
 	long size;
@@ -43,13 +46,18 @@ AppBean bean;
 
 	private boolean downloadFlag;
 
+	private Thread mThread;
+
+	private boolean lastState_IsWifi;
+
 	public DownloadTask() {
 		this.listenerMap = new ConcurrentHashMap<Object, DownloadTaskListener>();
 	}
 
-	public void addDownloadListener(DownloadTaskListener downloadTaskListener, Object key) {
-		this.listenerMap.remove(key);
-		this.listenerMap.put(key, downloadTaskListener);
+	public void addDownloadListener(DownloadTaskListener downloadTaskListener,
+			Object keyListener) {
+		this.listenerMap.remove(keyListener);
+		this.listenerMap.put(keyListener, downloadTaskListener);
 	}
 
 	int caculatePercent() {
@@ -88,7 +96,8 @@ AppBean bean;
 	}
 
 	void setState(int status) {
-		if ((this.state == STATE_PAUSED) && ((status == STATE_FILE_ERROR) || (status == STATE_NET_ERROR)))
+		if ((this.state == STATE_PAUSED)
+				&& ((status == STATE_FILE_ERROR) || (status == STATE_NET_ERROR)))
 			return;
 		this.state = status;
 		if (status == STATE_FINISHED) {
@@ -125,16 +134,17 @@ AppBean bean;
 		long currentTime = System.currentTimeMillis();
 		if ((currentTime - lastSendTime > 500L) || (this.percent == 100)) {
 			lastSendTime = currentTime;
-			sendMsg(1);
+			sendMsg(DownloadTaskListener.PROGRESS_CHANGE);
 		}
 	}
 
 	void fireStateChangeEvent() {
-		sendMsg(2);
+		sendMsg(DownloadTaskListener.STATE_CHANGE);
 	}
 
 	void sendMsg(int what) {
-		Iterator<Map.Entry<Object, DownloadTaskListener>> lIterator = this.listenerMap.entrySet().iterator();
+		Iterator<Map.Entry<Object, DownloadTaskListener>> lIterator = this.listenerMap
+				.entrySet().iterator();
 		while (lIterator.hasNext()) {
 			Map.Entry<Object, DownloadTaskListener> entry = lIterator.next();
 			DownloadTaskListener downloadTaskListener = entry.getValue();
@@ -146,5 +156,34 @@ AppBean bean;
 				log.debug("sendMsg is listener is null");
 			}
 		}
+	}
+
+	void setNetworkConnectState() {
+		boolean isWifiEnable = TelephoneUtil.isWifiEnable(DownloadMgr.mCtx);
+		boolean isWithoutWifiNotify = PreferenceUtil.getBoolean(DownloadMgr.mCtx,
+				"NOTIFY_LARGE_WITHOUT_WIFI",
+				PreferenceUtil.DEFAULT_NOTIFY_LARGE_FILE_WITHOUT_WIFI);
+		if ((this.lastState_IsWifi) && (!isWifiEnable) && (isWithoutWifiNotify)) {
+			Message message = Message.obtain();
+			message.obj = this;
+			DownloadMgr.no_wifi.sendMessage(message);
+		}
+		this.lastState_IsWifi = isWifiEnable;
+	}
+
+	void start() {
+		this.downloadFlag = true;
+		setState(STATE_CONNETING);
+		this.mThread = new Thread() {
+			@Override
+			public void run() {
+			}
+		};
+		mThread.start();
+	}
+
+	public void stop() {
+		this.downloadFlag = false;
+		setState(STATE_PAUSED);
 	}
 }

@@ -5,7 +5,7 @@ package com.airshiplay.framework.bean;
  * @version 1.0
  * @since 1.0 2013-2-6
  */
-public class AppBean extends BaseBean {
+public class AppBean extends AbstractBaseBean {
 	public static final int ACTION_TYPE_DOWNLOAD = 1;
 	public static final int ACTION_TYPE_PAY = 2;
 
@@ -48,5 +48,11 @@ public class AppBean extends BaseBean {
 			return this.resId.equals(((AppBean) obj).resId);
 		}
 		return false;
+	}
+
+	@Override
+	public long getSizeValue() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
