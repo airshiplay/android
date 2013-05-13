@@ -3,50 +3,58 @@
  */
 package com.airshiplay.framework.image;
 
-import com.airshiplay.framework.image.CaptureImageTask.OnCompleteHandler;
-
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 
 /**
+ * Thread Capture Image，（local file or remote http）
+ * 
  * @author airshiplay
  * @Create Date 2013-3-10
  * @version 1.0
  * @since 1.0
  */
 public class CaptureImageTask implements Runnable {
+	private static final int BITMAP_READY = 0;
+	private Context context;
+	private IImageCapturer image;
+	private OnCompleteHandler onCompleteHandler;
 
-	/**
-	 * @param localContext3
-	 * @param paramIImageCapturer
-	 */
-	public CaptureImageTask(Context localContext3,
-			IImageCapturer paramIImageCapturer) {
-		// TODO Auto-generated constructor stub
+	public CaptureImageTask(Context context, IImageCapturer iImageCapturer) {
+		this.image = iImageCapturer;
+		this.context = context;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Runnable#run()
-	 */
+	public void complete(Bitmap bitmap) {
+		if ((this.onCompleteHandler != null) && (bitmap != null))
+			this.onCompleteHandler.obtainMessage(BITMAP_READY, bitmap)
+					.sendToTarget();
+	}
+
+	public IImageCapturer getImage() {
+		return this.image;
+	}
+
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-
+		if (this.image != null) {
+			Bitmap bitmap = this.image.request(this.context);
+			complete(bitmap);
+			this.context = null;
+		}
 	}
 
 	/**
 	 * 
 	 */
 	public void cancel() {
-		// TODO Auto-generated method stub
-
+		this.onCompleteHandler.cancel();
 	}
 
 	public class OnCompleteHandler extends Handler {
-		private boolean cancelled;
+		private boolean cancelled = false;
 
 		public void cancel() {
 			this.cancelled = true;
@@ -66,7 +74,6 @@ public class CaptureImageTask implements Runnable {
 	 * @param onCompleteHandler
 	 */
 	public void setOnCompleteHandler(OnCompleteHandler onCompleteHandler) {
-		// TODO Auto-generated method stub
-		
+		this.onCompleteHandler = onCompleteHandler;
 	}
 }

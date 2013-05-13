@@ -9,8 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import android.os.Message;
 
 import com.airshiplay.framework.bean.AppBean;
-import com.airshiplay.framework.util.Log;
-import com.airshiplay.framework.util.LogFactory;
+import com.airshiplay.framework.log.Logger;
+import com.airshiplay.framework.log.LoggerFactory;
 
 /**
  * @author lig
@@ -18,7 +18,7 @@ import com.airshiplay.framework.util.LogFactory;
  * @since 1.0 2013-2-6
  */
 public class DownloadTask {
-	private static Log log = LogFactory.getLog(DownloadTask.class);
+	private static Logger log = LoggerFactory.getLogger(DownloadTask.class);
 
 	public static final int STATE_WAIT = 0;
 	public static final int STATE_CONNETING = 1;
@@ -27,7 +27,7 @@ public class DownloadTask {
 	public static final int STATE_FINISHED = 4;
 	public static final int STATE_NET_ERROR = 5;
 	public static final int STATE_FILE_ERROR = 6;
-AppBean bean;
+	AppBean bean;
 	int percent;
 	long loadSize;
 	long size;

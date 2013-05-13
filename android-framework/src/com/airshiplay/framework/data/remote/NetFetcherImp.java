@@ -3,7 +3,7 @@
  */
 package com.airshiplay.framework.data.remote;
 
-import com.airshiplay.framework.net.JSONUtil;
+import com.airshiplay.framework.http.JSONUtil;
 
 import android.text.TextUtils;
 

@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.airshiplay.framework.util.Log;
-import com.airshiplay.framework.util.LogFactory;
+import com.airshiplay.framework.log.Logger;
+import com.airshiplay.framework.log.LoggerFactory;
 import com.airshiplay.framework.util.TelephoneUtil;
 import com.airshiplay.framework.widget.PullToRefreshListView.P2RListViewStateListener;
 
@@ -35,7 +35,7 @@ import android.widget.ListView;
  */
 public abstract class AbsListViewAdapter<T> extends BaseAdapter implements
 		AbsListView.OnScrollListener, Filterable {
-	private static final Log log = LogFactory.getLog(AbsListViewAdapter.class);
+	private static final Logger log = LoggerFactory.getLogger(AbsListViewAdapter.class);
 	/**
 	 * Contains the list of objects that represent the data of this
 	 * ArrayAdapter. The content of this list is referred to as "the array" in

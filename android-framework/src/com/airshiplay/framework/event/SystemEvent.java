@@ -4,10 +4,11 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.airshiplay.framework.log.Logger;
+import com.airshiplay.framework.log.LoggerFactory;
+
 import android.util.SparseArray;
 
-import com.airshiplay.framework.util.Log;
-import com.airshiplay.framework.util.LogFactory;
 
 /**
  * 自定义事件,在各个Activity中实现接收处理
@@ -39,7 +40,7 @@ public class SystemEvent {
 	public static final int EVENT_TYPE_RING_PLAYSTATE = 22;
 	public static final int EVENT_TYPE_RING_STOP = 21;
 	public static final int EVENT_TYPE_RESTART=22;
-	private static final Log log = LogFactory.getLog(SystemEvent.class);
+	private static final Logger log = LoggerFactory.getLogger(SystemEvent.class);
 
 	private static SparseArray<List<WeakReference<EventListener>>> mEventMap = new SparseArray<List<WeakReference<EventListener>>>();
 

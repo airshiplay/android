@@ -12,6 +12,8 @@ import com.airshiplay.framework.util.TelephoneUtil;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 
@@ -24,8 +26,7 @@ import android.widget.ImageView;
 public class FWImageView {
 	public static final int KEY = 110;
 	private static final int LOADING_THREADS = 4;
-	private static ExecutorService threadPool = Executors
-			.newFixedThreadPool(LOADING_THREADS);
+	private static ExecutorService threadPool = Executors.newFixedThreadPool(LOADING_THREADS);
 	private boolean SaveFlowMode;
 	protected CaptureImageTask currentTask;
 	private OnSetImageFinished finishedHandler;
@@ -53,8 +54,7 @@ public class FWImageView {
 		imageView.setTag(this);
 		mImageViewRef = new WeakReference<ImageView>(imageView);
 		if (defaultDrawableResid != null) {
-			mDefaultDrawable = mContext.getResources().getDrawable(
-					defaultDrawableResid.intValue());
+			mDefaultDrawable = mContext.getResources().getDrawable(defaultDrawableResid.intValue());
 			imageView.setImageDrawable(mDefaultDrawable);
 		}
 	}
@@ -62,6 +62,51 @@ public class FWImageView {
 	public static void cancelAllTasks() {
 		threadPool.shutdownNow();
 		threadPool = Executors.newFixedThreadPool(LOADING_THREADS);
+	}
+
+	public static void recoveryImage(View view) {
+		if (view == null)
+			return;
+		if ((view instanceof ImageView)) {
+			if ((view.getTag() instanceof FWImageView)) {
+				FWImageView fwImageView = (FWImageView) view.getTag();
+				if (fwImageView.isRemoved)
+					fwImageView.setImage();
+			}
+			// } else if ((paramView instanceof ViewFlow)) {
+			// recoveryImage(((ViewFlow) paramView).getCurrentView());
+		} else if ((view instanceof ViewGroup)) {
+			ViewGroup viewGroup = (ViewGroup) view;
+			int i = viewGroup.getChildCount();
+			for (int j = 0; j < i; j++)
+				recoveryImage(viewGroup.getChildAt(j));
+		}
+
+	}
+
+	private void recycleCurrent() {
+	}
+
+	public static void removeImage(View view) {
+		if (view == null)
+			return;
+
+		if ((view instanceof ImageView)) {
+			if ((view.getTag() instanceof FWImageView)) {
+				FWImageView fwImageView = (FWImageView) view.getTag();
+				if (!fwImageView.isRemoved) {
+					fwImageView.setDefautlImage();
+					fwImageView.recycleCurrent();
+					fwImageView.isRemoved = true;
+				}
+			}
+		} else if ((view instanceof ViewGroup)) {
+			ViewGroup viewGroup = (ViewGroup) view;
+			int i = viewGroup.getChildCount();
+			for (int j = 0; j < i; j++)
+				removeImage(viewGroup.getChildAt(j));
+		}
+
 	}
 
 	private void setImage(Bitmap bitmap, boolean animate) {
@@ -78,7 +123,6 @@ public class FWImageView {
 			imageView.setImageBitmap(bitmap);
 		if (finishedHandler != null)
 			finishedHandler.onSetImageFinished();
-
 	}
 
 	public ImageView getImageView() {
@@ -115,8 +159,7 @@ public class FWImageView {
 		setImage(iImageCapturer, false);
 	}
 
-	public void setImage(IImageCapturer iImageCapturer,
-			OnSetImageFinished onSetImageFinished) {
+	public void setImage(IImageCapturer iImageCapturer, OnSetImageFinished onSetImageFinished) {
 		finishedHandler = onSetImageFinished;
 		setImage(iImageCapturer, false);
 	}
@@ -125,8 +168,7 @@ public class FWImageView {
 		setImage(iImageCapturer, onlyLoadCache, false);
 	}
 
-	public void setImage(IImageCapturer iImageCapturer, boolean onlyLoadCache,
-			boolean animate) {
+	public void setImage(IImageCapturer iImageCapturer, boolean onlyLoadCache, boolean animate) {
 		if (iImageCapturer == null)
 			return;
 		if (!canLoad(mContext)) {
@@ -146,18 +188,17 @@ public class FWImageView {
 						currentTask = null;
 					}
 					currentTask = new CaptureImageTask(mContext, mCapturer);
-					currentTask
-							.setOnCompleteHandler(currentTask.new OnCompleteHandler() {
+					currentTask.setOnCompleteHandler(currentTask.new OnCompleteHandler() {
 
-								@Override
-								public void onComplete() {
-									Bitmap bitmap = mCapturer.get(mContext);
-									if (bitmap != null)
-										setImage(bitmap, true);
-									else
-										setDefautlImage();
-								}
-							});
+						@Override
+						public void onComplete() {
+							Bitmap bitmap = mCapturer.get(mContext);
+							if (bitmap != null)
+								setImage(bitmap, true);
+							else
+								setDefautlImage();
+						}
+					});
 					threadPool.execute(currentTask);
 				}
 			}
@@ -166,7 +207,7 @@ public class FWImageView {
 	}
 
 	/**
-	 * @param localContext1
+	 * @param context
 	 * @return
 	 */
 	private boolean canLoad(Context context) {

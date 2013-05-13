@@ -1,8 +1,7 @@
 package com.airshiplay.framework.sliding;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.util.Devices;
-import com.airshiplay.framework.util.SystemUtils;
+import com.airshiplay.framework.util.ScreenUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -100,7 +99,7 @@ public class SlidingLayout extends ViewGroup implements
 		int x = (int) ev.getX();
 		int y = (int) ev.getY();
 		if ((this.mContent.getLeft() < x) && (this.mContent.getRight() > x)
-				&& (this.mContent.getTop() + SystemUtils.dp2px(42.0F) < y)
+				&& (this.mContent.getTop() + ScreenUtil.dp2px(42.0F) < y)
 				&& (this.mContent.getBottom() > y))
 			return true;
 		return false;
@@ -221,7 +220,7 @@ public class SlidingLayout extends ViewGroup implements
 	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		super.measureChildren(widthMeasureSpec, heightMeasureSpec);
-		this.mSidebarWidth = (13 * Devices.size[0] / 20);
+		this.mSidebarWidth = (13 * ScreenUtil.size[0] / 20);
 	}
 
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,

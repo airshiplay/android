@@ -5,7 +5,7 @@ package com.airshiplay.framework.data.local;
 
 import com.airshiplay.framework.data.remote.NetFetcherImp;
 import com.airshiplay.framework.data.remote.NetFetcherImp.IFetchHandler;
-import com.airshiplay.framework.net.JSONUtil;
+import com.airshiplay.framework.http.JSONUtil;
 
 /**
  * @author airshiplay

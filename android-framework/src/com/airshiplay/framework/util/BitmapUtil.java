@@ -117,8 +117,8 @@ public class BitmapUtil {
 		return false;
 	}
 
-	public static Bitmap toRoundCorner(Bitmap paramBitmap) {
-		return toRoundCorner(paramBitmap, 10);
+	public static Bitmap toRoundCorner(Bitmap bitmap) {
+		return toRoundCorner(bitmap, 10);
 	}
 
 	public static Bitmap toRoundCorner(Bitmap bitmap, int radius) {
