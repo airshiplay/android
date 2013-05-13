@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -424,5 +426,29 @@ public class TelephoneUtil {
 	public static void shotVibratePhone(Context context) {
 		((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE))
 				.vibrate(new long[] { 800L, 50L, 400L, 30L }, -1);
+	}
+
+	public static boolean isSdcardExist() {
+		return Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED);
+	}
+
+	public static long getAvailableExternalMemorySize() {
+		if (Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+			StatFs statFs = new StatFs(Environment
+					.getExternalStorageDirectory().getPath());
+			return statFs.getBlockSize() * statFs.getAvailableBlocks();
+		}
+		if (Environment.getExternalStorageState().equals(
+				Environment.MEDIA_REMOVED)) {
+			return -1L;
+		}
+		return 0L;
+	}
+
+	public static long getAvailableInternalMemorySize() {
+		StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());
+	    return statFs.getBlockSize() * statFs.getAvailableBlocks();
 	}
 }
