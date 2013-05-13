@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name="com.airshiplay.framework.application.FWApplication"
@@ -50,9 +51,6 @@
             android:name="com.airshiplay.framework.example.pulltorefresh.LauncherActivity"
             android:label="@string/pulltorefreshactivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshExpandableListActivity" >
@@ -79,9 +77,6 @@
             android:name="com.airshiplay.framework.example.wheel.WheelDemo"
             android:label="WheelDemo" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.airshiplay.framework.platform.PlatformLoginActivity" >
@@ -102,6 +97,15 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="framework.wheel.WHEEL_SAMPLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.ImageActivity"
+            android:label="wheeltest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

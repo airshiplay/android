@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.airshiplay.framework.net;
+package com.airshiplay.framework.http;
 
 import com.airshiplay.framework.data.remote.NetFetcherImp;
 

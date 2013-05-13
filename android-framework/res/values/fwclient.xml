@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="fwServerProtocol">http</string>
+    <string name="fwServerHost">172.16.39.138</string>
+    <string name="fwServerPort">8080</string>
+    <string name="fwServerContext">/</string>
+    <string name="fwEnvironment">/rs/tmsWebserviceService</string>
+
+</resources>
