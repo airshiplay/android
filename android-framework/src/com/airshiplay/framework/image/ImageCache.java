@@ -6,14 +6,13 @@ package com.airshiplay.framework.image;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-import com.airshiplay.framework.util.BitmapUtil;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
 import android.support.v4.util.LruCache;
 import android.text.TextUtils;
+
+import com.airshiplay.framework.util.BitmapUtil;
 
 public class ImageCache {
 	private static final String DISK_CACHE_PATH = "/web_image_cache/";
@@ -28,9 +27,9 @@ public class ImageCache {
 	private ImageCache(Context context) {
 		this.memoryCache = new LruCache<String, WeakReference<Bitmap>>(MAX_SIZE);
 		if (selfPath) {
-			String str1 = String.valueOf(context.getApplicationContext()
+			String baseDir = String.valueOf(context.getApplicationContext()
 					.getCacheDir().getAbsolutePath());
-			diskCachePath = str1 + DISK_CACHE_PATH;
+			diskCachePath = baseDir + DISK_CACHE_PATH;
 		}
 		File file = new File(diskCachePath);
 		file.mkdirs();
@@ -64,9 +63,9 @@ public class ImageCache {
 			return;
 		String key = BitmapLoader.getKeyByUrl(url);
 		this.memoryCache.remove(key);
-		File localFile = new File(diskCachePath, key);
-		if ((localFile.exists()) && (localFile.isFile()))
-			localFile.delete();
+		File file = new File(diskCachePath, key);
+		if ((file.exists()) && (file.isFile()))
+			file.delete();
 	}
 
 	public void cacheBitmapToMemory(String url, Bitmap bitmap) {
@@ -93,20 +92,22 @@ public class ImageCache {
 		if (TextUtils.isEmpty(url))
 			return null;
 
-		Bitmap localBitmap2 = null;
+		Bitmap bitmap = null;
 		if (diskCacheEnabled) {
 			String str = getFilePath(url);
 			if (new File(str).exists())
-				localBitmap2 = BitmapLoader.getBitmapFromDisk(str);
+				bitmap = BitmapLoader.getBitmapFromDisk(str);
 		}
-		return localBitmap2;
+		return bitmap;
 
 	}
 
 	public void clear() {
 		this.memoryCache.evictAll();
 		File file = new File(diskCachePath);
-		
+		if(file.exists()){
+			
+		}
 	}
 
 	public Bitmap getBitmapFromDisk(String url, float scale) {
@@ -126,14 +127,14 @@ public class ImageCache {
 	}
 
 	public Bitmap getBitmapFromDisk(String url, float mWidth, float mHeight) {
-		Bitmap localBitmap = null;
+		Bitmap bitmap = null;
 		if (this.diskCacheEnabled) {
-			String str = getFilePath(url);
-			if (new File(str).exists())
-				localBitmap = BitmapLoader.getBitmapFromDisk(str, mWidth,
+			String ilePath = getFilePath(url);
+			if (new File(ilePath).exists())
+				bitmap = BitmapLoader.getBitmapFromDisk(ilePath, mWidth,
 						mHeight);
 		}
-		return localBitmap;
+		return bitmap;
 	}
 
 }

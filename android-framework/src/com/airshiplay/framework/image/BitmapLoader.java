@@ -17,8 +17,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
-import com.airshiplay.framework.util.ScreenUtil;
-
 /**
  * @author airshiplay
  * @Create Date 2013-3-18
