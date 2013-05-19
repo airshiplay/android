@@ -82,20 +82,20 @@ public class ImageCache {
 		return buffer.toString();
 	}
 
-	public static void setCachePath(String paramString) {
-		if (TextUtils.isEmpty(paramString))
+	public static void setCachePath(String diskPath) {
+		if (TextUtils.isEmpty(diskPath))
 			return;
-		diskCachePath = paramString;
+		diskCachePath = diskPath;
 		selfPath = true;
 	}
 
-	public Bitmap getBitmapFromDisk(String paramString) {
-		if (TextUtils.isEmpty(paramString))
+	public Bitmap getBitmapFromDisk(String url) {
+		if (TextUtils.isEmpty(url))
 			return null;
 
 		Bitmap localBitmap2 = null;
 		if (diskCacheEnabled) {
-			String str = getFilePath(paramString);
+			String str = getFilePath(url);
 			if (new File(str).exists())
 				localBitmap2 = BitmapLoader.getBitmapFromDisk(str);
 		}
@@ -106,7 +106,7 @@ public class ImageCache {
 	public void clear() {
 		this.memoryCache.evictAll();
 		File file = new File(diskCachePath);
-
+		
 	}
 
 	public Bitmap getBitmapFromDisk(String url, float scale) {

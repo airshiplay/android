@@ -98,7 +98,7 @@ public class BitmapLoader {
 	}
 
 	public static Bitmap getBitmapFromDisk(String loadFilePath) {
-		return null;
+		return getBitmapFromDisk(loadFilePath, 0, 0);
 	}
 
 	public static Bitmap getBitmapFromDisk(String filepath, float width,
@@ -110,6 +110,7 @@ public class BitmapLoader {
 			if (width > 0 && height > 0) {
 				bitmap = BitmapFactory.decodeFile(filepath,
 						getOptions(filepath, width, height));
+				bitmap.setDensity(240);
 			} else {
 				bitmap = BitmapFactory.decodeFile(filepath);
 			}
@@ -137,9 +138,9 @@ public class BitmapLoader {
 	 * @param filepath
 	 *            complete path name for the file to be decoded.
 	 * @param width
-	 *            dp <0 不做处理，
+	 *            px <=1 不做处理，
 	 * @param height
-	 *            dp
+	 *            px <=1 不做处理，
 	 * @return
 	 */
 	public static BitmapFactory.Options getOptions(String filepath,
@@ -148,19 +149,21 @@ public class BitmapLoader {
 		options.inJustDecodeBounds = true;// true 不分配空间，解码，仅计算图片的原始高度、宽度
 		BitmapFactory.decodeFile(filepath, options);
 		if ((width > 0) || (height > 0)) {
-			if ((width != 1) || (height <= 1)) {
-				float w = ScreenUtil.dp2px(width);
+			if (width > 1) {
+				float w = (width);
 				if (options.outWidth > w) {
 					options.inDensity = 240;
 					options.inTargetDensity = (int) (options.inDensity * w / options.outWidth);
 					options.inScaled = true;
 				}
 			}
-			float h = ScreenUtil.dp2px(height);
-			if (options.outHeight > h) {
-				options.inDensity = 240;
-				options.inTargetDensity = (int) (options.inDensity * h / options.outHeight);
-				options.inScaled = true;
+			if (height > 1) {
+				float h = (height);
+				if (options.outHeight > h) {
+					options.inDensity = 240;
+					options.inTargetDensity = (int) (options.inDensity * h / options.outHeight);
+					options.inScaled = true;
+				}
 			}
 		}
 		options.inJustDecodeBounds = false;

@@ -26,6 +26,10 @@ public class DownloadMgr {
 		return task;
 	}
 
+	/**add to download queue,awate for download
+	 * @param bean
+	 * @return
+	 */
 	public static<T extends BaseBean> DownloadTask addTask(T bean) {
 		return null;
 	}

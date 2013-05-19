@@ -51,8 +51,8 @@ public class FWImageView {
 
 	public FWImageView(ImageView imageView, Integer defaultDrawableResid) {
 		mContext = imageView.getContext().getApplicationContext();
-		imageView.setTag(this);
 		mImageViewRef = new WeakReference<ImageView>(imageView);
+		imageView.setTag(this);
 		if (defaultDrawableResid != null) {
 			mDefaultDrawable = mContext.getResources().getDrawable(defaultDrawableResid.intValue());
 			imageView.setImageDrawable(mDefaultDrawable);
@@ -139,14 +139,7 @@ public class FWImageView {
 
 	}
 
-	public void setFinishedHandler(OnSetImageFinished onSetImageFinished) {
-		finishedHandler = onSetImageFinished;
-	}
-
-	public void setForceImage(boolean paramBoolean) {
-		mForce = paramBoolean;
-	}
-
+	
 	public void setImage() {
 		if (mCapturer != null) {
 			IImageCapturer localIImageCapturer = mCapturer;
@@ -206,19 +199,6 @@ public class FWImageView {
 
 	}
 
-	/**
-	 * @param context
-	 * @return
-	 */
-	private boolean canLoad(Context context) {
-		if (mForce)
-			return true;
-		if ((!TelephoneUtil.isWifiEnable(mContext)) && (SaveFlowMode))
-			return false;
-		else
-			return true;
-	}
-
 	public void setImage(String url) {
 		RemoteImage remoteImage = RemoteImage.getListIcon(url);
 		setImage(remoteImage);
@@ -237,6 +217,25 @@ public class FWImageView {
 		}
 	}
 
+	public void setFinishedHandler(OnSetImageFinished onSetImageFinished) {
+		finishedHandler = onSetImageFinished;
+	}
+
+	public void setForceImage(boolean paramBoolean) {
+		mForce = paramBoolean;
+	}
+	/**
+	 * @param context
+	 * @return
+	 */
+	private boolean canLoad(Context context) {
+		if (mForce)
+			return true;
+		if ((!TelephoneUtil.isWifiEnable(mContext)) && (SaveFlowMode))
+			return false;
+		else
+			return true;
+	}
 	public abstract interface OnSetImageFinished {
 		public abstract void onSetImageFinished();
 	}

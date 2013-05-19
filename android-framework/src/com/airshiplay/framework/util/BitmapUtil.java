@@ -126,22 +126,22 @@ public class BitmapUtil {
 			if (!bitmap.isRecycled()) {
 				try {
 					Bitmap.Config localConfig = Bitmap.Config.ARGB_8888;
-					Bitmap localBitmap = Bitmap.createBitmap(bitmap.getWidth(),
+					Bitmap resultBitmap = Bitmap.createBitmap(bitmap.getWidth(),
 							bitmap.getHeight(), localConfig);
-					Canvas canvas = new Canvas(localBitmap);
+					Canvas canvas = new Canvas(resultBitmap);
 					Paint paint = new Paint();
-					Rect rect = new Rect(0, 0, bitmap.getWidth(),
+					Rect rectSrc = new Rect(0, 0, bitmap.getWidth(),
 							bitmap.getHeight());
-					RectF localRectF = new RectF(rect);
+					RectF rectFDst = new RectF(rectSrc);
 					paint.setAntiAlias(true);
 					canvas.drawARGB(0, 0, 0, 0);
 					paint.setColor(-12434878);
-					canvas.drawRoundRect(localRectF, radius, radius, paint);
+					canvas.drawRoundRect(rectFDst, radius, radius, paint);
 					paint.setXfermode(new PorterDuffXfermode(
 							PorterDuff.Mode.SRC_IN));
-					canvas.drawBitmap(bitmap, rect, rect, paint);
+					canvas.drawBitmap(bitmap, rectSrc, rectFDst, paint);
 					bitmap.recycle();
-					return localBitmap;
+					return resultBitmap;
 				} catch (OutOfMemoryError e) {
 					e.printStackTrace();
 				}

@@ -22,22 +22,16 @@ public class RemoteImage implements IImageCapturer {
 	protected boolean mAllowStop;
 	protected Integer mCornerPixel;
 	protected boolean mCut;
-	protected float mHeight;
 	protected boolean mRotate;
 	protected boolean mRoundCorner;
+	/** unit px */
 	protected float mWidth;
+	/** unit px */
+	protected float mHeight;
 	protected String url;
 
 	public RemoteImage(String url) {
 		this.url = url;
-	}
-
-	public static RemoteImage getListIcon(String url) {
-		RemoteImage remoteImage = new RemoteImage(url);
-		remoteImage.mWidth = ScreenUtil.dp2px(48);
-		remoteImage.mHeight = ScreenUtil.dp2px(48);
-		remoteImage.mRoundCorner = true;
-		return remoteImage;
 	}
 
 	@Override
@@ -91,6 +85,63 @@ public class RemoteImage implements IImageCapturer {
 		return bitmap;
 	}
 
+	public static RemoteImage getListIcon(String url) {
+		RemoteImage remoteImage = new RemoteImage(url);
+		remoteImage.mWidth = ScreenUtil.dp2px(48);
+		remoteImage.mHeight = ScreenUtil.dp2px(48);
+		remoteImage.mRoundCorner = true;
+		return remoteImage;
+	}
+
+	/**
+	 * width fixed,screen width
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static RemoteImage getScreenShot(String url) {
+		return getScreenShot(url, false);
+	}
+
+	public static RemoteImage getScreenShot(String url, boolean halfWidth) {
+		RemoteImage remoteImage = new RemoteImage(url);
+		if (halfWidth)
+			remoteImage.mWidth = ScreenUtil.resolutionXY[0] / 2;
+		else {
+			remoteImage.mWidth = ScreenUtil.resolutionXY[0];
+		}
+		remoteImage.mHeight = 1;
+		return remoteImage;
+	}
+
+	/**
+	 * Height 48dp fixed
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static RemoteImage getWebIcon(String url) {
+		return getWebIcon(url, false, false, false);
+	}
+
+	public static RemoteImage getWebIcon(String url, boolean screenHeight) {
+		return getWebIcon(url, screenHeight, false, false);
+	}
+
+	public static RemoteImage getWebIcon(String url, boolean screenHeight,
+			boolean allowStop, boolean cut) {
+		RemoteImage remoteImage = new RemoteImage(url);
+		if (screenHeight) {
+			remoteImage.mHeight = ScreenUtil.resolutionXY[1];
+		} else {
+			remoteImage.mHeight = ScreenUtil.dp2px(48);
+		}
+		remoteImage.mWidth = 1;
+		remoteImage.mAllowStop = allowStop;
+		remoteImage.mCut = cut;
+		return remoteImage;
+	}
+
 	/**
 	 * 对超出屏幕的图片采用居中截取,把多余的边界抛弃
 	 * 
@@ -132,14 +183,9 @@ public class RemoteImage implements IImageCapturer {
 	 * @return
 	 */
 	private Bitmap getRotateImage(Bitmap bitmap) {
-		Bitmap resultBitmap = null;
-		if (bitmap != null) {
-			if (!mRotate)
-				resultBitmap = BitmapUtil.getVerticalImage(bitmap);
-			else
-				resultBitmap = bitmap;
-		}
-		return resultBitmap;
+		if (!mRotate || null == bitmap)
+			return bitmap;
+		return BitmapUtil.getVerticalImage(bitmap);
 	}
 
 	/**
@@ -160,43 +206,6 @@ public class RemoteImage implements IImageCapturer {
 					mCornerPixel.intValue());
 		}
 		return resultBitmap;
-	}
-
-	public static RemoteImage getScreenShot(String url) {
-		return getScreenShot(url, false);
-	}
-
-	public static RemoteImage getScreenShot(String url, boolean halfWidth) {
-		RemoteImage remoteImage = new RemoteImage(url);
-		if (halfWidth)
-			remoteImage.mWidth = ScreenUtil.resolutionXY[0] / 2;
-		else {
-			remoteImage.mWidth = ScreenUtil.resolutionXY[0];
-		}
-		remoteImage.mHeight = -1;
-		return remoteImage;
-	}
-
-	public static RemoteImage getWebIcon(String url) {
-		return getWebIcon(url, false, false, false);
-	}
-
-	public static RemoteImage getWebIcon(String url, boolean screenHeight) {
-		return getWebIcon(url, screenHeight, false, false);
-	}
-
-	public static RemoteImage getWebIcon(String url, boolean screenHeight,
-			boolean allowStop, boolean cut) {
-		RemoteImage remoteImage = new RemoteImage(url);
-		if (screenHeight) {
-			remoteImage.mHeight = ScreenUtil.resolutionXY[1];
-		} else {
-			remoteImage.mHeight = ScreenUtil.dp2px(48);
-		}
-		remoteImage.mWidth = -1;
-		remoteImage.mAllowStop = allowStop;
-		remoteImage.mCut = cut;
-		return remoteImage;
 	}
 
 	public String getUrl() {
