@@ -32,6 +32,11 @@ import android.view.WindowManager;
  */
 public class TelephoneUtil {
 
+	/**
+	 * 
+	 * This method requires the caller to hold the permission
+	 * {@link android.Manifest.permission#ACCESS_NETWORK_STATE}.
+	 */
 	public static boolean isNetworkAvailable(Context context) {
 		try {
 			NetworkInfo networkInfo = ((ConnectivityManager) context
@@ -45,6 +50,11 @@ public class TelephoneUtil {
 		}
 	}
 
+	/**
+	 * 
+	 * This method requires the caller to hold the permission
+	 * {@link android.Manifest.permission#ACCESS_NETWORK_STATE}.
+	 */
 	public static boolean isWifiEnable(Context context) {
 		try {
 			NetworkInfo networkInfo = ((ConnectivityManager) context
@@ -62,9 +72,15 @@ public class TelephoneUtil {
 		return Build.VERSION.SDK_INT;
 	}
 
+	/**
+	 * single application memory max size limit
+	 * 
+	 * @param context
+	 * @return Unit KB
+	 */
 	public static int getCacheSize(Context context) {
-		return 1048576 * ((ActivityManager) context
-				.getSystemService("activity")).getMemoryClass() / 8;
+		return 1024 * ((ActivityManager) context
+				.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
 	}
 
 	public static String getDevice() {
@@ -72,65 +88,78 @@ public class TelephoneUtil {
 	}
 
 	public static float getDisplayDensity(Activity activity) {
-		DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay()
-				.getMetrics(localDisplayMetrics);
-		return localDisplayMetrics.density;
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.density;
 	}
 
 	public static float getDisplayDensity(Context context) {
-		DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-		((WindowManager) context.getSystemService("window"))
-				.getDefaultDisplay().getMetrics(localDisplayMetrics);
-		return localDisplayMetrics.density;
+		DisplayMetrics dm = new DisplayMetrics();
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
+				.getDefaultDisplay().getMetrics(dm);
+		return dm.density;
 	}
 
 	public static int getDisplayHeight(Activity activity) {
-		DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay()
-				.getMetrics(localDisplayMetrics);
-		return localDisplayMetrics.heightPixels;
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
 	}
 
 	public static int getDisplayHeight(Context context) {
-		DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-		((WindowManager) context.getSystemService("window"))
-				.getDefaultDisplay().getMetrics(localDisplayMetrics);
-		return localDisplayMetrics.heightPixels;
+		DisplayMetrics dm = new DisplayMetrics();
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
+				.getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
 	}
 
 	public static int getDisplayWidth(Activity activity) {
-		DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay()
-				.getMetrics(localDisplayMetrics);
-		return localDisplayMetrics.widthPixels;
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
 	}
 
 	public static int getDisplayWidth(Context context) {
-		DisplayMetrics localDisplayMetrics = new DisplayMetrics();
-		((WindowManager) context.getSystemService("window"))
-				.getDefaultDisplay().getMetrics(localDisplayMetrics);
-		return localDisplayMetrics.widthPixels;
+		DisplayMetrics dm = new DisplayMetrics();
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
+				.getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
 	}
 
+	/**
+	 * the IMEI for GSM and the MEID or ESN for CDMA phones
+	 * <p>
+	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE
+	 * READ_PHONE_STATE}
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static String getIMEI(Context context) {
-		String str = ((TelephonyManager) context.getSystemService("phone"))
-				.getDeviceId();
+		String str = ((TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 		if (str == null)
 			str = "";
 		return str;
 	}
 
+	/**
+	 * Requires Permission: {@link android.Manifest.permission#READ_PHONE_STATE
+	 * READ_PHONE_STATE}
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static String getIMSI(Context context) {
-		String str = ((TelephonyManager) context.getSystemService("phone"))
-				.getSubscriberId();
+		String str = ((TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE)).getSubscriberId();
 		if (str == null)
 			str = "";
 		return str;
 	}
 
 	public static String getLocalMacAddress(Context context) {
-		return ((WifiManager) context.getSystemService("wifi"))
+		return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE))
 				.getConnectionInfo().getMacAddress();
 	}
 
@@ -138,16 +167,29 @@ public class TelephoneUtil {
 		return getNetworkType(context).toLowerCase();
 	}
 
+	/**
+	 * Returns the alphabetic name of current registered operator.
+	 * <p>
+	 * Availability: Only when user is registered to a network. Result may be
+	 * unreliable on CDMA networks (use {@link TelephonyManager#getPhoneType()}
+	 * to determine if on a CDMA network).
+	 */
 	public static String getNetworkOperatorName(Activity activity) {
-		return ((TelephonyManager) activity.getSystemService("phone"))
+		return ((TelephonyManager) activity
+				.getSystemService(Context.TELEPHONY_SERVICE))
 				.getNetworkOperatorName();
 	}
 
 	public static String getNetworkOperatorName(Context context) {
-		return ((TelephonyManager) context.getSystemService("phone"))
+		return ((TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE))
 				.getNetworkOperatorName();
 	}
 
+	/**
+	 * Returns the language code for this {@code Locale} or the empty string if
+	 * no language was set.
+	 */
 	public static String getPhoneLanguage() {
 		String str = Locale.getDefault().getLanguage();
 		if (str == null)
@@ -169,7 +211,7 @@ public class TelephoneUtil {
 	/**
 	 * @param context
 	 * @param unit
-	 *            The unit to convert from.
+	 *            The unit to convert from. {@link TypedValue#TYPE_DIMENSION}.
 	 * @param value
 	 *            value The value to apply the unit to.
 	 * @return The complex floating point value multiplied by the appropriate
@@ -193,7 +235,7 @@ public class TelephoneUtil {
 
 	public static String getResolution(Context context) {
 		DisplayMetrics dm = new DisplayMetrics();
-		((WindowManager) context.getSystemService("window"))
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
 				.getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels + "x" + dm.heightPixels;
 	}
@@ -261,7 +303,6 @@ public class TelephoneUtil {
 			if (networkInfo.getTypeName().toLowerCase().equals("wifi"))
 				return "wifi";
 			return networkInfo.getExtraInfo().toLowerCase();
-
 		}
 		return "wifi not available";
 	}
@@ -307,7 +348,14 @@ public class TelephoneUtil {
 		return (str.equals("10.0.0.172")) || (str.equals("010.000.000.172"));
 	}
 
+	/**
+	 * China Mobile Network
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static boolean isConnectChinaMobile(Context context) {
+		// MCC+MNC (mobile country code + mobile network code)
 		String str = ((TelephonyManager) context
 				.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
 		if (str != null)
@@ -315,6 +363,12 @@ public class TelephoneUtil {
 		return false;
 	}
 
+	/**
+	 * China Telecom Network
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static boolean isConnectChinaTelecom(Context context) {
 		String str = ((TelephonyManager) context
 				.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
@@ -323,6 +377,12 @@ public class TelephoneUtil {
 		return false;
 	}
 
+	/**
+	 * China Unicom Network
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static boolean isConnectChinaUnicom(Context context) {
 		String str = ((TelephonyManager) context
 				.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
@@ -331,6 +391,12 @@ public class TelephoneUtil {
 		return false;
 	}
 
+	/**
+	 * Current Network Type（Is Mobile）
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static boolean isMobileType(Context context) {
 		ConnectivityManager cm = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -342,6 +408,12 @@ public class TelephoneUtil {
 		return networkInfo.getTypeName().equalsIgnoreCase("mobile");
 	}
 
+	/**
+	 * Network Access point Uniwap
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public static boolean isUniwap(Context context) {
 		if ((!isConnectChinaUnicom(context)) || (!isMobileType(context)))
 			return false;

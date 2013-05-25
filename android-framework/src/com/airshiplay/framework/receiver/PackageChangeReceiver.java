@@ -13,8 +13,8 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.airshiplay.framework.event.SystemEvent;
-import com.airshiplay.framework.util.Log;
-import com.airshiplay.framework.util.LogFactory;
+import com.airshiplay.framework.log.Logger;
+import com.airshiplay.framework.log.LoggerFactory;
 
 /**
  * @author airshiplay
@@ -23,8 +23,8 @@ import com.airshiplay.framework.util.LogFactory;
  * @since 1.0
  */
 public class PackageChangeReceiver extends BroadcastReceiver {
-	private static final Log log = LogFactory
-			.getLog(PackageChangeReceiver.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(PackageChangeReceiver.class);
 	/** key:packageName,value:Handler */
 	private static Map<String, Handler> listeners = new HashMap<String, Handler>();
 

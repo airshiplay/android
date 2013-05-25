@@ -4,11 +4,17 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-sdk
         android:minSdkVersion="4"
         android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name="com.airshiplay.framework.application.FWApplication"
         android:allowBackup="false"
@@ -45,9 +51,6 @@
             android:name="com.airshiplay.framework.example.pulltorefresh.LauncherActivity"
             android:label="@string/pulltorefreshactivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshExpandableListActivity" >
@@ -74,10 +77,9 @@
             android:name="com.airshiplay.framework.example.wheel.WheelDemo"
             android:label="WheelDemo" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.airshiplay.framework.platform.PlatformLoginActivity" >
         </activity>
         <activity
             android:name="com.airshiplay.framework.example.wheel.TimeActivity"
@@ -96,6 +98,19 @@
 
                 <category android:name="framework.wheel.WHEEL_SAMPLE" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.TextViewUI"
+            android:label="TextView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.ImageActivity"
+            android:label="ImageActivity" >
         </activity>
     </application>
 

@@ -1,17 +1,24 @@
 package com.airshiplay.framework.download;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.os.Message;
 
-import com.airshiplay.framework.bean.AppBean;
 import com.airshiplay.framework.bean.BaseBean;
-import com.airshiplay.framework.util.Log;
-import com.airshiplay.framework.util.LogFactory;
+import com.airshiplay.framework.log.Logger;
+import com.airshiplay.framework.log.LoggerFactory;
 import com.airshiplay.framework.util.PreferenceUtil;
 import com.airshiplay.framework.util.TelephoneUtil;
 
@@ -21,7 +28,7 @@ import com.airshiplay.framework.util.TelephoneUtil;
  * @since 1.0 2013-2-6
  */
 public class DownloadTask {
-	private static Log log = LogFactory.getLog(DownloadTask.class);
+	private static Logger log = LoggerFactory.getLogger(DownloadTask.class);
 
 	public static final int STATE_WAIT = 0;
 	public static final int STATE_CONNETING = 1;
@@ -50,6 +57,8 @@ public class DownloadTask {
 
 	private boolean lastState_IsWifi;
 
+	private final int timeoutMillis = 3000;
+
 	public DownloadTask() {
 		this.listenerMap = new ConcurrentHashMap<Object, DownloadTaskListener>();
 	}
@@ -73,8 +82,54 @@ public class DownloadTask {
 			file.delete();
 	}
 
-	boolean download() {
-		return false;
+	public boolean download() {
+		HttpURLConnection connection = null;
+		InputStream input = null;
+		FileOutputStream out = null;
+		try {
+			setState(STATE_CONNETING);
+			connection = (HttpURLConnection) new URL(bean.getDownloadUrl())
+					.openConnection();
+			connection.setReadTimeout(timeoutMillis);
+			connection.setConnectTimeout(timeoutMillis);
+			connection.getContentLength();
+			input = connection.getInputStream();
+
+			path = "";
+			out = new FileOutputStream(path);
+			byte[] buffer = new byte[4096];
+			int length;
+			setState(STATE_DOWNLOADING);
+			while ((length = input.read(buffer)) != -1) {
+				out.write(buffer, 0, length);
+				if (!downloadFlag)
+					return false;
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			setState(STATE_NET_ERROR);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			setState(STATE_FILE_ERROR);
+		} catch (IOException e) {
+			e.printStackTrace();
+			setState(STATE_NET_ERROR);
+		} finally {
+			if (input != null)
+				try {
+					input.close();
+				} catch (IOException e) {
+				}
+			if (out != null)
+				try {
+					out.close();
+				} catch (IOException e) {
+				}
+			if (connection != null)
+				connection.disconnect();
+		}
+		setState(STATE_FINISHED);
+		return true;
 	}
 
 	long getCurrentSize() {
@@ -96,16 +151,17 @@ public class DownloadTask {
 	}
 
 	void setState(int status) {
+		this.state = status;
+		fireStateChangeEvent();
+
 		if ((this.state == STATE_PAUSED)
 				&& ((status == STATE_FILE_ERROR) || (status == STATE_NET_ERROR)))
 			return;
-		this.state = status;
 		if (status == STATE_FINISHED) {
 			rename();
 			changeDirectoryPrivilege(this.path);
 			DownloadMgr.onFinish(this);
-		}
-		fireStateChangeEvent();
+		}// 等待，连接，下载中
 		if (!isDownloading())
 			DownloadMgr.scheduleTask(this);
 	}
@@ -160,8 +216,8 @@ public class DownloadTask {
 
 	void setNetworkConnectState() {
 		boolean isWifiEnable = TelephoneUtil.isWifiEnable(DownloadMgr.mCtx);
-		boolean isWithoutWifiNotify = PreferenceUtil.getBoolean(DownloadMgr.mCtx,
-				"NOTIFY_LARGE_WITHOUT_WIFI",
+		boolean isWithoutWifiNotify = PreferenceUtil.getBoolean(
+				DownloadMgr.mCtx, "NOTIFY_LARGE_WITHOUT_WIFI",
 				PreferenceUtil.DEFAULT_NOTIFY_LARGE_FILE_WITHOUT_WIFI);
 		if ((this.lastState_IsWifi) && (!isWifiEnable) && (isWithoutWifiNotify)) {
 			Message message = Message.obtain();
@@ -177,6 +233,7 @@ public class DownloadTask {
 		this.mThread = new Thread() {
 			@Override
 			public void run() {
+				DownloadMgr.scheduleTask(DownloadTask.this);
 			}
 		};
 		mThread.start();

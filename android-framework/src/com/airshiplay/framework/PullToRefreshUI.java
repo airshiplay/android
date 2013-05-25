@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.data.FetchDataHelper;
-import com.airshiplay.framework.net.BaseFetchHandle;
+import com.airshiplay.framework.http.BaseFetchHandle;
 import com.airshiplay.framework.widget.AbsListViewAdapter;
 import com.airshiplay.framework.widget.PullToRefreshListView;
 

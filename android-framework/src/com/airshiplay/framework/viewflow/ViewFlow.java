@@ -731,6 +731,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 		logBuffer();
 	}
 
+	@SuppressWarnings("deprecation")
 	private View setupChild(View child, boolean addToEnd, boolean recycle) {
 		ViewGroup.LayoutParams p = (ViewGroup.LayoutParams) child
 				.getLayoutParams();

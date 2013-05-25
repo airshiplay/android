@@ -56,13 +56,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 		return INSTANCE;
 	}
 
-	private boolean handleException(final Throwable paramThrowable) {
-		if (paramThrowable == null)
+	private boolean handleException(final Throwable tr) {
+		if (tr == null)
 			return true;
-		StringWriter localStringWriter = new StringWriter();
-		PrintWriter localPrintWriter = new PrintWriter(localStringWriter);
-		final StringBuffer localStringBuffer = localStringWriter.getBuffer();
-		paramThrowable.printStackTrace(localPrintWriter);
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter writer = new PrintWriter(stringWriter);
+		tr.printStackTrace(writer);
+		final StringBuffer buffer = stringWriter.getBuffer();
 		new Thread() {
 			public void run() {
 				// new

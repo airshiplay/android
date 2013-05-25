@@ -43,7 +43,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "anim", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -52,7 +51,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "array", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -69,7 +67,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "color", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -78,7 +75,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "dimen", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -95,7 +91,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "drawable", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -104,7 +99,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "layout", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -113,7 +107,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "raw", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -132,7 +125,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, defType, this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -142,7 +134,6 @@ public class FWResource {
 		try {
 			return this.resources.getString(identifier);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "";
 		}
 	}
@@ -159,7 +150,6 @@ public class FWResource {
 		try {
 			return this.resources.getIdentifier(name, "string", this.pkg);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -177,7 +167,6 @@ public class FWResource {
 			int i = this.resources.getIdentifier(name, "style", this.pkg);
 			return i;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -195,7 +184,6 @@ public class FWResource {
 			int i = this.resources.getIdentifier(name, "id", this.pkg);
 			return i;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return 0;
 	}

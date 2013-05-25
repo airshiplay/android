@@ -8,7 +8,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.view.WindowManager;
 
-import com.airshiplay.framework.util.Devices;
+import com.airshiplay.framework.util.ScreenUtil;
 
 /**
  * @author airshiplay
@@ -34,7 +34,7 @@ public class FWApplication extends Application {
 		super.onCreate();
 		instance = this;
 		this.listActivities = new ArrayList<Activity>();
-		Devices.init(this);
+		ScreenUtil.init(this);
 	}
 
 	public void addAcitvity(Activity activity) {

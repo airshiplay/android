@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.event.SystemEvent;
 import com.airshiplay.framework.event.SystemEvent.EventTypeData;
-import com.airshiplay.framework.util.Log;
-import com.airshiplay.framework.util.LogFactory;
+import com.airshiplay.framework.log.Logger;
+import com.airshiplay.framework.log.LoggerFactory;
 
 /**
  * @author lig
@@ -17,7 +17,7 @@ import com.airshiplay.framework.util.LogFactory;
  * @since 1.0 2013-2-6
  */
 public class MainUI extends Activity implements SystemEvent.EventListener {
-	private static final Log log =LogFactory.getLog(MainUI.class);
+	private static final Logger log =LoggerFactory.getLogger(MainUI.class);
 	private TextView text;
 
 	/** Called when the activity is first created. */

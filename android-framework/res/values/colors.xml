@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="android_gray1">@android:color/darker_gray</color>
+    <color name="android_darker_gray">@android:color/darker_gray</color>
     <color name="android_white">#ffffffff</color>
     <color name="android_light_blue">#ff317cd3</color>
     <color name="android_black">#ff000000</color>
@@ -17,6 +17,4 @@
      <color name="solid_white">#ffffffff</color>
     <color name="secondary_text">#ff999999</color>
     <color name="manage_sidebar_background">#ff3f2c01</color>
-        <color name="mc_forum__login_button2_n">#ffffffff</color>
-    <color name="mc_forum__login_button2_h">#ffffffff</color>
 </resources>
