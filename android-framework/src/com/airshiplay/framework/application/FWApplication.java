@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.view.WindowManager;
 
+import com.airshiplay.framework.log.LoggerFactory;
 import com.airshiplay.framework.util.ScreenUtil;
 
 /**
@@ -34,7 +35,8 @@ public class FWApplication extends Application {
 		super.onCreate();
 		instance = this;
 		this.listActivities = new ArrayList<Activity>();
-		ScreenUtil.init(this);
+		ScreenUtil.init(getApplicationContext());
+		LoggerFactory.init(getApplicationContext());
 	}
 
 	public void addAcitvity(Activity activity) {

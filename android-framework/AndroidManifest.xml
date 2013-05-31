@@ -100,7 +100,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.airshiplay.framework.example.TextViewUI"
+            android:name="com.airshiplay.framework.example.TouchDelegateUI"
             android:label="TextView" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
