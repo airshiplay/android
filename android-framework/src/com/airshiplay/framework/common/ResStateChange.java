@@ -19,15 +19,15 @@ public class ResStateChange {
 	public static void updateProgress(View view, AppBean appBean, Context mContext) {
 		DownloadTask task = DownloadMgr.findTask(appBean.resId);
 		if (task != null) {
-			task.addDownloadListener(new DownloadAppTask(task, view, appBean, mContext), appBean);
+			task.addDownloadListener(new DownloadAppTaskListener(task, view, appBean, mContext), appBean);
 		}
 	}
 
-	private static class DownloadAppTask extends DownloadTaskListener {
+	private static class DownloadAppTaskListener extends DownloadTaskListener {
 		private View view;
 		private AppBean info;
 
-		public DownloadAppTask(DownloadTask task, View view, AppBean appBean, Context mContext) {
+		public DownloadAppTaskListener(DownloadTask task, View view, AppBean appBean, Context mContext) {
 			super(task);
 			this.info = appBean;
 			this.view = view;
@@ -50,7 +50,7 @@ public class ResStateChange {
 
 		@Override
 		public void onProgressChange(int percent, long loadSize) {
-			ProgressBar progressBar = (ProgressBar) this.view.findViewWithTag(info.resId);
+			ProgressBar progressBar = (ProgressBar) this.view.findViewWithTag(info.getResId());
 			if (progressBar != null)
 				progressBar.setProgress(percent);
 		}

@@ -7,6 +7,7 @@ import com.airshiplay.mobile.chart.view.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +26,10 @@ public class MainUI extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        
+        SharedPreferences prefs=getSharedPreferences("test.prefs",MODE_MULTI_PROCESS+MODE_APPEND+ MODE_WORLD_WRITEABLE+MODE_WORLD_READABLE);
+       boolean result= prefs.edit().putString("key", " key values---------").commit();
+       System.out.println("key writer----"+result);
+       System.out.println(prefs.getString("other", "other default"));
         ShapeDrawable shapeDrawable = new ShapeDrawable();
         shapeDrawable.setShape(new BarShape());
     }
