@@ -62,6 +62,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 	private static final int STYLE_FILL = 1;
 
 	private float radius = 4;
+	private float spacing = 4;
 	private int fadeOutTime = 0;
 	private final Paint mPaintInactive = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private final Paint mPaintActive = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -118,7 +119,10 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 
 		// Retrieve the radius
 		radius = a.getDimension(R.styleable.CircleFlowIndicator_radius, 4.0f);
-
+		
+		// Retrieve the spacing
+		spacing = a.getDimension(R.styleable.CircleFlowIndicator_spacing, 4.0f);
+		
 		// Retrieve the fade out time
 		fadeOutTime = a.getInt(R.styleable.CircleFlowIndicator_fadeOut, 0);
 
@@ -164,7 +168,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 			count = viewFlow.getViewsCount();
 		}
 
-		float circleSeparation = 2 * radius + radius;
+		float circleSeparation = 2 * radius + spacing;
 		// this is the amount the first circle should be offset to make the
 		// entire thing centered
 		float centeringOffset = 0;
@@ -180,7 +184,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 		float cx = 0;
 		if (flowWidth != 0) {
 			// Draw the filled circle according to the current scroll
-			cx = (currentScroll * (2 * radius + radius)) / flowWidth;
+			cx = (currentScroll * (2 * radius + spacing)) / flowWidth;
 		}
 		// The flow width has been upadated yet. Draw the default position
 		canvas.drawCircle(leftPadding + radius + cx + centeringOffset,
@@ -262,7 +266,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 				count = viewFlow.getViewsCount();
 			}
 			result = (int) (getPaddingLeft() + getPaddingRight()
-					+ (count * 2 * radius) + (count - 1) * radius + 1);
+					+ (count * 2 * radius) + (count - 1) * spacing + 1);
 			// Respect AT_MOST value if that was what is called for by
 			// measureSpec
 			if (specMode == MeasureSpec.AT_MOST) {

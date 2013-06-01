@@ -6,6 +6,7 @@ package com.airshiplay.framework.viewflow;
 import android.content.Context;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
@@ -17,6 +18,7 @@ import android.widget.ScrollView;
  * @since 1.0
  */
 public class ViewFlowScroller extends ScrollView {
+	private String tag = "ViewFlowScroller";
 	private ViewFlow mViewFlow;
 
 	public ViewFlowScroller(Context context, AttributeSet attrs, int defStyle) {
@@ -66,7 +68,16 @@ public class ViewFlowScroller extends ScrollView {
 		} catch (Exception e) {
 			return super.onInterceptTouchEvent(ev);
 		}
-		return true;
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		try {
+			return super.onTouchEvent(ev);
+		} catch (IllegalArgumentException e) {
+		}
+		return false;
 	}
 
 	public void setViewFlow(ViewFlow viewFlow) {

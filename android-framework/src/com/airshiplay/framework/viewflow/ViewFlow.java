@@ -79,6 +79,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 
 	private OnGlobalLayoutListener orientationChangeListener = new OnGlobalLayoutListener() {
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public void onGlobalLayout() {
 			getViewTreeObserver().removeGlobalOnLayoutListener(
@@ -669,11 +670,9 @@ public class ViewFlow extends AdapterView<Adapter> {
 	}
 
 	public boolean isScrolling() {
-
 		if (this.mTouchState == TOUCH_STATE_SCROLLING)
 			return true;
 		return false;
-
 	}
 
 	private void postViewSwitched(int direction) {
