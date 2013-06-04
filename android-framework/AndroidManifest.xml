@@ -102,6 +102,10 @@
         <activity
             android:name="com.airshiplay.framework.example.TouchDelegateUI"
             android:label="TextView" >
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.Fragmentlauncher"
+            android:label="AndroidFramework" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

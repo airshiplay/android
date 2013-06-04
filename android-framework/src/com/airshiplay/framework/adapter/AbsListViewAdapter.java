@@ -97,12 +97,12 @@ public abstract class AbsListViewAdapter<T> extends BaseAdapter implements
 
 	}
 
-	protected abstract void onDataItemClick(View view, int position);
+	protected abstract void onListItemClick(View view, int position);
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		onDataItemClick(view, position);
+		onListItemClick(view, position);
 	}
 
 }

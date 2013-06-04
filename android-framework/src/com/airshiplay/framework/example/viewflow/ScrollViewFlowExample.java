@@ -7,11 +7,11 @@ import android.view.Menu;
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.viewflow.ViewFlow;
 import com.airshiplay.framework.viewflow.ViewFlowAdapter;
-import com.airshiplay.framework.viewflow.ViewFlowScroller;
+import com.airshiplay.framework.viewflow.ViewFlowScrollView;
 
 public class ScrollViewFlowExample extends Activity {
 
-	private ViewFlowScroller viewFlowScroll;
+	private ViewFlowScrollView viewFlowScroll;
 	private ViewFlow viewFlow;
 
 	@Override
@@ -23,7 +23,7 @@ public class ScrollViewFlowExample extends Activity {
 	}
 
 	void initView() {
-		viewFlowScroll = (ViewFlowScroller) findViewById(R.id.scrollview);
+		viewFlowScroll = (ViewFlowScrollView) findViewById(R.id.scrollview);
 		viewFlow = (ViewFlow) findViewById(R.id.viewflow);
 	}
 

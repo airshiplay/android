@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".example.TouchDelegateUI" >
 
-    <com.airshiplay.framework.example.MyViewGroup
+    <com.airshiplay.framework.example.CustomViewGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/android_green" >
-    </com.airshiplay.framework.example.MyViewGroup>
+    </com.airshiplay.framework.example.CustomViewGroup>
 
     <ImageButton
         android:id="@+id/button"
