@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/com.airshiplay.framework"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<LinearLayout android:layout_width="fill_parent"
-		android:gravity="center_horizontal" android:id="@+id/header_layout"
-		android:orientation="vertical" android:layout_height="wrap_content">
-		<com.airshiplay.framework.viewflow.TitleFlowIndicator
-			android:id="@+id/viewflowindic" android:layout_height="wrap_content"
-			android:layout_width="fill_parent"
-			app:footerLineHeight="2dp"
-			app:customTypeface="fonts/Antic.ttf"
-			app:footerTriangleHeight="10dp" app:textColor="#FFFFFFFF" app:selectedColor="#FFFFC445" app:footerColor="#FFFFC445" app:titlePadding="10dp" app:textSize="11dp" app:selectedSize="12dp" android:layout_marginTop="10dip" app:clipPadding="5dp"></com.airshiplay.framework.viewflow.TitleFlowIndicator>
+    xmlns:app="http://schemas.android.com/apk/res/com.airshiplay.framework"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-	</LinearLayout>
-	<com.airshiplay.framework.viewflow.ViewFlow
-		android:duplicateParentState="true" android:id="@+id/viewflow"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"></com.airshiplay.framework.viewflow.ViewFlow>
-</LinearLayout> 
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <com.airshiplay.framework.viewflow.TitleFlowIndicator
+            android:id="@+id/viewflowindic"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            app:clipPadding="5dp"
+            app:customTypeface="fonts/Antic.ttf"
+            app:footerColor="#FFFFC445"
+            app:footerLineHeight="2dp"
+            app:footerTriangleHeight="10dp"
+            app:selectedColor="#FFFFC445"
+            app:selectedSize="12dp"
+            app:textColor="#FFFFFFFF"
+            app:textSize="11dp"
+            app:titlePadding="10dp" >
+        </com.airshiplay.framework.viewflow.TitleFlowIndicator>
+    </LinearLayout>
+
+    <com.airshiplay.framework.viewflow.ViewFlow
+        android:id="@+id/viewflow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:duplicateParentState="true" >
+    </com.airshiplay.framework.viewflow.ViewFlow>
+
+</LinearLayout>
