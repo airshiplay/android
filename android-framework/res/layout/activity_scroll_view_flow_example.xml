@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ScrollViewFlowExample" >
 
-    <com.airshiplay.framework.viewflow.ViewFlowScroller
+    <com.airshiplay.framework.viewflow.ViewFlowScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -40,6 +40,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hello_world" />
         </LinearLayout>
-    </com.airshiplay.framework.viewflow.ViewFlowScroller>
+    </com.airshiplay.framework.viewflow.ViewFlowScrollView>
 
 </LinearLayout>

@@ -44,11 +44,7 @@
         <activity
             android:name="com.airshiplay.framework.example.CustomViewGroupUI"
             android:label="@string/title_activity_scroll_view_flow_example" >
-                        <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.airshiplay.framework.example.sliding.SlidingLayoutDemo" >
         </activity>
@@ -107,7 +103,15 @@
         <activity
             android:name="com.airshiplay.framework.example.TouchDelegateUI"
             android:label="TextView" >
+        </activity>
+        <activity
+            android:name="com.airshiplay.framework.example.Fragmentlauncher"
+            android:label="AndroidFramework" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.airshiplay.framework.ImageActivity"

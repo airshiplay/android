@@ -1,4 +1,4 @@
-package com.airshiplay.framework.base;
+package com.airshiplay.framework.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ public abstract class BaseActivity extends Activity implements SystemEvent.Event
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().setWindowAnimations(R.style.ActivityAnimation1);
+		getWindow().setWindowAnimations(R.style.ActivityAnimationRightInLeftOut);
 		SystemEvent.addListener(SystemEvent.EVENT_TYPE_RESTART, this);
 		FWApplication.getInstance().addAcitvity(this);
 	}

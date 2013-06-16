@@ -28,7 +28,7 @@ import com.airshiplay.framework.widget.PullToRefreshListView.P2RListViewStateLis
  * @version 1.0
  * @since 1.0
  */
-public class PullToRefreshScrollView extends ViewFlowScroller {
+public class PullToRefreshScrollView extends ViewFlowScrollView {
 
 	protected static final int RATIO = 2;
 	protected static final int RELEASE_TO_REFRESH = 0;

@@ -17,19 +17,19 @@ import android.widget.ScrollView;
  * @version 1.0
  * @since 1.0
  */
-public class ViewFlowScroller extends ScrollView {
+public class ViewFlowScrollView extends ScrollView {
 	private String tag = "ViewFlowScroller";
 	private ViewFlow mViewFlow;
 
-	public ViewFlowScroller(Context context, AttributeSet attrs, int defStyle) {
+	public ViewFlowScrollView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
-	public ViewFlowScroller(Context context, AttributeSet attrs) {
+	public ViewFlowScrollView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public ViewFlowScroller(Context context) {
+	public ViewFlowScrollView(Context context) {
 		super(context);
 	}
 
