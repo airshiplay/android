@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
@@ -33,8 +34,8 @@ public class AppUtil {
 
 	public static int getPid(Context context, String processName) {
 		Iterator<ActivityManager.RunningAppProcessInfo> itr = ((ActivityManager) context
-				.getSystemService("activity")).getRunningAppProcesses()
-				.iterator();
+				.getSystemService(Context.ACTIVITY_SERVICE))
+				.getRunningAppProcesses().iterator();
 		ActivityManager.RunningAppProcessInfo runningAppProcessInfo;
 		do {
 			if (!itr.hasNext())
@@ -66,4 +67,17 @@ public class AppUtil {
 		}
 		return "";
 	}
+
+	public static PackageInfo getPackageInfo(Context context,
+			String archiveFilePath) {
+		PackageInfo pkgInfo = context.getPackageManager()
+				.getPackageArchiveInfo(archiveFilePath,
+						PackageManager.GET_ACTIVITIES);
+		if (pkgInfo.applicationInfo != null) {
+			pkgInfo.applicationInfo.sourceDir = archiveFilePath;
+			pkgInfo.applicationInfo.publicSourceDir = archiveFilePath;
+		}
+		return pkgInfo;
+	}
+
 }
