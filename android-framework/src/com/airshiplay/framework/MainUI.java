@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.event.SystemEvent;
 import com.airshiplay.framework.event.SystemEvent.EventTypeData;
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
 
 /**
  * @author lig

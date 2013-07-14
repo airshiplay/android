@@ -25,10 +25,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshListView;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase.OnRefreshListener;
-import com.airshiplay.framework.pulltorefresh.extras.listfragment.PullToRefreshListFragment;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshListView;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import com.airshiplay.mobile.pulltorefresh.extras.listfragment.PullToRefreshListFragment;
 
 public final class PullToRefreshListFragmentActivity extends FragmentActivity implements OnRefreshListener<ListView> {
 

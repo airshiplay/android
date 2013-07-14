@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.airshiplay.framework.pulltorefresh.internal.FlipLoadingLayout;
+import com.airshiplay.mobile.pulltorefresh.internal.FlipLoadingLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;

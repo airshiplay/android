@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.viewflow.ViewFlow;
-import com.airshiplay.framework.viewflow.ViewFlowAdapter;
 import com.airshiplay.framework.viewflow.ViewFlowScrollView;
+import com.airshiplay.mobile.viewflow.ViewFlow;
+import com.airshiplay.mobile.viewflow.ViewFlowAdapter;
 
 public class ScrollViewFlowExample extends Activity {
 

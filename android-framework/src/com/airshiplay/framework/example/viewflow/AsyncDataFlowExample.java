@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.viewflow.TitleFlowIndicator;
-import com.airshiplay.framework.viewflow.ViewFlow;
+import com.airshiplay.mobile.viewflow.TitleFlowIndicator;
+import com.airshiplay.mobile.viewflow.ViewFlow;
 
 public class AsyncDataFlowExample extends Activity {
 

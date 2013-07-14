@@ -23,7 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.viewflow.TitleProvider;
+import com.airshiplay.mobile.viewflow.TitleProvider;
 
 public class AndroidVersionAdapter extends BaseAdapter implements TitleProvider {
 

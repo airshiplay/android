@@ -7,8 +7,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
 
 public class Gesture extends Activity implements
 		GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {

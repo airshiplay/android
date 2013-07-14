@@ -8,8 +8,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.view.WindowManager;
 
-import com.airshiplay.framework.log.LoggerFactory;
-import com.airshiplay.framework.util.ScreenUtil;
+import com.airshiplay.mobile.log.LoggerFactory;
+import com.airshiplay.mobile.util.ScreenUtil;
 
 /**
  * @author airshiplay

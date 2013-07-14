@@ -3,6 +3,8 @@
  */
 package com.airshiplay.framework.viewflow;
 
+import com.airshiplay.mobile.viewflow.ViewFlow;
+
 import android.content.Context;
 import android.graphics.RectF;
 import android.util.AttributeSet;

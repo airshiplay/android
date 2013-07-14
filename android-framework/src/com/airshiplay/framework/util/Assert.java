@@ -6,6 +6,8 @@ package com.airshiplay.framework.util;
 import java.util.Collection;
 import java.util.Map;
 
+import com.airshiplay.mobile.util.StringUtils;
+
 
 /**
  * @author airshiplay

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.viewflow.TitleProvider;
+import com.airshiplay.mobile.viewflow.TitleProvider;
 
 public class DiffAdapter extends BaseAdapter implements TitleProvider {
 

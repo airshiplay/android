@@ -5,7 +5,7 @@ import java.io.File;
 import android.content.Context;
 
 import com.airshiplay.framework.bean.BaseBean;
-import com.airshiplay.framework.util.TelephoneUtil;
+import com.airshiplay.mobile.util.TelephoneUtil;
 
 public abstract class AbstractFlowImp<Bean extends BaseBean> implements
 		IDownFlow {

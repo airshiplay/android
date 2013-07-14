@@ -4,7 +4,7 @@
 package com.airshiplay.framework.image;
 
 import com.airshiplay.framework.util.BitmapUtil;
-import com.airshiplay.framework.util.ScreenUtil;
+import com.airshiplay.mobile.util.ScreenUtil;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.viewflow.TitleProvider;
+import com.airshiplay.mobile.viewflow.TitleProvider;
 
 
 public class AsyncAdapter extends BaseAdapter implements TitleProvider {
