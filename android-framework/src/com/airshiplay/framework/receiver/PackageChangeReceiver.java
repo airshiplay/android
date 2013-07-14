@@ -12,7 +12,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
-import com.airshiplay.framework.event.SystemEvent;
+import com.airshiplay.mobile.event.SystemEvent;
 import com.airshiplay.mobile.log.Logger;
 import com.airshiplay.mobile.log.LoggerFactory;
 

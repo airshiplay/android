@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.application.FWApplication;
-import com.airshiplay.framework.event.SystemEvent;
-import com.airshiplay.framework.event.SystemEvent.EventTypeData;
+import com.airshiplay.mobile.event.SystemEvent;
+import com.airshiplay.mobile.event.SystemEvent.EventTypeData;
 
 public abstract class BaseActivity extends Activity implements SystemEvent.EventListener {
 	@Override

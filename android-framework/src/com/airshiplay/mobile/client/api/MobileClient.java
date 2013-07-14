@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
@@ -17,12 +21,16 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import android.content.Context;
+import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 import com.airshiplay.mobile.client.AsynchronousRequestSender;
 import com.airshiplay.mobile.client.MobileConfig;
 import com.airshiplay.mobile.client.MobileCookieManager;
 import com.airshiplay.mobile.client.MobileRequest;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
+import com.airshiplay.mobile.util.StringUtils;
 
 /**
  * @author airshiplay
@@ -31,6 +39,7 @@ import com.airshiplay.mobile.client.MobileRequest;
  * @since 1.0
  */
 public class MobileClient {
+	private static Logger log = LoggerFactory.getLogger(MobileClient.class);
 
 	private static MobileClient mobileClient;
 	private MobileConfig config;
@@ -165,8 +174,8 @@ public class MobileClient {
 		params.add(new BasicNameValuePair("isAjaxRequest", "true"));
 		if (requestParams != null) {
 			for (String paramName : requestParams.keySet()) {
-				params.add(new BasicNameValuePair(paramName,
-						requestParams.get(paramName)));
+				params.add(new BasicNameValuePair(paramName, requestParams
+						.get(paramName)));
 			}
 		}
 		UrlEncodedFormEntity encodedFormEntity = null;
@@ -190,5 +199,40 @@ public class MobileClient {
 
 	public HttpContext getHttpContext() {
 		return httpContext;
+	}
+
+	@SuppressWarnings("unused")
+	private boolean updateCookiesFromWebView() {
+		String wlServerUrl = getMobileServerURL();
+		String cookiesString = CookieManager.getInstance().getCookie(
+				wlServerUrl);
+
+		if (!StringUtils.isEmpty(cookiesString)) {
+			MobileCookieManager.setCookies(cookiesString, wlServerUrl);
+			Set<Cookie> cookies = MobileCookieManager.getCookies();
+
+			if (cookies != null) {
+				CookieStore cookieStore = new BasicCookieStore();
+				for (Cookie cookie : cookies) {
+					cookieStore.addCookie(cookie);
+				}
+				this.httpContext.setAttribute("http.cookie-store", cookieStore);
+				return true;
+			}
+			log.debug("No Cookies found for url "
+					+ this.config.getAppURL().getHost() + " in WebView.");
+			return false;
+		}
+
+		return false;
+	}
+
+	private String getMobileServerURL() {
+		String context = getConfig().getContext();
+		String host = getConfig().getAppURL().getHost();
+		String serverUrl = (context != null) && (context.trim().length() > 1) ? host
+				+ context
+				: host;
+		return serverUrl;
 	}
 }

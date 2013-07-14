@@ -1,4 +1,4 @@
-package com.airshiplay.framework.event;
+package com.airshiplay.mobile.event;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
