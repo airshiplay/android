@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.airshiplay.framework.util;
+package com.airshiplay.mobile.util;
 
 import android.content.Context;
 import android.content.res.Resources;
