@@ -6,8 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.airshiplay.framework.client.FWUtils;
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
 
 public class WLResponse {
 	private Logger log = LoggerFactory.getLogger(WLResponse.class);
@@ -23,9 +23,12 @@ public class WLResponse {
 		this.headers = httpResponse.getAllHeaders();
 		this.httpResponseCache = httpResponse;
 		try {
-			this.responseText = FWUtils.convertStreamToString(httpResponse.getEntity().getContent());
+			this.responseText = FWUtils.convertStreamToString(httpResponse
+					.getEntity().getContent());
 		} catch (Exception e) {
-			log.error("Response from Worklight server failed because could not read text from response " + e.getMessage(), e);
+			log.error(
+					"Response from Worklight server failed because could not read text from response "
+							+ e.getMessage(), e);
 		}
 
 		responseTextToJSON(this.responseText);
@@ -39,7 +42,8 @@ public class WLResponse {
 		this.httpResponseCache = response.httpResponseCache;
 	}
 
-	protected WLResponse(int status, String responseText, WLRequestOptions requestOptions) {
+	protected WLResponse(int status, String responseText,
+			WLRequestOptions requestOptions) {
 		this.status = status;
 		this.requestOptions = requestOptions;
 		this.responseText = responseText;
@@ -56,11 +60,14 @@ public class WLResponse {
 			return;
 		}
 
-		String jsonText = this.responseText.substring(firstIndex, lastIndex + 1);
+		String jsonText = this.responseText
+				.substring(firstIndex, lastIndex + 1);
 		try {
 			this.responseJSON = new JSONObject(jsonText);
 		} catch (JSONException e) {
-			log.error("Response from Worklight server failed because could not read JSON from response with text " + jsonText, e);
+			log.error(
+					"Response from Worklight server failed because could not read JSON from response with text "
+							+ jsonText, e);
 			this.responseJSON = null;
 		}
 	}
@@ -113,6 +120,9 @@ public class WLResponse {
 	}
 
 	public String toString() {
-		return "WLResponse [invocationContext=" + this.requestOptions.getInvocationContext() + ", responseText=" + this.responseText + ", status=" + this.status + "]";
+		return "WLResponse [invocationContext="
+				+ this.requestOptions.getInvocationContext()
+				+ ", responseText=" + this.responseText + ", status="
+				+ this.status + "]";
 	}
 }
