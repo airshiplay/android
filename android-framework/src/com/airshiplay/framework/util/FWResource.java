@@ -25,6 +25,25 @@ public class FWResource {
 		this.resources = context.getResources();
 	}
 
+	private FWResource(Resources res, String pkg) {
+		this.resources = res;
+		this.pkg = pkg;
+	}
+
+	/**
+	 * 可以获取其他apk资源
+	 * 
+	 * @param res
+	 * @param pkg
+	 * @return
+	 */
+	public static FWResource getInstance(Resources res, String pkg) {
+		if (fwResource == null) {
+			fwResource = new FWResource(res, pkg);
+		}
+		return fwResource;
+	}
+
 	public static FWResource getInstance(Context context) {
 		FWApplication application;
 		if (fwResource == null) {

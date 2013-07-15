@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.bean.ListItemBean;
+import com.airshiplay.framework.skin.AppInfo;
 
 public class Fragmentlauncher extends FragmentActivity {
 	FragmentManager fm;
@@ -43,7 +46,7 @@ public class Fragmentlauncher extends FragmentActivity {
 		} else {
 			switch (fragmentId) {
 			case 1:
-				fragment =new ViewGroupFragment();
+				fragment = new ViewGroupFragment();
 				break;
 
 			default:
@@ -51,6 +54,12 @@ public class Fragmentlauncher extends FragmentActivity {
 			}
 		}
 
+		Resources res = AppInfo
+				.getResource(this, Environment.getExternalStorageDirectory()
+						.getAbsolutePath() + "/ICity.apk");
+		res.getIdentifier("port", "string", "com.certusnet.icity.mobileHD");
+		AppInfo info=	AppInfo.getInstance(this, Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/ICity.apk");
 		transation.add(R.id.fragment, fragment);
 		transation.commit();
 	}

@@ -81,9 +81,11 @@ public class AppInfo {
 					.getConstructor(new Class[] { assertManager.getClass(),
 							localResources.getDisplayMetrics().getClass(),
 							localResources.getConfiguration().getClass() });
-			return resourcesConstructor.newInstance(new Object[] {
+			Resources res=resourcesConstructor.newInstance(new Object[] {
 					assertManager, localResources.getDisplayMetrics(),
 					localResources.getConfiguration() });
+
+			return res;
 		} catch (Exception e) {
 		}
 		return null;
