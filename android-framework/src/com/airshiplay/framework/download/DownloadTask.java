@@ -17,10 +17,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.Message;
 
 import com.airshiplay.framework.bean.BaseBean;
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
 import com.airshiplay.framework.util.PreferenceUtil;
-import com.airshiplay.framework.util.TelephoneUtil;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
+import com.airshiplay.mobile.util.TelephoneUtil;
 
 /**
  * @author lig

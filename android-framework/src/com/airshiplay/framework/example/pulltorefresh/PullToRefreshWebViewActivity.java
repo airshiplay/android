@@ -21,7 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshWebView;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshWebView;
 
 public final class PullToRefreshWebViewActivity extends Activity {
 

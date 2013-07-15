@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.airshiplay.framework.util.ScreenUtil;
+import com.airshiplay.mobile.util.ScreenUtil;
 
 public class LocalImage implements IImageCapturer {
 	protected static ImageCache webImageCache;

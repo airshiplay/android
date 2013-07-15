@@ -10,13 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.airshiplay.framework.image.FWImageView;
+import com.airshiplay.framework.image.MobileImageView;
 import com.airshiplay.framework.image.RemoteImage;
 
 public class ImageActivity extends Activity implements OnClickListener {
 
 	private ImageView img;
-	private FWImageView tool;
+	private MobileImageView tool;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ImageActivity extends Activity implements OnClickListener {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		scroll.addView(layout);
 		setContentView(scroll);
-		tool = new FWImageView(new ImageView(this),android.R.drawable.star_big_off);
+		tool = new MobileImageView(new ImageView(this),android.R.drawable.star_big_off);
 		layout.addView(tool.getImageView(), new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -35,7 +35,7 @@ public class ImageActivity extends Activity implements OnClickListener {
 		tool.setImage(RemoteImage
 				.getWebIcon("http://172.16.17.160:8181/xml/22.jpg",true));
 		
-		tool = new FWImageView(new ImageView(this),android.R.drawable.star_big_off);
+		tool = new MobileImageView(new ImageView(this),android.R.drawable.star_big_off);
 		layout.addView(tool.getImageView(), new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -45,7 +45,7 @@ public class ImageActivity extends Activity implements OnClickListener {
 				.getScreenShot("http://172.16.17.160:8181/xml/33.jpg",true));
 		
 		
-		tool = new FWImageView(new ImageView(this),android.R.drawable.star_big_off);
+		tool = new MobileImageView(new ImageView(this),android.R.drawable.star_big_off);
 		layout.addView(tool.getImageView(), new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -57,7 +57,7 @@ public class ImageActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		FWImageView fw = (FWImageView) v.getTag();
+		MobileImageView fw = (MobileImageView) v.getTag();
 		int width = ((ImageView) v).getWidth();
 		int height = ((ImageView) v).getHeight();
 		Toast.makeText(this, width + "*" + height, Toast.LENGTH_LONG).show();

@@ -20,8 +20,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.viewflow.CircleFlowIndicator;
-import com.airshiplay.framework.viewflow.ViewFlow;
+import com.airshiplay.mobile.viewflow.CircleFlowIndicator;
+import com.airshiplay.mobile.viewflow.ViewFlow;
 
 public class CircleViewFlowExample extends Activity {
 

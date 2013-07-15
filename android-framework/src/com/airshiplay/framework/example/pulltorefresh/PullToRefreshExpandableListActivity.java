@@ -27,9 +27,9 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshExpandableListView;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshExpandableListView;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 
 public final class PullToRefreshExpandableListActivity extends ExpandableListActivity {
 	private static final String KEY = "key";

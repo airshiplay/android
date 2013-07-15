@@ -1,7 +1,7 @@
 package com.airshiplay.framework.sliding;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.util.ScreenUtil;
+import com.airshiplay.mobile.util.ScreenUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -24,6 +24,7 @@ public class SlidingLayout extends ViewGroup implements
 	protected Animation mAnimation = null;
 	protected Animation.AnimationListener mCloseListener = null;
 	protected View mContent = null;
+	@SuppressWarnings("deprecation")
 	protected GestureDetector mDetector = new GestureDetector(this);
 	protected SlidingLayout.SidebarListener mListener = null;
 	protected Animation.AnimationListener mOpenListener = null;

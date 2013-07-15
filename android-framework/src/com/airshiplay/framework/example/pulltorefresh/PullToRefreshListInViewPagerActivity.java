@@ -17,9 +17,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshListView;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshListView;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 
 public class PullToRefreshListInViewPagerActivity extends Activity implements OnRefreshListener<ListView> {
 

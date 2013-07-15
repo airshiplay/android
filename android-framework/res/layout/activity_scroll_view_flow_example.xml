@@ -18,11 +18,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <com.airshiplay.framework.viewflow.ViewFlow
+            <com.airshiplay.mobile.viewflow.ViewFlow
                 android:id="@+id/viewflow"
                 android:layout_width="match_parent"
                 android:layout_height="240dp" android:background="@color/android_blue">
-            </com.airshiplay.framework.viewflow.ViewFlow>
+            </com.airshiplay.mobile.viewflow.ViewFlow>
 
             <LinearLayout
                 android:layout_width="match_parent"

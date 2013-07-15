@@ -10,10 +10,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
 import com.airshiplay.framework.widget.ListViewFooter;
 import com.airshiplay.framework.widget.LoadingView;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
 
 public abstract class AbsListViewAdapter<T> extends BaseAdapter implements
 		AbsListView.OnScrollListener, AdapterView.OnItemClickListener {

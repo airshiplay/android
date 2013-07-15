@@ -9,10 +9,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
-import com.airshiplay.framework.util.TelephoneUtil;
 import com.airshiplay.framework.widget.PullToRefreshListView.P2RListViewStateListener;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
+import com.airshiplay.mobile.util.TelephoneUtil;
 
 import android.content.Context;
 import android.os.Handler;

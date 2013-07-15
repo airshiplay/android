@@ -6,8 +6,6 @@ package com.airshiplay.framework.util;
 import java.io.File;
 import java.io.IOException;
 
-import com.airshiplay.framework.image.BitmapLoader;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -17,8 +15,9 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Xfermode;
 import android.os.Environment;
+
+import com.airshiplay.framework.image.BitmapLoader;
 
 /**
  * @author airshiplay

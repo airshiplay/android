@@ -21,9 +21,9 @@ import android.os.Bundle;
 import android.widget.ScrollView;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshScrollView;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshScrollView;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 
 public final class PullToRefreshScrollViewActivity extends Activity {
 

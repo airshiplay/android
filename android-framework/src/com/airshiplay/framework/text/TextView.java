@@ -1,7 +1,7 @@
 package com.airshiplay.framework.text;
 
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
 
 import android.content.Context;
 import android.graphics.Canvas;

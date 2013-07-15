@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.airshiplay.framework"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical" >
 
-        <com.airshiplay.framework.viewflow.TitleFlowIndicator
+        <com.airshiplay.mobile.viewflow.TitleFlowIndicator
             android:id="@+id/viewflowindic"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -25,16 +25,17 @@
             app:selectedColor="#FFFFC445"
             app:selectedSize="12dp"
             app:textColor="#FFFFFFFF"
-            app:textSize="11dp"
+            app:textSize="12sp"
             app:titlePadding="10dp" >
-        </com.airshiplay.framework.viewflow.TitleFlowIndicator>
+        </com.airshiplay.mobile.viewflow.TitleFlowIndicator>
     </LinearLayout>
 
-    <com.airshiplay.framework.viewflow.ViewFlow
+    <com.airshiplay.mobile.viewflow.ViewFlow
         android:id="@+id/viewflow"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:duplicateParentState="true" >
-    </com.airshiplay.framework.viewflow.ViewFlow>
+
+    </com.airshiplay.mobile.viewflow.ViewFlow>
 
 </LinearLayout>

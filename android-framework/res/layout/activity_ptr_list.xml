@@ -6,7 +6,7 @@
 
 <!--     The PullToRefreshListView replaces a standard ListView widget. -->
 
-    <com.airshiplay.framework.pulltorefresh.PullToRefreshListView
+    <com.airshiplay.mobile.pulltorefresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

@@ -26,9 +26,9 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase;
-import com.airshiplay.framework.pulltorefresh.PullToRefreshBase.OnRefreshListener;
-import com.airshiplay.framework.pulltorefresh.extras.viewpager.PullToRefreshViewPager;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase;
+import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.OnRefreshListener;
+import com.airshiplay.mobile.pulltorefresh.extras.viewpager.PullToRefreshViewPager;
 
 public class PullToRefreshViewPagerActivity extends Activity implements OnRefreshListener<ViewPager> {
 

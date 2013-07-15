@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.SlidingDrawer;
 
 import com.airshiplay.framework.R;
 import com.airshiplay.framework.sliding.SlidingLayout;
@@ -36,6 +37,7 @@ public class SlidingLayoutDemo extends Activity implements View.OnClickListener 
 		mSlidingLayout = (SlidingLayout) findViewById(R.id.slidinglayout);
 		mSideBar = findViewById(R.id.sidebar);
 		rightView = findViewById(R.id.manage_btn);
+		new SlidingDrawer(this,null);
 	}
 
 	void setContentView() {
