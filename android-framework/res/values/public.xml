@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <!-- attr -->
+    <public id="0x7f010000" name="orientation" type="attr" />
+
+    <!-- drawable -->
+    <public id="0x7f020000" name="load_gif_0" type="drawable" />
+
+    <!-- layout -->
+    <public id="0x7f030000" name="mobile_pull_to_refresh_header_horizontal" type="layout" />
+    <public id="0x7f030001" name="mobile_pull_to_refresh_header_vertical" type="layout" />
+
+    <!-- anim -->
+    <public id="0x7f040000" name="slide_right_in" type="anim" />
+    <!-- raw -->
+    <public id="0x7f050000" name="pull_event" type="raw" />
+    <!-- color -->
+    <public id="0x7f060000" name="android_white" type="color" />
+    <!-- dimen -->
+    <public id="0x7f070000" name="user_image_size" type="dimen" />
+    <!-- id -->
+    <public id="0x7f080000" name="fl_inner" type="id" />
+    <public id="0x7f080001" name="pull_to_refresh_text" type="id" />
+    <public id="0x7f080002" name="pull_to_refresh_progress" type="id" />
+    <public id="0x7f080003" name="pull_to_refresh_sub_text" type="id" />
+    <public id="0x7f080004" name="pull_to_refresh_image" type="id" />
+
+    <!-- string -->
+    <public id="0x7f090000" name="pull_to_refresh_from_bottom_pull_label" type="string" />
+    <public id="0x7f090001" name="pull_to_refresh_from_bottom_refreshing_label" type="string" />
+
+    <!-- style -->
+    <public id="0x7f0a0000" name="AppBaseTheme" type="style" />
+    <!-- array -->
+    <public id="0x7f0b0000" name="auto_delete" type="array" />
+    <!-- menu -->
+    <public id="0x7f0c0000" name="scroll_view_flow_example" type="menu" />
+
+</resources>

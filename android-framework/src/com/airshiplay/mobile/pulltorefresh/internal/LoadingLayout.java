@@ -42,7 +42,7 @@ import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Orientation;
 import com.airshiplay.mobile.util.MobileResource;
 
 @SuppressLint("ViewConstructor")
-public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout, PullToRefreshResourceConstant {
+public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout, PullToRefreshResource {
 
 	static final String LOG_TAG = "PullToRefresh-LoadingLayout";
 
@@ -69,23 +69,20 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		super(context);
 		mMode = mode;
 		mScrollDirection = scrollDirection;
-		int layoutId = 0;
 		switch (scrollDirection) {
 		case HORIZONTAL:
-			layoutId = MobileResource.getInstance(getContext()).getLayoutId(Layout.mobile_pull_to_refresh_header_horizontal);
-			LayoutInflater.from(context).inflate(layoutId, this);
+			LayoutInflater.from(context).inflate(PullToRefreshResource.layout.mobile_pull_to_refresh_header_horizontal, this);
 			break;
 		case VERTICAL:
 		default:
-			layoutId = MobileResource.getInstance(getContext()).getLayoutId(Layout.mobile_pull_to_refresh_header_vertical);
-			LayoutInflater.from(context).inflate(layoutId, this);
+			LayoutInflater.from(context).inflate(PullToRefreshResource.layout.mobile_pull_to_refresh_header_vertical, this);
 			break;
 		}
-		mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
-		mHeaderText = (TextView) mInnerLayout.findViewById(R.id.pull_to_refresh_text);
-		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(R.id.pull_to_refresh_progress);
-		mSubHeaderText = (TextView) mInnerLayout.findViewById(R.id.pull_to_refresh_sub_text);
-		mHeaderImage = (ImageView) mInnerLayout.findViewById(R.id.pull_to_refresh_image);
+		mInnerLayout = (FrameLayout) findViewById(PullToRefreshResource.id.fl_inner);
+		mHeaderText = (TextView) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_text);
+		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_progress);
+		mSubHeaderText = (TextView) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_sub_text);
+		mHeaderImage = (ImageView) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_image);
 
 		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mInnerLayout.getLayoutParams();
 
@@ -94,8 +91,8 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 			lp.gravity = scrollDirection == Orientation.VERTICAL ? Gravity.TOP : Gravity.LEFT;
 
 			// Load in labels
-			mPullLabel = context.getString(R.string.pull_to_refresh_from_bottom_pull_label);
-			mRefreshingLabel = context.getString(R.string.pull_to_refresh_from_bottom_refreshing_label);
+			mPullLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_from_bottom_pull_label);
+			mRefreshingLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_from_bottom_refreshing_label);
 			mReleaseLabel = context.getString(R.string.pull_to_refresh_from_bottom_release_label);
 			break;
 
