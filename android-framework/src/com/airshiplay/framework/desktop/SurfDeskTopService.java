@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.view.WindowManager;
 
-import com.airshiplay.framework.application.FWApplication;
+import com.airshiplay.mobile.application.MobileApplication;
 
 /**
  * @author airshiplay
@@ -29,7 +29,7 @@ public class SurfDeskTopService extends Service {
 
 	void init() {
 		this.wm = ((WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE));
-		this.lp = ((FWApplication) getApplication()).getWinLayoutParams();
+		this.lp = ((MobileApplication) getApplication()).getWinLayoutParams();
 		this.lp.type = 2002;
 		this.lp.format = 1;
 		lp.flags = (0x8 | lp.flags);

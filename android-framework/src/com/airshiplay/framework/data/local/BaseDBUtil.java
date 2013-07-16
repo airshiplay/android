@@ -3,7 +3,7 @@
  */
 package com.airshiplay.framework.data.local;
 
-import com.airshiplay.framework.application.FWApplication;
+import com.airshiplay.mobile.application.MobileApplication;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -24,7 +24,7 @@ public abstract class BaseDBUtil {
 	protected SQLiteDatabase writableDatabase;
 
 	public BaseDBUtil(Context context) {
-		FWApplication application = FWApplication.getInstance();
+		MobileApplication application = MobileApplication.getInstance();
 		if (application == null)
 			this.mContext = context.getApplicationContext();
 		else {

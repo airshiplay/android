@@ -39,6 +39,7 @@ import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.ILoadingLayout;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Mode;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Orientation;
+import com.airshiplay.mobile.util.MobileResource;
 
 @SuppressLint("ViewConstructor")
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout {
@@ -71,14 +72,13 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 
 		switch (scrollDirection) {
 			case HORIZONTAL:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
+				LayoutInflater.from(context).inflate(R.layout.mobile_pull_to_refresh_header_horizontal, this);
 				break;
 			case VERTICAL:
 			default:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
+				LayoutInflater.from(context).inflate(R.layout.mobile_pull_to_refresh_header_vertical, this);
 				break;
 		}
-
 		mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
 		mHeaderText = (TextView) mInnerLayout.findViewById(R.id.pull_to_refresh_text);
 		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(R.id.pull_to_refresh_progress);

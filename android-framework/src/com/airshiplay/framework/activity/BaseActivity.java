@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.airshiplay.framework.R;
-import com.airshiplay.framework.application.FWApplication;
+import com.airshiplay.mobile.application.MobileApplication;
 import com.airshiplay.mobile.event.SystemEvent;
 import com.airshiplay.mobile.event.SystemEvent.EventTypeData;
 
@@ -14,7 +14,7 @@ public abstract class BaseActivity extends Activity implements SystemEvent.Event
 		super.onCreate(savedInstanceState);
 		getWindow().setWindowAnimations(R.style.ActivityAnimationRightInLeftOut);
 		SystemEvent.addListener(SystemEvent.EVENT_TYPE_RESTART, this);
-		FWApplication.getInstance().addAcitvity(this);
+		MobileApplication.getInstance().addAcitvity(this);
 	}
 
 	@Override
@@ -37,6 +37,6 @@ public abstract class BaseActivity extends Activity implements SystemEvent.Event
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		FWApplication.getInstance().remove(this);
+		MobileApplication.getInstance().remove(this);
 	}
 }

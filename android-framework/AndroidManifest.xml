@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.airshiplay.framework.application.FWApplication"
+        android:name="com.airshiplay.mobile.application.MobileApplication"
         android:allowBackup="false"
         android:label="@string/app_name"
         android:theme="@style/appTheme" >
@@ -51,7 +51,10 @@
         <activity
             android:name="com.airshiplay.framework.example.pulltorefresh.LauncherActivity"
             android:label="@string/pulltorefreshactivity" >
-            <intent-filter>
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.airshiplay.framework.example.pulltorefresh.PullToRefreshExpandableListActivity" >
@@ -107,11 +110,7 @@
         <activity
             android:name="com.airshiplay.framework.example.Fragmentlauncher"
             android:label="AndroidFramework" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+           
         </activity>
         <activity
             android:name="com.airshiplay.framework.ImageActivity"

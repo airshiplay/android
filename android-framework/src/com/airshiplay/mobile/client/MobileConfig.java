@@ -8,7 +8,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.airshiplay.framework.util.AppUtil;
-import com.airshiplay.framework.util.MobileResource;
+import com.airshiplay.mobile.util.MobileResource;
 
 /**
  * <p>
