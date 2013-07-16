@@ -29,8 +29,8 @@ import com.airshiplay.framework.client.challengehandler.AntiXSRFChallengeHandler
 import com.airshiplay.framework.client.challengehandler.AuthenticityChallengeHandler;
 import com.airshiplay.framework.client.challengehandler.NoProvisioningChallengeHandler;
 import com.airshiplay.framework.client.challengehandler.RemoteDisableChallengeHandler;
-import com.airshiplay.framework.log.Logger;
-import com.airshiplay.framework.log.LoggerFactory;
+import com.airshiplay.mobile.log.Logger;
+import com.airshiplay.mobile.log.LoggerFactory;
 
 public class WLClient {
 	private static Logger log = LoggerFactory.getLogger(WLClient.class);
@@ -97,7 +97,8 @@ public class WLClient {
 
 	public static WLClient getInstance() {
 		if (wlClient == null) {
-			throw new RuntimeException("WLClient object has not been created. You must call WLClient.createInstance first.");
+			throw new RuntimeException(
+					"WLClient object has not been created. You must call WLClient.createInstance first.");
 		}
 		return wlClient;
 	}
@@ -116,7 +117,8 @@ public class WLClient {
 		FWCookieManager.clearCookies();
 
 		if (updateCookiesFromWebView()) {
-			String instanceId = FWUtils.readWLPref(getContext(), WL_INSTANCE_ID);
+			String instanceId = FWUtils
+					.readWLPref(getContext(), WL_INSTANCE_ID);
 			if (!FWUtils.isStringEmpty(instanceId)) {
 				getInstance().addGlobalHeader(WL_INSTANCE_ID, instanceId);
 			}
@@ -127,7 +129,8 @@ public class WLClient {
 		requestOptions.setResponseListener(responseListener);
 
 		InitRequestListener initRequestListener = new InitRequestListener();
-		FWRequest initRequest = new FWRequest(initRequestListener, this.httpContext, requestOptions, this.config, this.context);
+		FWRequest initRequest = new FWRequest(initRequestListener,
+				this.httpContext, requestOptions, this.config, this.context);
 		initRequest.makeRequest(INIT_REQUEST_PATH);
 	}
 
@@ -143,7 +146,9 @@ public class WLClient {
 			public void onFailure(WLFailResponse wlFailResponse) {
 			}
 		};
-		FWRequest checkNotificationRequest = new FWRequest(listener, this.httpContext, new WLRequestOptions(), this.config, this.context);
+		FWRequest checkNotificationRequest = new FWRequest(listener,
+				this.httpContext, new WLRequestOptions(), this.config,
+				this.context);
 
 		checkNotificationRequest.makeRequest(AUTHENTICATE_REQUEST_PATH);
 	}
@@ -158,17 +163,20 @@ public class WLClient {
 
 	public void addGlobalHeadersToRequest(HttpPost postRequest) {
 		for (Map.Entry entry : this.globalHeaders.entrySet())
-			postRequest.addHeader((String) entry.getKey(), (String) entry.getValue());
+			postRequest.addHeader((String) entry.getKey(),
+					(String) entry.getValue());
 	}
 
-	public void invokeProcedure(WLProcedureInvocationData invocationData, WLResponseListener responseListener, WLRequestOptions requestOptions) {
+	public void invokeProcedure(WLProcedureInvocationData invocationData,
+			WLResponseListener responseListener, WLRequestOptions requestOptions) {
 		if (!this.isInitialized) {
 			log.error("invokeProcedure() will not be executed because WLCLient is not initialized, ensure WLCLient.connect function has been called.");
 			return;
 		}
 
 		if (responseListener == null) {
-			throw new IllegalArgumentException("Error during invocation of remote procedure, because responseListener parameter can't be null.");
+			throw new IllegalArgumentException(
+					"Error during invocation of remote procedure, because responseListener parameter can't be null.");
 		}
 
 		if (requestOptions == null) {
@@ -179,14 +187,18 @@ public class WLClient {
 		requestOptions.addParameters(invocationData.getInvocationDataMap());
 		InvokeProcedureRequestListener invokeProcedureInternalListener = new InvokeProcedureRequestListener();
 
-		FWRequest invokeProcedureWLRequest = new FWRequest(invokeProcedureInternalListener, this.httpContext, requestOptions, this.config, this.context);
+		FWRequest invokeProcedureWLRequest = new FWRequest(
+				invokeProcedureInternalListener, this.httpContext,
+				requestOptions, this.config, this.context);
 
 		invokeProcedureWLRequest.makeRequest(INVOKE_PROCEDURE_REQUEST_PATH);
 	}
 
-	public void sendInvoke(WLProcedureInvocationData invocationData, WLResponseListener responseListener, WLRequestOptions requestOptions) {
+	public void sendInvoke(WLProcedureInvocationData invocationData,
+			WLResponseListener responseListener, WLRequestOptions requestOptions) {
 		if (responseListener == null) {
-			throw new IllegalArgumentException("Error during invocation of remote procedure, because responseListener parameter can't be null.");
+			throw new IllegalArgumentException(
+					"Error during invocation of remote procedure, because responseListener parameter can't be null.");
 		}
 
 		if (requestOptions == null) {
@@ -197,12 +209,16 @@ public class WLClient {
 		requestOptions.addParameters(invocationData.getInvocationDataMap());
 		InvokeProcedureRequestListener invokeProcedureInternalListener = new InvokeProcedureRequestListener();
 
-		FWRequest invokeProcedureWLRequest = new FWRequest(invokeProcedureInternalListener, this.httpContext, requestOptions, this.config, this.context);
+		FWRequest invokeProcedureWLRequest = new FWRequest(
+				invokeProcedureInternalListener, this.httpContext,
+				requestOptions, this.config, this.context);
 
-		invokeProcedureWLRequest.makeRequest(SEND_INVOKE_PROCEDURE_REQUEST_PATH, true);
+		invokeProcedureWLRequest.makeRequest(
+				SEND_INVOKE_PROCEDURE_REQUEST_PATH, true);
 	}
 
-	public void invokeProcedure(WLProcedureInvocationData invocationData, WLResponseListener responseListener) {
+	public void invokeProcedure(WLProcedureInvocationData invocationData,
+			WLResponseListener responseListener) {
 		invokeProcedure(invocationData, responseListener, null);
 	}
 
@@ -220,7 +236,8 @@ public class WLClient {
 		requestOptions.addParameter("activity", activityType);
 		LogActivityListener logActivityListener = new LogActivityListener();
 
-		FWRequest logActivityWLRequest = new FWRequest(logActivityListener, this.httpContext, requestOptions, this.config, this.context);
+		FWRequest logActivityWLRequest = new FWRequest(logActivityListener,
+				this.httpContext, requestOptions, this.config, this.context);
 
 		logActivityWLRequest.makeRequest(LOG_ACTIVITY_REQUEST_PATH);
 	}
@@ -231,7 +248,8 @@ public class WLClient {
 
 	private boolean updateCookiesFromWebView() {
 		String wlServerUrl = getWLServerURL();
-		String cookiesString = CookieManager.getInstance().getCookie(wlServerUrl);
+		String cookiesString = CookieManager.getInstance().getCookie(
+				wlServerUrl);
 
 		if (!FWUtils.isStringEmpty(cookiesString)) {
 			FWCookieManager.setCookies(cookiesString, wlServerUrl);
@@ -245,7 +263,8 @@ public class WLClient {
 				this.httpContext.setAttribute("http.cookie-store", cookieStore);
 				return true;
 			}
-			log.debug("No Cookies found for url " + this.config.getAppURL().getHost() + " in WebView.");
+			log.debug("No Cookies found for url "
+					+ this.config.getAppURL().getHost() + " in WebView.");
 			return false;
 		}
 
@@ -255,17 +274,21 @@ public class WLClient {
 	private void registerDefaultChallengeHandlers() {
 		registerChallengeHandler(new AntiXSRFChallengeHandler(ANTI_XSRF_REALM));
 
-		registerChallengeHandler(new NoProvisioningChallengeHandler("wl_deviceNoProvisioningRealm"));
+		registerChallengeHandler(new NoProvisioningChallengeHandler(
+				"wl_deviceNoProvisioningRealm"));
 
-		registerChallengeHandler(new RemoteDisableChallengeHandler("wl_remoteDisableRealm"));
+		registerChallengeHandler(new RemoteDisableChallengeHandler(
+				"wl_remoteDisableRealm"));
 
-		registerChallengeHandler(new AuthenticityChallengeHandler("wl_authenticityRealm"));
+		registerChallengeHandler(new AuthenticityChallengeHandler(
+				"wl_authenticityRealm"));
 	}
 
 	public void registerChallengeHandler(BaseChallengeHandler challengeHandler) {
 		if (challengeHandler == null) {
 			log.error("Cannot register 'null' challenge handler");
-			throw new RuntimeException("Cannot register 'null' challenge handler");
+			throw new RuntimeException(
+					"Cannot register 'null' challenge handler");
 		}
 
 		String realm = challengeHandler.getRealm();
@@ -295,7 +318,8 @@ public class WLClient {
 		Iterator iter = this.chMap.entrySet().iterator();
 
 		while (iter.hasNext()) {
-			BaseChallengeHandler handler = (BaseChallengeHandler) ((Map.Entry) iter.next()).getValue();
+			BaseChallengeHandler handler = (BaseChallengeHandler) ((Map.Entry) iter
+					.next()).getValue();
 			if ((handler instanceof ChallengeHandler)) {
 				ChallengeHandler cl = (ChallengeHandler) handler;
 				if (cl.isCustomResponse(response)) {
@@ -310,7 +334,9 @@ public class WLClient {
 	private String getWLServerURL() {
 		String context = getConfig().getContext();
 		String host = getConfig().getAppURL().getHost();
-		String serverUrl = (context != null) && (context.trim().length() > 1) ? host + context : host;
+		String serverUrl = (context != null) && (context.trim().length() > 1) ? host
+				+ context
+				: host;
 		return serverUrl;
 	}
 }

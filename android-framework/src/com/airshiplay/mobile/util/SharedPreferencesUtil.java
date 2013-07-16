@@ -1,8 +1,10 @@
-package com.airshiplay.framework.util;
+package com.airshiplay.mobile.util;
 
 import java.util.Map;
 import java.util.Set;
 
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,28 +18,52 @@ public class SharedPreferencesUtil {
 	@SuppressWarnings("unused")
 	private Context mContext;
 
-	public SharedPreferencesUtil(Context context) {
+	/**
+	 * @param context
+	 * @param name
+	 */
+	@SuppressLint({ "WorldWriteableFiles", "WorldReadableFiles" })
+	public SharedPreferencesUtil(Context context, String name) {
 		mContext = context;
 		try {
-			prefs = context.createPackageContext(context.getPackageName(), Context.CONTEXT_IGNORE_SECURITY)
-					.getSharedPreferences(name,
-					Context.MODE_WORLD_READABLE + Context.MODE_WORLD_WRITEABLE+Context.MODE_MULTI_PROCESS);
+			prefs = context.createPackageContext(context.getPackageName(),
+					Context.CONTEXT_IGNORE_SECURITY).getSharedPreferences(
+					StringUtils.isEmpty(name) ? SharedPreferencesUtil.name
+							: name,
+					Context.MODE_WORLD_READABLE + Context.MODE_WORLD_WRITEABLE
+							+ Context.MODE_MULTI_PROCESS);
 			return;
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		prefs = context.getSharedPreferences(name, Context.MODE_WORLD_WRITEABLE+Context.MODE_MULTI_PROCESS);
+		prefs = context.getSharedPreferences(
+				StringUtils.isEmpty(name) ? SharedPreferencesUtil.name : name,
+				Context.MODE_WORLD_WRITEABLE + Context.MODE_MULTI_PROCESS);
 	}
 
 	public static SharedPreferencesUtil getInstance(Context context) {
+		return getInstance(context, name);
+	}
+
+	public static SharedPreferencesUtil getInstance(Context context, String name) {
 		if (instance == null) {
-			instance = new SharedPreferencesUtil(context);
+			instance = new SharedPreferencesUtil(context, name);
 		}
 		return instance;
 	}
 
 	public static SharedPreferencesUtil getNewInstance(Context context) {
-		instance = new SharedPreferencesUtil(context);
+		return getNewInstance(context, name);
+	}
+
+	/**
+	 * @param context
+	 * @param name
+	 * @return
+	 */
+	public static SharedPreferencesUtil getNewInstance(Context context,
+			String name) {
+		instance = new SharedPreferencesUtil(context, name);
 		return instance;
 	}
 
@@ -81,11 +107,13 @@ public class SharedPreferencesUtil {
 		return prefs.edit();
 	}
 
-	public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+	public void registerOnSharedPreferenceChangeListener(
+			OnSharedPreferenceChangeListener listener) {
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 	}
 
-	public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+	public void unregisterOnSharedPreferenceChangeListener(
+			OnSharedPreferenceChangeListener listener) {
 		prefs.unregisterOnSharedPreferenceChangeListener(listener);
 	}
 
@@ -93,24 +121,54 @@ public class SharedPreferencesUtil {
 		return edit().putString(key, value).commit();
 	}
 
+	public SharedPreferencesUtil putStringl(String key, String value) {
+		putString(key, value);
+		return instance;
+	}
+
 	public boolean putStringSet(String key, Set<String> values) {
 		return edit().putStringSet(key, values).commit();
+	}
+
+	public SharedPreferencesUtil putStringSetl(String key, Set<String> values) {
+		putStringSet(key, values);
+		return instance;
 	}
 
 	public boolean putInt(String key, int value) {
 		return edit().putInt(key, value).commit();
 	}
 
+	public SharedPreferencesUtil putIntl(String key, int value) {
+		putInt(key, value);
+		return instance;
+	}
+
 	public boolean putLong(String key, long value) {
 		return edit().putLong(key, value).commit();
+	}
+
+	public SharedPreferencesUtil putLongl(String key, long value) {
+		putLong(key, value);
+		return instance;
 	}
 
 	public boolean putFloat(String key, float value) {
 		return edit().putFloat(key, value).commit();
 	}
 
+	public SharedPreferencesUtil putFloatl(String key, float value) {
+		putFloat(key, value);
+		return instance;
+	}
+
 	public boolean putBoolean(String key, boolean value) {
 		return edit().putBoolean(key, value).commit();
+	}
+
+	public SharedPreferencesUtil putBooleanl(String key, boolean value) {
+		putBoolean(key, value);
+		return instance;
 	}
 
 	public boolean remove(String key) {
@@ -123,5 +181,10 @@ public class SharedPreferencesUtil {
 
 	public void apply() {
 		edit().apply();
+	}
+
+	public static boolean getBoolean(Context mCtx, String key, boolean defValue) {
+		return SharedPreferencesUtil.getInstance(mCtx)
+				.getBoolean(key, defValue);
 	}
 }

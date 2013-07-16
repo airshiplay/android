@@ -17,9 +17,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.Message;
 
 import com.airshiplay.framework.bean.BaseBean;
-import com.airshiplay.framework.util.PreferenceUtil;
+import com.airshiplay.framework.util.PreferenceConstants;
 import com.airshiplay.mobile.log.Logger;
 import com.airshiplay.mobile.log.LoggerFactory;
+import com.airshiplay.mobile.util.SharedPreferencesUtil;
 import com.airshiplay.mobile.util.TelephoneUtil;
 
 /**
@@ -216,9 +217,9 @@ public class DownloadTask {
 
 	void setNetworkConnectState() {
 		boolean isWifiEnable = TelephoneUtil.isWifiEnable(DownloadMgr.mCtx);
-		boolean isWithoutWifiNotify = PreferenceUtil.getBoolean(
+		boolean isWithoutWifiNotify = SharedPreferencesUtil.getBoolean(
 				DownloadMgr.mCtx, "NOTIFY_LARGE_WITHOUT_WIFI",
-				PreferenceUtil.DEFAULT_NOTIFY_LARGE_FILE_WITHOUT_WIFI);
+				PreferenceConstants.DEFAULT_NOTIFY_LARGE_FILE_WITHOUT_WIFI);
 		if ((this.lastState_IsWifi) && (!isWifiEnable) && (isWithoutWifiNotify)) {
 			Message message = Message.obtain();
 			message.obj = this;
