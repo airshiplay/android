@@ -23,8 +23,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.GridView;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.internal.EmptyViewMethodAccessor;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 
 public class PullToRefreshGridView extends PullToRefreshAdapterViewBase<GridView> {
 
@@ -59,7 +59,7 @@ public class PullToRefreshGridView extends PullToRefreshAdapterViewBase<GridView
 		}
 
 		// Use Generated ID (from res/values/ids.xml)
-		gv.setId(R.id.gridview);
+		gv.setId(PullToRefreshResource.id.gridview);
 		return gv;
 	}
 

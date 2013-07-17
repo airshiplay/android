@@ -25,7 +25,7 @@ import android.util.FloatMath;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
-import com.airshiplay.framework.R;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 
 public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 
@@ -103,7 +103,7 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 			webView = new WebView(context, attrs);
 		}
 
-		webView.setId(R.id.webview);
+		webView.setId(PullToRefreshResource.id.webview);
 		return webView;
 	}
 

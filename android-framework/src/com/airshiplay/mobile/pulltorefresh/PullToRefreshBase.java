@@ -34,9 +34,9 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.internal.FlipLoadingLayout;
 import com.airshiplay.mobile.pulltorefresh.internal.LoadingLayout;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 import com.airshiplay.mobile.pulltorefresh.internal.RotateLoadingLayout;
 import com.airshiplay.mobile.pulltorefresh.internal.Utils;
 import com.airshiplay.mobile.pulltorefresh.internal.ViewCompat;
@@ -1089,15 +1089,15 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		mTouchSlop = config.getScaledTouchSlop();
 
 		// Styleables from XML
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PullToRefresh);
+		TypedArray a = context.obtainStyledAttributes(attrs, PullToRefreshResource.styleable.PullToRefresh);
 
-		if (a.hasValue(R.styleable.PullToRefresh_ptrMode)) {
-			mMode = Mode.mapIntToValue(a.getInteger(R.styleable.PullToRefresh_ptrMode, 0));
+		if (a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrMode)) {
+			mMode = Mode.mapIntToValue(a.getInteger(PullToRefreshResource.styleable.PullToRefresh_ptrMode, 0));
 		}
 
-		if (a.hasValue(R.styleable.PullToRefresh_ptrAnimationStyle)) {
+		if (a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrAnimationStyle)) {
 			mLoadingAnimationStyle = AnimationStyle.mapIntToValue(a.getInteger(
-					R.styleable.PullToRefresh_ptrAnimationStyle, 0));
+					PullToRefreshResource.styleable.PullToRefresh_ptrAnimationStyle, 0));
 		}
 
 		// Refreshable View
@@ -1112,26 +1112,26 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		/**
 		 * Styleables from XML
 		 */
-		if (a.hasValue(R.styleable.PullToRefresh_ptrRefreshableViewBackground)) {
-			Drawable background = a.getDrawable(R.styleable.PullToRefresh_ptrRefreshableViewBackground);
+		if (a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrRefreshableViewBackground)) {
+			Drawable background = a.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrRefreshableViewBackground);
 			if (null != background) {
 				mRefreshableView.setBackgroundDrawable(background);
 			}
-		} else if (a.hasValue(R.styleable.PullToRefresh_ptrAdapterViewBackground)) {
+		} else if (a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrAdapterViewBackground)) {
 			Utils.warnDeprecation("ptrAdapterViewBackground", "ptrRefreshableViewBackground");
-			Drawable background = a.getDrawable(R.styleable.PullToRefresh_ptrAdapterViewBackground);
+			Drawable background = a.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrAdapterViewBackground);
 			if (null != background) {
 				mRefreshableView.setBackgroundDrawable(background);
 			}
 		}
 
-		if (a.hasValue(R.styleable.PullToRefresh_ptrOverScroll)) {
-			mOverScrollEnabled = a.getBoolean(R.styleable.PullToRefresh_ptrOverScroll, true);
+		if (a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrOverScroll)) {
+			mOverScrollEnabled = a.getBoolean(PullToRefreshResource.styleable.PullToRefresh_ptrOverScroll, true);
 		}
 
-		if (a.hasValue(R.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled)) {
+		if (a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled)) {
 			mScrollingWhileRefreshingEnabled = a.getBoolean(
-					R.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled, false);
+					PullToRefreshResource.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled, false);
 		}
 
 		// Let the derivative classes have a go at handling attributes, then

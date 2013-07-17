@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="gridview" type="id"/>
+    <item name="webview" type="id"/>
+    <item name="scrollview" type="id"/>
+    <item name="viewpager" type="id"/>
+    <item name="fl_inner" type="id"/>
+    <item name="pull_to_refresh_text" type="id"/>
+    <item name="pull_to_refresh_progress" type="id"/>
+    <item name="pull_to_refresh_sub_text" type="id"/>
+    <item name="pull_to_refresh_image" type="id"/>
+    <item name="ptrRefreshableViewBackground" type="id"/>
+    <item name="ptrHeaderBackground" type="id"/>
+    <item name="ptrHeaderTextColor" type="id"/>
+    <item name="ptrHeaderSubTextColor" type="id"/>
+    <item name="ptrMode" type="id"/>
+    <item name="ptrShowIndicator" type="id"/>
+    <item name="ptrDrawable" type="id"/>
+    <item name="ptrDrawableStart" type="id"/>
+    <item name="ptrDrawableEnd" type="id"/>
+    <item name="ptrOverScroll" type="id"/>
+    <item name="ptrHeaderTextAppearance" type="id"/>
+    <item name="ptrSubHeaderTextAppearance" type="id"/>
+    <item name="ptrAnimationStyle" type="id"/>
+    <item name="ptrScrollingWhileRefreshingEnabled" type="id"/>
+    <item name="ptrListViewExtrasEnabled" type="id"/>
+    <item name="ptrRotateDrawableWhilePulling" type="id"/>
+    <item name="ptrAdapterViewBackground" type="id"/>
+    <item name="ptrDrawableTop" type="id"/>
+    <item name="ptrDrawableBottom" type="id"/>
+
+</resources>

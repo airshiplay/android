@@ -35,11 +35,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.ILoadingLayout;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Mode;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Orientation;
-import com.airshiplay.mobile.util.MobileResource;
 
 @SuppressLint("ViewConstructor")
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout, PullToRefreshResource {
@@ -93,7 +91,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 			// Load in labels
 			mPullLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_from_bottom_pull_label);
 			mRefreshingLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_from_bottom_refreshing_label);
-			mReleaseLabel = context.getString(R.string.pull_to_refresh_from_bottom_release_label);
+			mReleaseLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_from_bottom_release_label);
 			break;
 
 		case PULL_FROM_START:
@@ -101,39 +99,39 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 			lp.gravity = scrollDirection == Orientation.VERTICAL ? Gravity.BOTTOM : Gravity.RIGHT;
 
 			// Load in labels
-			mPullLabel = context.getString(R.string.pull_to_refresh_pull_label);
-			mRefreshingLabel = context.getString(R.string.pull_to_refresh_refreshing_label);
-			mReleaseLabel = context.getString(R.string.pull_to_refresh_release_label);
+			mPullLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_pull_label);
+			mRefreshingLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_refreshing_label);
+			mReleaseLabel = context.getString(PullToRefreshResource.string.pull_to_refresh_release_label);
 			break;
 		}
 
-		if (attrs.hasValue(R.styleable.PullToRefresh_ptrHeaderBackground)) {
-			Drawable background = attrs.getDrawable(R.styleable.PullToRefresh_ptrHeaderBackground);
+		if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderBackground)) {
+			Drawable background = attrs.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderBackground);
 			if (null != background) {
 				ViewCompat.setBackground(this, background);
 			}
 		}
 
-		if (attrs.hasValue(R.styleable.PullToRefresh_ptrHeaderTextAppearance)) {
+		if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderTextAppearance)) {
 			TypedValue styleID = new TypedValue();
-			attrs.getValue(R.styleable.PullToRefresh_ptrHeaderTextAppearance, styleID);
+			attrs.getValue(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderTextAppearance, styleID);
 			setTextAppearance(styleID.data);
 		}
-		if (attrs.hasValue(R.styleable.PullToRefresh_ptrSubHeaderTextAppearance)) {
+		if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrSubHeaderTextAppearance)) {
 			TypedValue styleID = new TypedValue();
-			attrs.getValue(R.styleable.PullToRefresh_ptrSubHeaderTextAppearance, styleID);
+			attrs.getValue(PullToRefreshResource.styleable.PullToRefresh_ptrSubHeaderTextAppearance, styleID);
 			setSubTextAppearance(styleID.data);
 		}
 
 		// Text Color attrs need to be set after TextAppearance attrs
-		if (attrs.hasValue(R.styleable.PullToRefresh_ptrHeaderTextColor)) {
-			ColorStateList colors = attrs.getColorStateList(R.styleable.PullToRefresh_ptrHeaderTextColor);
+		if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderTextColor)) {
+			ColorStateList colors = attrs.getColorStateList(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderTextColor);
 			if (null != colors) {
 				setTextColor(colors);
 			}
 		}
-		if (attrs.hasValue(R.styleable.PullToRefresh_ptrHeaderSubTextColor)) {
-			ColorStateList colors = attrs.getColorStateList(R.styleable.PullToRefresh_ptrHeaderSubTextColor);
+		if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderSubTextColor)) {
+			ColorStateList colors = attrs.getColorStateList(PullToRefreshResource.styleable.PullToRefresh_ptrHeaderSubTextColor);
 			if (null != colors) {
 				setSubTextColor(colors);
 			}
@@ -141,8 +139,8 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 
 		// Try and get defined drawable from Attrs
 		Drawable imageDrawable = null;
-		if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawable)) {
-			imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawable);
+		if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrDrawable)) {
+			imageDrawable = attrs.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrDrawable);
 		}
 
 		// Check Specific Drawable from Attrs, these overrite the generic
@@ -150,20 +148,20 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		switch (mode) {
 		case PULL_FROM_START:
 		default:
-			if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableStart)) {
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableStart);
-			} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableTop)) {
+			if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableStart)) {
+				imageDrawable = attrs.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableStart);
+			} else if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableTop)) {
 				Utils.warnDeprecation("ptrDrawableTop", "ptrDrawableStart");
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableTop);
+				imageDrawable = attrs.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableTop);
 			}
 			break;
 
 		case PULL_FROM_END:
-			if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableEnd)) {
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableEnd);
-			} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableBottom)) {
+			if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableEnd)) {
+				imageDrawable = attrs.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableEnd);
+			} else if (attrs.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableBottom)) {
 				Utils.warnDeprecation("ptrDrawableBottom", "ptrDrawableEnd");
-				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableBottom);
+				imageDrawable = attrs.getDrawable(PullToRefreshResource.styleable.PullToRefresh_ptrDrawableBottom);
 			}
 			break;
 		}

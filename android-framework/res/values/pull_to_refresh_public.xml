@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <!-- attr -->
+    <public id="0x7f010000" name="ptrRefreshableViewBackground" type="attr" />
+    <public id="0x7f010001" name="ptrHeaderBackground" type="attr" />
+    <public id="0x7f010002" name="ptrHeaderTextColor" type="attr" />
+    <public id="0x7f010003" name="ptrHeaderSubTextColor" type="attr" />
+    <public id="0x7f010004" name="ptrMode" type="attr" />
+    <public id="0x7f010005" name="ptrShowIndicator" type="attr" />
+    <public id="0x7f010006" name="ptrDrawable" type="attr" />
+    <public id="0x7f010007" name="ptrDrawableStart" type="attr" />
+    <public id="0x7f010008" name="ptrDrawableEnd" type="attr" />
+    <public id="0x7f010009" name="ptrOverScroll" type="attr" />
+    <public id="0x7f01000a" name="ptrHeaderTextAppearance" type="attr" />
+    <public id="0x7f01000b" name="ptrSubHeaderTextAppearance" type="attr" />
+    <public id="0x7f01000c" name="ptrAnimationStyle" type="attr" />
+    <public id="0x7f01000d" name="ptrScrollingWhileRefreshingEnabled" type="attr" />
+    <public id="0x7f01000e" name="ptrListViewExtrasEnabled" type="attr" />
+    <public id="0x7f01000f" name="ptrRotateDrawableWhilePulling" type="attr" />
+    <public id="0x7f010010" name="ptrAdapterViewBackground" type="attr" />
+    <public id="0x7f010011" name="ptrDrawableTop" type="attr" />
+    <public id="0x7f010012" name="ptrDrawableBottom" type="attr" />
+
+    <!-- drawable -->
+    <public id="0x7f020000" name="default_ptr_flip" type="drawable" />
+    <public id="0x7f020001" name="default_ptr_rotate" type="drawable" />
+
+    <!-- layout -->
+    <public id="0x7f030000" name="mobile_pull_to_refresh_header_horizontal" type="layout" />
+    <public id="0x7f030001" name="mobile_pull_to_refresh_header_vertical" type="layout" />
+
+    <!-- anim -->
+    <public id="0x7f040000" name="slide_right_in" type="anim" />
+    <!-- raw -->
+    <public id="0x7f050000" name="pull_event" type="raw" />
+    <!-- color -->
+    <public id="0x7f060000" name="android_white" type="color" />
+    <!-- dimen -->
+    <public id="0x7f070000" name="indicator_right_padding" type="dimen" />
+    <public id="0x7f070001" name="indicator_corner_radius" type="dimen" />
+    <public id="0x7f070002" name="indicator_internal_padding" type="dimen" />
+    <!-- id -->
+    <public id="0x7f080000" name="fl_inner" type="id" />
+    <public id="0x7f080001" name="pull_to_refresh_text" type="id" />
+    <public id="0x7f080002" name="pull_to_refresh_progress" type="id" />
+    <public id="0x7f080003" name="pull_to_refresh_sub_text" type="id" />
+    <public id="0x7f080004" name="pull_to_refresh_image" type="id" />
+    <public id="0x7f080005" name="gridview" type="id" />
+    <public id="0x7f080006" name="webview" type="id" />
+    <public id="0x7f080007" name="scrollview" type="id" />
+    <public id="0x7f080008" name="viewpager" type="id" />
+
+    <!-- string -->
+    <public id="0x7f090000" name="pull_to_refresh_pull_label" type="string" />
+    <public id="0x7f090001" name="pull_to_refresh_release_label" type="string" />
+    <public id="0x7f090002" name="pull_to_refresh_refreshing_label" type="string" />
+    <public id="0x7f090003" name="pull_to_refresh_from_bottom_pull_label" type="string" />
+    <public id="0x7f090004" name="pull_to_refresh_from_bottom_release_label" type="string" />
+    <public id="0x7f090005" name="pull_to_refresh_from_bottom_refreshing_label" type="string" />
+    <!-- pull to refresh -->
+    <!-- style -->
+    <public id="0x7f0a0000" name="AppBaseTheme" type="style" />
+    <!-- array -->
+    <public id="0x7f0b0000" name="auto_delete" type="array" />
+    <!-- menu -->
+    <public id="0x7f0c0000" name="scroll_view_flow_example" type="menu" />
+
+</resources>

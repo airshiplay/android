@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 
-import com.airshiplay.framework.R;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 
 public class PullToRefreshHorizontalScrollView extends PullToRefreshBase<HorizontalScrollView> {
 
@@ -58,7 +58,7 @@ public class PullToRefreshHorizontalScrollView extends PullToRefreshBase<Horizon
 			scrollView = new HorizontalScrollView(context, attrs);
 		}
 
-		scrollView.setId(R.id.scrollview);
+		scrollView.setId(PullToRefreshResource.id.scrollview);
 		return scrollView;
 	}
 

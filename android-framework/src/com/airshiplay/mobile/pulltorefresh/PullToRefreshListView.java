@@ -29,9 +29,9 @@ import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.internal.EmptyViewMethodAccessor;
 import com.airshiplay.mobile.pulltorefresh.internal.LoadingLayout;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 
 public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView> {
 
@@ -226,7 +226,7 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 	protected void handleStyledAttributes(TypedArray a) {
 		super.handleStyledAttributes(a);
 
-		mListViewExtrasEnabled = a.getBoolean(R.styleable.PullToRefresh_ptrListViewExtrasEnabled, true);
+		mListViewExtrasEnabled = a.getBoolean(PullToRefreshResource.styleable.PullToRefresh_ptrListViewExtrasEnabled, true);
 
 		if (mListViewExtrasEnabled) {
 			final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
@@ -248,7 +248,7 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 			 * If the value for Scrolling While Refreshing hasn't been
 			 * explicitly set via XML, enable Scrolling While Refreshing.
 			 */
-			if (!a.hasValue(R.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled)) {
+			if (!a.hasValue(PullToRefreshResource.styleable.PullToRefresh_ptrScrollingWhileRefreshingEnabled)) {
 				setScrollingWhileRefreshingEnabled(true);
 			}
 		}

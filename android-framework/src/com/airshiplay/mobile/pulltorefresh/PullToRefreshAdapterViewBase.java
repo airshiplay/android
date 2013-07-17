@@ -32,9 +32,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.internal.EmptyViewMethodAccessor;
 import com.airshiplay.mobile.pulltorefresh.internal.IndicatorLayout;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 
 public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extends PullToRefreshBase<T> implements
 		OnScrollListener {
@@ -301,7 +301,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	@Override
 	protected void handleStyledAttributes(TypedArray a) {
 		// Set Show Indicator to the XML value, or default value
-		mShowIndicator = a.getBoolean(R.styleable.PullToRefresh_ptrShowIndicator, !isPullToRefreshOverScrollEnabled());
+		mShowIndicator = a.getBoolean(PullToRefreshResource.styleable.PullToRefresh_ptrShowIndicator, !isPullToRefreshOverScrollEnabled());
 	}
 
 	protected boolean isReadyForPullStart() {
@@ -341,7 +341,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			mIndicatorIvTop = new IndicatorLayout(getContext(), Mode.PULL_FROM_START);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 					ViewGroup.LayoutParams.WRAP_CONTENT);
-			params.rightMargin = getResources().getDimensionPixelSize(R.dimen.indicator_right_padding);
+			params.rightMargin = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.indicator_right_padding);
 			params.gravity = Gravity.TOP | Gravity.RIGHT;
 			refreshableViewWrapper.addView(mIndicatorIvTop, params);
 
@@ -356,7 +356,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			mIndicatorIvBottom = new IndicatorLayout(getContext(), Mode.PULL_FROM_END);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 					ViewGroup.LayoutParams.WRAP_CONTENT);
-			params.rightMargin = getResources().getDimensionPixelSize(R.dimen.indicator_right_padding);
+			params.rightMargin = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.indicator_right_padding);
 			params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
 			refreshableViewWrapper.addView(mIndicatorIvBottom, params);
 
