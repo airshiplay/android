@@ -5,6 +5,8 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
+ * android屏幕相关处理工具类
+ * 
  * @author airshiplay
  * @Create 2013-7-14
  * @version 1.0
@@ -17,6 +19,8 @@ public class ScreenUtil {
 	public static int[] resolutionXY;
 
 	/**
+	 * 初始化
+	 * 
 	 * @param context
 	 */
 	public static void init(Context context) {
@@ -42,14 +46,16 @@ public class ScreenUtil {
 	}
 
 	/**
+	 * 获取屏幕的宽高（像素点）
+	 * 
 	 * @param context
-	 * @return
+	 * @return int[0]为屏幕最小边像素点，int[1]为屏幕最大边像素点
 	 */
 	public static int[] getScreenResolutionXY(Context context) {
 		int[] resolutionXY = new int[2];
 		DisplayMetrics dm = new DisplayMetrics();
-		((WindowManager) context.getApplicationContext().getSystemService(
-				Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+		((WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay()
+				.getMetrics(dm);
 		if (dm.widthPixels < dm.heightPixels) {
 			resolutionXY[0] = dm.widthPixels;
 			resolutionXY[1] = dm.heightPixels;

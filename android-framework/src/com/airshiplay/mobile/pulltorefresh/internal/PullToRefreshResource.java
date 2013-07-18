@@ -33,9 +33,19 @@ public interface PullToRefreshResource {
 		int indicator_internal_padding = 0x7f070002;
 	}
 
+	public static interface anim {
+		int slide_in_from_top = 0x7f040000;
+		int slide_in_from_bottom = 0x7f040001;
+		int slide_out_to_top = 0x7f040002;
+		int slide_out_to_bottom = 0x7f040003;
+	}
+
 	public static interface drawable {
 		int default_ptr_flip = 0x7f020000;
 		int default_ptr_rotate = 0x7f020001;
+		int indicator_bg_top = 0x7f020002;
+		int indicator_bg_bottom = 0x7f020003;
+		int indicator_arrow = 0x7f020004;
 	}
 
 	public static interface attr {

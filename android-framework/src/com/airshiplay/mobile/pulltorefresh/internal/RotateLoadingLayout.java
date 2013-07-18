@@ -23,7 +23,6 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView.ScaleType;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Mode;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Orientation;
 
@@ -41,7 +40,7 @@ public class RotateLoadingLayout extends LoadingLayout {
 	public RotateLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
 		super(context, mode, scrollDirection, attrs);
 
-		mRotateDrawableWhilePulling = attrs.getBoolean(R.styleable.PullToRefresh_ptrRotateDrawableWhilePulling, true);
+		mRotateDrawableWhilePulling = attrs.getBoolean(PullToRefreshResource.styleable.PullToRefresh_ptrRotateDrawableWhilePulling, true);
 
 		mHeaderImage.setScaleType(ScaleType.MATRIX);
 		mHeaderImageMatrix = new Matrix();

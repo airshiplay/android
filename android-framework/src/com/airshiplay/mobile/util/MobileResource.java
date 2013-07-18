@@ -10,6 +10,8 @@ import android.graphics.drawable.Drawable;
 import com.airshiplay.mobile.application.MobileApplication;
 
 /**
+ * 资源工具类，通过资源名称获取对应资源ID
+ * 
  * @author airshiplay
  * @Create Date 2013-3-8
  * @version 1.0

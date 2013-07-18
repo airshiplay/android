@@ -12,7 +12,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
-import com.airshiplay.framework.util.AppUtil;
+import com.airshiplay.mobile.util.AppUtil;
 
 /**
  * @author airshiplay

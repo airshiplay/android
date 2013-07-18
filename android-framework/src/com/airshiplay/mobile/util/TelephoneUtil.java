@@ -25,6 +25,8 @@ import android.util.TypedValue;
 import android.view.WindowManager;
 
 /**
+ * android电话相关工具类
+ * 
  * @author airshiplay
  * @Create Date 2013-2-24
  * @version 1.0
@@ -39,11 +41,9 @@ public class TelephoneUtil {
 	 */
 	public static boolean isNetworkAvailable(Context context) {
 		try {
-			NetworkInfo networkInfo = ((ConnectivityManager) context
-					.getSystemService(Context.CONNECTIVITY_SERVICE))
+			NetworkInfo networkInfo = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE))
 					.getActiveNetworkInfo();
-			return (networkInfo != null)
-					&& (networkInfo.isAvailable() && networkInfo.isConnected());
+			return (networkInfo != null) && (networkInfo.isAvailable() && networkInfo.isConnected());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -57,11 +57,9 @@ public class TelephoneUtil {
 	 */
 	public static boolean isWifiEnable(Context context) {
 		try {
-			NetworkInfo networkInfo = ((ConnectivityManager) context
-					.getSystemService(Context.CONNECTIVITY_SERVICE))
+			NetworkInfo networkInfo = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE))
 					.getActiveNetworkInfo();
-			return (networkInfo != null)
-					&& (networkInfo.isAvailable() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI);
+			return (networkInfo != null) && (networkInfo.isAvailable() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -79,8 +77,7 @@ public class TelephoneUtil {
 	 * @return Unit KB
 	 */
 	public static int getCacheSize(Context context) {
-		return 1024 * ((ActivityManager) context
-				.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
+		return 1024 * ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
 	}
 
 	public static String getDevice() {
@@ -95,8 +92,7 @@ public class TelephoneUtil {
 
 	public static float getDisplayDensity(Context context) {
 		DisplayMetrics dm = new DisplayMetrics();
-		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
-				.getDefaultDisplay().getMetrics(dm);
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
 		return dm.density;
 	}
 
@@ -108,8 +104,7 @@ public class TelephoneUtil {
 
 	public static int getDisplayHeight(Context context) {
 		DisplayMetrics dm = new DisplayMetrics();
-		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
-				.getDefaultDisplay().getMetrics(dm);
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
 	}
 
@@ -121,8 +116,7 @@ public class TelephoneUtil {
 
 	public static int getDisplayWidth(Context context) {
 		DisplayMetrics dm = new DisplayMetrics();
-		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
-				.getDefaultDisplay().getMetrics(dm);
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels;
 	}
 
@@ -136,8 +130,7 @@ public class TelephoneUtil {
 	 * @return
 	 */
 	public static String getIMEI(Context context) {
-		String str = ((TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+		String str = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 		if (str == null)
 			str = "";
 		return str;
@@ -151,16 +144,14 @@ public class TelephoneUtil {
 	 * @return
 	 */
 	public static String getIMSI(Context context) {
-		String str = ((TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE)).getSubscriberId();
+		String str = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getSubscriberId();
 		if (str == null)
 			str = "";
 		return str;
 	}
 
 	public static String getLocalMacAddress(Context context) {
-		return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE))
-				.getConnectionInfo().getMacAddress();
+		return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getMacAddress();
 	}
 
 	public static String getNetWorkName(Context context) {
@@ -175,15 +166,11 @@ public class TelephoneUtil {
 	 * to determine if on a CDMA network).
 	 */
 	public static String getNetworkOperatorName(Activity activity) {
-		return ((TelephonyManager) activity
-				.getSystemService(Context.TELEPHONY_SERVICE))
-				.getNetworkOperatorName();
+		return ((TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE)).getNetworkOperatorName();
 	}
 
 	public static String getNetworkOperatorName(Context context) {
-		return ((TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE))
-				.getNetworkOperatorName();
+		return ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getNetworkOperatorName();
 	}
 
 	/**
@@ -227,8 +214,7 @@ public class TelephoneUtil {
 			resources = Resources.getSystem();
 		else
 			resources = context.getResources();
-		return (int) TypedValue.applyDimension(unit, value,
-				resources.getDisplayMetrics());
+		return (int) TypedValue.applyDimension(unit, value, resources.getDisplayMetrics());
 	}
 
 	public static String getResolution(Activity activity) {
@@ -239,8 +225,7 @@ public class TelephoneUtil {
 
 	public static String getResolution(Context context) {
 		DisplayMetrics dm = new DisplayMetrics();
-		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
-				.getDefaultDisplay().getMetrics(dm);
+		((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
 		return dm.widthPixels + "x" + dm.heightPixels;
 	}
 
@@ -274,8 +259,7 @@ public class TelephoneUtil {
 	}
 
 	public static String getAccessPointType(Context context) {
-		NetworkInfo networkInfo = ((ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE))
+		NetworkInfo networkInfo = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE))
 				.getActiveNetworkInfo();
 		if (networkInfo.getTypeName().equalsIgnoreCase("MOBILE"))
 			return networkInfo.getExtraInfo();
@@ -286,8 +270,7 @@ public class TelephoneUtil {
 		Cursor cur = null;
 		try {
 			Uri uri = Uri.parse("content://telephony/carriers/preferapn");
-			cur = context.getContentResolver().query(uri, null, null, null,
-					null);
+			cur = context.getContentResolver().query(uri, null, null, null, null);
 			if ((cur != null) && (cur.moveToFirst())) {
 				String str = cur.getString(cur.getColumnIndex("proxy"));
 				return str;
@@ -300,8 +283,7 @@ public class TelephoneUtil {
 	}
 
 	public static String getNetworkType(Context context) {
-		NetworkInfo networkInfo = ((ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE))
+		NetworkInfo networkInfo = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE))
 				.getActiveNetworkInfo();
 		if ((networkInfo != null) && (networkInfo.isAvailable())) {
 			if (networkInfo.getTypeName().toLowerCase().equals("wifi"))
@@ -317,8 +299,7 @@ public class TelephoneUtil {
 		Cursor cur = null;
 		try {
 			Uri uri = Uri.parse("content://telephony/carriers");
-			cur = context.getContentResolver().query(uri, null, null, null,
-					null);
+			cur = context.getContentResolver().query(uri, null, null, null, null);
 			String id;
 			do {
 				if (cur != null) {
@@ -339,8 +320,7 @@ public class TelephoneUtil {
 	}
 
 	public static WifiInfo getWifiStatus(Context context) {
-		return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE))
-				.getConnectionInfo();
+		return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE)).getConnectionInfo();
 	}
 
 	public static boolean isCmwap(Context context) {
@@ -360,8 +340,7 @@ public class TelephoneUtil {
 	 */
 	public static boolean isConnectChinaMobile(Context context) {
 		// MCC+MNC (mobile country code + mobile network code)
-		String str = ((TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
+		String str = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
 		if (str != null)
 			return (str.startsWith("46000")) || (str.startsWith("46002"));
 		return false;
@@ -374,8 +353,7 @@ public class TelephoneUtil {
 	 * @return
 	 */
 	public static boolean isConnectChinaTelecom(Context context) {
-		String str = ((TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
+		String str = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
 		if (str != null)
 			return str.startsWith("46003");
 		return false;
@@ -388,8 +366,7 @@ public class TelephoneUtil {
 	 * @return
 	 */
 	public static boolean isConnectChinaUnicom(Context context) {
-		String str = ((TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
+		String str = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getSimOperator();
 		if (str != null)
 			return str.startsWith("46001");
 		return false;
@@ -402,8 +379,7 @@ public class TelephoneUtil {
 	 * @return
 	 */
 	public static boolean isMobileType(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		if (cm == null)
 			return false;
 		NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -428,24 +404,19 @@ public class TelephoneUtil {
 	}
 
 	public static void shotVibratePhone(Context context) {
-		((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE))
-				.vibrate(new long[] { 800L, 50L, 400L, 30L }, -1);
+		((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(new long[] { 800L, 50L, 400L, 30L }, -1);
 	}
 
 	public static boolean isSdcardExist() {
-		return Environment.getExternalStorageState().equals(
-				Environment.MEDIA_MOUNTED);
+		return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
 	}
 
 	public static long getAvailableExternalMemorySize() {
-		if (Environment.getExternalStorageState().equals(
-				Environment.MEDIA_MOUNTED)) {
-			StatFs statFs = new StatFs(Environment
-					.getExternalStorageDirectory().getPath());
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
 			return statFs.getBlockSize() * statFs.getAvailableBlocks();
 		}
-		if (Environment.getExternalStorageState().equals(
-				Environment.MEDIA_REMOVED)) {
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_REMOVED)) {
 			return -1L;
 		}
 		return 0L;

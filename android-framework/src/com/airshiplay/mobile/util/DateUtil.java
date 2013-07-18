@@ -10,12 +10,10 @@ public class DateUtil {
 	}
 
 	/**
-	 * yyyy-MM-dd HH:mm:ss
+	 * 时间格式化
 	 * 
 	 * @param date
-	 * @return
-	 * @变更记录 2013-7-16 上午9:43:09 lig
-	 * 
+	 * @return 返回yyyy-MM-dd HH:mm:ss格式时间
 	 */
 	public static String format(Date date) {
 		return getDateFormat().format(date);

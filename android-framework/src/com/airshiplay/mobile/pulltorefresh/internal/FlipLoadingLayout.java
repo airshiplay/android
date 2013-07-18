@@ -26,7 +26,6 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView.ScaleType;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Mode;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Orientation;
 

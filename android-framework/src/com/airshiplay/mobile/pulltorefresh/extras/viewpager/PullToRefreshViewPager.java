@@ -20,9 +20,8 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
-import com.airshiplay.framework.R;
 import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase;
-import com.airshiplay.mobile.pulltorefresh.PullToRefreshBase.Orientation;
+import com.airshiplay.mobile.pulltorefresh.internal.PullToRefreshResource;
 
 public class PullToRefreshViewPager extends PullToRefreshBase<ViewPager> {
 
@@ -42,7 +41,7 @@ public class PullToRefreshViewPager extends PullToRefreshBase<ViewPager> {
 	@Override
 	protected ViewPager createRefreshableView(Context context, AttributeSet attrs) {
 		ViewPager viewPager = new ViewPager(context, attrs);
-		viewPager.setId(R.id.viewpager);
+		viewPager.setId(PullToRefreshResource.id.viewpager);
 		return viewPager;
 	}
 
