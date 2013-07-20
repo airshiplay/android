@@ -103,7 +103,7 @@ public class RotateLoadingLayout extends LoadingLayout {
 
 	@Override
 	protected int getDefaultDrawableResId() {
-		return PullToRefreshResource.drawable.default_ptr_rotate;
+		return PullToRefreshResource.drawable.pull_to_refresh_default_ptr_rotate;
 	}
 
 }

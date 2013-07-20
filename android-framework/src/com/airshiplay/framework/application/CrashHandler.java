@@ -22,7 +22,7 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
-import com.airshiplay.framework.util.AppUtil;
+import com.airshiplay.mobile.util.AppUtil;
 
 /**
  * @author airshiplay

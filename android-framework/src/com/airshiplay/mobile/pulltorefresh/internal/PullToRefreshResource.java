@@ -2,12 +2,12 @@ package com.airshiplay.mobile.pulltorefresh.internal;
 
 public interface PullToRefreshResource {
 	public static interface layout {
-		static int mobile_pull_to_refresh_header_horizontal = 0x7f030000;
-		static int mobile_pull_to_refresh_header_vertical = 0x7f030001;
+		final static int pull_to_refresh_header_horizontal = 0x7f030000;
+		final static int pull_to_refresh_header_vertical = 0x7f030001;
 	}
 
 	public static interface id {
-		static int fl_inner = 0x7f080000;
+		static int pull_to_refresh_fl_inner = 0x7f080000;
 		static int pull_to_refresh_text = 0x7f080001;
 		static int pull_to_refresh_progress = 0x7f080002;
 		static int pull_to_refresh_sub_text = 0x7f080003;
@@ -28,9 +28,9 @@ public interface PullToRefreshResource {
 	}
 
 	public static interface dimen {
-		int indicator_right_padding = 0x7f070000;
-		int indicator_corner_radius = 0x7f070001;
-		int indicator_internal_padding = 0x7f070002;
+		int pull_to_refresh_indicator_right_padding = 0x7f070000;
+		int pull_to_refresh_indicator_corner_radius = 0x7f070001;
+		int pull_to_refresh_indicator_internal_padding = 0x7f070002;
 	}
 
 	public static interface anim {
@@ -41,11 +41,11 @@ public interface PullToRefreshResource {
 	}
 
 	public static interface drawable {
-		int default_ptr_flip = 0x7f020000;
-		int default_ptr_rotate = 0x7f020001;
-		int indicator_bg_top = 0x7f020002;
-		int indicator_bg_bottom = 0x7f020003;
-		int indicator_arrow = 0x7f020004;
+		int pull_to_refresh_default_ptr_flip = 0x7f020000;
+		int pull_to_refresh_default_ptr_rotate = 0x7f020001;
+		int pull_to_refresh_indicator_bg_top = 0x7f020002;
+		int pull_to_refresh_indicator_bg_bottom = 0x7f020003;
+		int pull_to_refresh_indicator_arrow = 0x7f020004;
 	}
 
 	public static interface attr {

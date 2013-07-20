@@ -341,7 +341,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			mIndicatorIvTop = new IndicatorLayout(getContext(), Mode.PULL_FROM_START);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 					ViewGroup.LayoutParams.WRAP_CONTENT);
-			params.rightMargin = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.indicator_right_padding);
+			params.rightMargin = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.pull_to_refresh_indicator_right_padding);
 			params.gravity = Gravity.TOP | Gravity.RIGHT;
 			refreshableViewWrapper.addView(mIndicatorIvTop, params);
 
@@ -356,7 +356,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			mIndicatorIvBottom = new IndicatorLayout(getContext(), Mode.PULL_FROM_END);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 					ViewGroup.LayoutParams.WRAP_CONTENT);
-			params.rightMargin = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.indicator_right_padding);
+			params.rightMargin = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.pull_to_refresh_indicator_right_padding);
 			params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
 			refreshableViewWrapper.addView(mIndicatorIvBottom, params);
 

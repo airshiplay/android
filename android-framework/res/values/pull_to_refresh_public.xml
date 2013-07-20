@@ -2,6 +2,7 @@
 <resources>
 
     <!-- attr -->
+    <!-- pull_to_refresh -->
     <public id="0x7f010000" name="ptrRefreshableViewBackground" type="attr" />
     <public id="0x7f010001" name="ptrHeaderBackground" type="attr" />
     <public id="0x7f010002" name="ptrHeaderTextColor" type="attr" />
@@ -23,25 +24,31 @@
     <public id="0x7f010012" name="ptrDrawableBottom" type="attr" />
 
     <!-- drawable -->
-    <public id="0x7f020000" name="default_ptr_flip" type="drawable" />
-    <public id="0x7f020001" name="default_ptr_rotate" type="drawable" />
+    <public id="0x7f020000" name="pull_to_refresh_default_ptr_flip" type="drawable" />
+    <public id="0x7f020001" name="pull_to_refresh_default_ptr_rotate" type="drawable" />
+    <public id="0x7f020002" name="pull_to_refresh_indicator_bg_top" type="drawable" />
+    <public id="0x7f020003" name="pull_to_refresh_indicator_bg_bottom" type="drawable" />
+    <public id="0x7f020004" name="pull_to_refresh_indicator_arrow" type="drawable" />
 
     <!-- layout -->
-    <public id="0x7f030000" name="mobile_pull_to_refresh_header_horizontal" type="layout" />
-    <public id="0x7f030001" name="mobile_pull_to_refresh_header_vertical" type="layout" />
+    <public id="0x7f030000" name="pull_to_refresh_header_horizontal" type="layout" />
+    <public id="0x7f030001" name="pull_to_refresh_header_vertical" type="layout" />
 
     <!-- anim -->
-    <public id="0x7f040000" name="slide_right_in" type="anim" />
+    <public id="0x7f040000" name="slide_in_from_top" type="anim" />
+    <public id="0x7f040001" name="slide_in_from_bottom" type="anim" />
+    <public id="0x7f040002" name="slide_out_to_top" type="anim" />
+    <public id="0x7f040003" name="slide_out_to_bottom" type="anim" />
     <!-- raw -->
     <public id="0x7f050000" name="pull_event" type="raw" />
     <!-- color -->
     <public id="0x7f060000" name="android_white" type="color" />
     <!-- dimen -->
-    <public id="0x7f070000" name="indicator_right_padding" type="dimen" />
-    <public id="0x7f070001" name="indicator_corner_radius" type="dimen" />
-    <public id="0x7f070002" name="indicator_internal_padding" type="dimen" />
+    <public id="0x7f070000" name="pull_to_refresh_indicator_right_padding" type="dimen" />
+    <public id="0x7f070001" name="pull_to_refresh_indicator_corner_radius" type="dimen" />
+    <public id="0x7f070002" name="pull_to_refresh_indicator_internal_padding" type="dimen" />
     <!-- id -->
-    <public id="0x7f080000" name="fl_inner" type="id" />
+    <public id="0x7f080000" name="pull_to_refresh_fl_inner" type="id" />
     <public id="0x7f080001" name="pull_to_refresh_text" type="id" />
     <public id="0x7f080002" name="pull_to_refresh_progress" type="id" />
     <public id="0x7f080003" name="pull_to_refresh_sub_text" type="id" />

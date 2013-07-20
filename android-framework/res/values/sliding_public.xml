@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public id="0x7f080009" name="sliding_layout_sidebar" type="id" />
+    <public id="0x7f08000a" name="sliding_layout_content" type="id" />
+</resources>

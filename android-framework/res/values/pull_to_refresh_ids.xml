@@ -5,7 +5,7 @@
     <item name="webview" type="id"/>
     <item name="scrollview" type="id"/>
     <item name="viewpager" type="id"/>
-    <item name="fl_inner" type="id"/>
+    <item name="pull_to_refresh_fl_inner" type="id"/>
     <item name="pull_to_refresh_text" type="id"/>
     <item name="pull_to_refresh_progress" type="id"/>
     <item name="pull_to_refresh_sub_text" type="id"/>

@@ -56,10 +56,10 @@ public class BitmapFlowIndicator extends View implements FlowIndicator,
 				R.styleable.BitmapFlowIndicator);
 		this.inactiveRes = a.getResourceId(
 				R.styleable.BitmapFlowIndicator_inactiveRes,
-				R.drawable.indicator_inactive);
+				R.drawable.viewflow_indicator_inactive);
 		this.activeRes = a.getResourceId(
 				R.styleable.BitmapFlowIndicator_activeRes,
-				R.drawable.indicator_active);
+				R.drawable.viewflow_indicator_active);
 		this.fadeOutTime = a.getInt(
 				R.styleable.BitmapFlowIndicator_fadeOutTime, 0);
 		Resources resources = context.getResources();

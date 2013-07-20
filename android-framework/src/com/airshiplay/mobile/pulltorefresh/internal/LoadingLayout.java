@@ -69,14 +69,14 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		mScrollDirection = scrollDirection;
 		switch (scrollDirection) {
 		case HORIZONTAL:
-			LayoutInflater.from(context).inflate(PullToRefreshResource.layout.mobile_pull_to_refresh_header_horizontal, this);
+			LayoutInflater.from(context).inflate(PullToRefreshResource.layout.pull_to_refresh_header_horizontal, this);
 			break;
 		case VERTICAL:
 		default:
-			LayoutInflater.from(context).inflate(PullToRefreshResource.layout.mobile_pull_to_refresh_header_vertical, this);
+			LayoutInflater.from(context).inflate(PullToRefreshResource.layout.pull_to_refresh_header_vertical, this);
 			break;
 		}
-		mInnerLayout = (FrameLayout) findViewById(PullToRefreshResource.id.fl_inner);
+		mInnerLayout = (FrameLayout) findViewById(PullToRefreshResource.id.pull_to_refresh_fl_inner);
 		mHeaderText = (TextView) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_text);
 		mHeaderProgress = (ProgressBar) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_progress);
 		mSubHeaderText = (TextView) mInnerLayout.findViewById(PullToRefreshResource.id.pull_to_refresh_sub_text);

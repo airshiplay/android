@@ -46,10 +46,10 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 		super(context);
 		mArrowImageView = new ImageView(context);
 
-		Drawable arrowD = getResources().getDrawable(PullToRefreshResource.drawable.indicator_arrow);
+		Drawable arrowD = getResources().getDrawable(PullToRefreshResource.drawable.pull_to_refresh_indicator_arrow);
 		mArrowImageView.setImageDrawable(arrowD);
 
-		final int padding = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.indicator_internal_padding);
+		final int padding = getResources().getDimensionPixelSize(PullToRefreshResource.dimen.pull_to_refresh_indicator_internal_padding);
 		mArrowImageView.setPadding(padding, padding, padding, padding);
 		addView(mArrowImageView);
 
@@ -58,7 +58,7 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 			case PULL_FROM_END:
 				inAnimResId = PullToRefreshResource.anim.slide_in_from_bottom;
 				outAnimResId = PullToRefreshResource.anim.slide_out_to_bottom;
-				setBackgroundResource(PullToRefreshResource.drawable.indicator_bg_bottom);
+				setBackgroundResource(PullToRefreshResource.drawable.pull_to_refresh_indicator_bg_bottom);
 
 				// Rotate Arrow so it's pointing the correct way
 				mArrowImageView.setScaleType(ScaleType.MATRIX);
@@ -70,7 +70,7 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 			case PULL_FROM_START:
 				inAnimResId = PullToRefreshResource.anim.slide_in_from_top;
 				outAnimResId = PullToRefreshResource.anim.slide_out_to_top;
-				setBackgroundResource(PullToRefreshResource.drawable.indicator_bg_top);
+				setBackgroundResource(PullToRefreshResource.drawable.pull_to_refresh_indicator_bg_top);
 				break;
 		}
 

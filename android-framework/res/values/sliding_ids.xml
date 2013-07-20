@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="sliding_layout_sidebar" type="id"/>
+    <item name="sliding_layout_content" type="id"/>
+
+</resources>

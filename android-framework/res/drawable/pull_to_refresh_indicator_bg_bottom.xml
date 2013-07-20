@@ -12,7 +12,7 @@
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
         android:radius="1dp"
-        android:topLeftRadius="@dimen/indicator_corner_radius"
-        android:topRightRadius="@dimen/indicator_corner_radius" />
+        android:topLeftRadius="@dimen/pull_to_refresh_indicator_corner_radius"
+        android:topRightRadius="@dimen/pull_to_refresh_indicator_corner_radius" />
 
 </shape>

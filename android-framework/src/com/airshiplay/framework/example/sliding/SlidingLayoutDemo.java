@@ -37,7 +37,7 @@ public class SlidingLayoutDemo extends Activity implements View.OnClickListener 
 		mSlidingLayout = (SlidingLayout) findViewById(R.id.slidinglayout);
 		mSideBar = findViewById(R.id.sidebar);
 		rightView = findViewById(R.id.manage_btn);
-		new SlidingDrawer(this,null);
+		//new SlidingDrawer(this,null);
 	}
 
 	void setContentView() {
