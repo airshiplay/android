@@ -1,5 +1,13 @@
 package com.airshiplay.mobile.pulltorefresh.internal;
 
+/**
+ * 资源1 pull to refresh
+ * 
+ * @author airshiplay
+ * @Create 2013-7-20
+ * @version 1.0
+ * @since 1.0
+ */
 public interface PullToRefreshResource {
 	public static interface layout {
 		final static int pull_to_refresh_header_horizontal = 0x7f030000;
@@ -71,9 +79,11 @@ public interface PullToRefreshResource {
 	}
 
 	public static interface styleable {
-		public static final int[] PullToRefresh = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005,
-				0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e,
-				0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012 };
+		public static final int[] PullToRefresh = { 0x7f010000, 0x7f010001,
+				0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006,
+				0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b,
+				0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f, 0x7f010010,
+				0x7f010011, 0x7f010012 };
 		public static final int PullToRefresh_ptrRefreshableViewBackground = 0x00;
 		public static final int PullToRefresh_ptrHeaderBackground = 0x01;
 		public static final int PullToRefresh_ptrHeaderTextColor = 0x02;

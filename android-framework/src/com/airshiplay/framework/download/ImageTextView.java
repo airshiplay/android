@@ -17,12 +17,12 @@ public class ImageTextView extends LinearLayout implements ViewState {
 
 	public ImageTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-
 		init(context);
 	}
 
 	public ImageTextView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
+		super(context, attrs);
+		init(context);
 	}
 
 	public ImageTextView(Context context) {

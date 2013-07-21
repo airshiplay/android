@@ -58,8 +58,8 @@ public class AnimationLayout extends ViewGroup {
     @Override
     public void onFinishInflate() {
         super.onFinishInflate();
-        mSidebar = findViewById(R.id.sliding_layout_sidebar);
-        mContent = findViewById(R.id.sliding_layout_content);
+        mSidebar = findViewById(SlidingResource.id.sliding_layout_sidebar);
+        mContent = findViewById(SlidingResource.id.sliding_layout_content);
 
         if (mSidebar == null) {
             throw new NullPointerException("no view id = animation_sidebar");

@@ -12,7 +12,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.util.LruCache;
 import android.text.TextUtils;
 
-import com.airshiplay.framework.util.BitmapUtil;
+import com.airshiplay.mobile.util.BitmapUtil;
 
 public class ImageCache {
 	private static final String DISK_CACHE_PATH = "/web_image_cache/";
