@@ -2,7 +2,8 @@ package com.airshiplay.mobile.util;
 
 import java.io.File;
 import java.io.FileFilter;
-
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -29,14 +30,12 @@ public class DrawableUtil {
 	 * @param bounds
 	 * @return
 	 */
-	public static BitmapDrawable getBitmapDrawable(Resources res,
-			Bitmap bitmap, Rect bounds) {
+	public static BitmapDrawable getBitmapDrawable(Resources res, Bitmap bitmap, Rect bounds) {
 		BitmapDrawable bitmapDrawable = new BitmapDrawable(res, bitmap);
 		if (bounds != null)
 			bitmapDrawable.setBounds(bounds);
 		else if (bitmap != null)
-			bitmapDrawable.setBounds(0, 0, bitmap.getWidth(),
-					bitmap.getHeight());
+			bitmapDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
 		return bitmapDrawable;
 	}
 
@@ -46,6 +45,27 @@ public class DrawableUtil {
 	 */
 	public static BitmapDrawable getBitmapDrawable(Bitmap bitmap) {
 		return getBitmapDrawable(null, bitmap, null);
+	}
+
+	/**
+	 * @param bitmap
+	 *            bitmap为经过编译的PNG文件 命令如下：aapt c -v -S /path/resource/source -C
+	 *            /path/resource/destination
+	 * @param res
+	 * @return
+	 */
+	public static Drawable getDrawable(Bitmap bitmap, Resources res) {
+		byte[] chunk = bitmap.getNinePatchChunk();
+		if (chunk != null && NinePatch.isNinePatchChunk(chunk)) {
+			Rect padding = new Rect();
+			ByteBuffer buffer = ByteBuffer.wrap(chunk, 12, 16).order((ByteOrder.LITTLE_ENDIAN));
+			padding.left = buffer.getInt();
+			padding.right = buffer.getInt();
+			padding.top = buffer.getInt();
+			padding.bottom = buffer.getInt();
+			return new NinePatchDrawable(res, bitmap, chunk, padding, null);
+		}
+		return getBitmapDrawable(res, bitmap, null);
 	}
 
 	/**
@@ -66,8 +86,7 @@ public class DrawableUtil {
 	 * @param resId
 	 * @return
 	 */
-	public static Drawable getNewDrawable(Drawable drawable, Resources res,
-			int resId) {
+	public static Drawable getNewDrawable(Drawable drawable, Resources res, int resId) {
 		Drawable localDrawable = res.getDrawable(resId);
 		Rect bounds = new Rect();
 		localDrawable.copyBounds(bounds);
@@ -104,8 +123,7 @@ public class DrawableUtil {
 			localBitmap = ((BitmapDrawable) localDrawable).getBitmap();
 		} else if (localDrawable instanceof StateListDrawable) {
 			StateListDrawable stateListDrawable = (StateListDrawable) localDrawable;
-			DrawableContainerState state = (DrawableContainerState) stateListDrawable
-					.getConstantState();
+			DrawableContainerState state = (DrawableContainerState) stateListDrawable.getConstantState();
 			if (state.getChildCount() > 0) {
 				localDrawable = state.getChildren()[0];
 				if (localDrawable instanceof NinePatchDrawable)
@@ -124,8 +142,7 @@ public class DrawableUtil {
 			if (localBitmap != null && !localBitmap.isRecycled())
 				localBitmap.recycle();
 			if (chunk != null && NinePatch.isNinePatchChunk(chunk)) {
-				drawable = new NinePatchDrawable(res, bitmap, chunk, padding,
-						null);
+				drawable = new NinePatchDrawable(res, bitmap, chunk, padding, null);
 			} else {
 				drawable = getBitmapDrawable(res, bitmap, bounds);
 			}
@@ -163,33 +180,23 @@ public class DrawableUtil {
 			@Override
 			public boolean accept(File pathname) {
 				String fileName = pathname.getName();
-				return fileName.startsWith(prefix)
-						&& (fileName.endsWith(".png") || fileName
-								.endsWith(".PNG"));
+				return fileName.startsWith(prefix) && (fileName.endsWith(".png") || fileName.endsWith(".PNG"));
 			}
 		});
 		if (files == null || files.length == 0)
 			return null;
 		if (files.length == 1)
-			return getBitmapDrawable(BitmapUtil.getBitmap(files[0]
-					.getAbsolutePath()));
+			return getBitmapDrawable(BitmapUtil.getBitmap(files[0].getAbsolutePath()));
 		StateListDrawable stateListDrawable = new StateListDrawable();
 		for (int i = 0; i < files.length; i++) {
-			BitmapDrawable bitmapDrawable = getBitmapDrawable(BitmapUtil
-					.getBitmap(files[i].getAbsolutePath()));
+			BitmapDrawable bitmapDrawable = getBitmapDrawable(BitmapUtil.getBitmap(files[i].getAbsolutePath()));
 			String fileName = files[i].getName();
 			if (fileName.contains("pressed")) {
-				stateListDrawable.addState(
-						new int[] { android.R.attr.state_pressed },
-						bitmapDrawable);
+				stateListDrawable.addState(new int[] { android.R.attr.state_pressed }, bitmapDrawable);
 			} else if (fileName.contains("checked")) {
-				stateListDrawable.addState(
-						new int[] { android.R.attr.state_checked },
-						bitmapDrawable);
+				stateListDrawable.addState(new int[] { android.R.attr.state_checked }, bitmapDrawable);
 			} else if (fileName.contains("selected")) {
-				stateListDrawable.addState(
-						new int[] { android.R.attr.state_selected },
-						bitmapDrawable);
+				stateListDrawable.addState(new int[] { android.R.attr.state_selected }, bitmapDrawable);
 			} else if (fileName.contains("normal")) {
 				stateListDrawable.addState(new int[] { 0 }, bitmapDrawable);
 			}
@@ -210,15 +217,12 @@ public class DrawableUtil {
 	 *            本地图片资源id,判断是否为Nine Patch File
 	 * @return
 	 */
-	public static Drawable getDrawable(String path, final String prefix,
-			Resources res, int resId) {
+	public static Drawable getDrawable(String path, final String prefix, Resources res, int resId) {
 		File[] files = new File(path).listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
 				String fileName = pathname.getName();
-				return fileName.startsWith(prefix)
-						&& (fileName.endsWith(".png") || fileName
-								.endsWith(".PNG"));
+				return fileName.startsWith(prefix) && (fileName.endsWith(".png") || fileName.endsWith(".PNG"));
 			}
 		});
 		if (files == null || files.length == 0)
@@ -238,8 +242,7 @@ public class DrawableUtil {
 			chunk = localBitmap.getNinePatchChunk();
 		} else if (localDrawable instanceof StateListDrawable) {
 			StateListDrawable stateListDrawable = (StateListDrawable) localDrawable;
-			DrawableContainerState state = (DrawableContainerState) stateListDrawable
-					.getConstantState();
+			DrawableContainerState state = (DrawableContainerState) stateListDrawable.getConstantState();
 			if (state.getChildCount() > 0) {
 				localDrawable = state.getChildren()[0];
 				if (localDrawable instanceof NinePatchDrawable)
@@ -254,11 +257,9 @@ public class DrawableUtil {
 			isNineDrawable = true;
 		// 待增加确认是否释放localbitmap
 		if (files.length == 1) {
-			Bitmap bitmap = BitmapUtil.getBitmap(files[0].getAbsolutePath(),
-					res.getDisplayMetrics().density);
+			Bitmap bitmap = BitmapUtil.getBitmap(files[0].getAbsolutePath(), res.getDisplayMetrics().density);
 			if (isNineDrawable) {
-				NinePatchDrawable drawable = new NinePatchDrawable(res, bitmap,
-						chunk, padding, files[0].getAbsolutePath());
+				NinePatchDrawable drawable = new NinePatchDrawable(res, bitmap, chunk, padding, files[0].getAbsolutePath());
 				drawable.setBounds(bounds);
 				return drawable;
 			}
@@ -266,25 +267,20 @@ public class DrawableUtil {
 		}
 		StateListDrawable stateListDrawable = new StateListDrawable();
 		for (int i = 0; i < files.length; i++) {
-			Bitmap bitmap = BitmapUtil.getBitmap(files[i].getAbsolutePath(),
-					res.getDisplayMetrics().density);
+			Bitmap bitmap = BitmapUtil.getBitmap(files[i].getAbsolutePath(), res.getDisplayMetrics().density);
 			Drawable drawable;
 			if (isNineDrawable) {
-				drawable = new NinePatchDrawable(res, bitmap, chunk, padding,
-						files[0].getAbsolutePath());
+				drawable = new NinePatchDrawable(res, bitmap, chunk, padding, files[0].getAbsolutePath());
 				drawable.setBounds(bounds);
 			} else
 				drawable = getBitmapDrawable(res, bitmap, bounds);
 			String fileName = files[i].getName();
 			if (fileName.contains("pressed")) {
-				stateListDrawable.addState(
-						new int[] { android.R.attr.state_pressed }, drawable);
+				stateListDrawable.addState(new int[] { android.R.attr.state_pressed }, drawable);
 			} else if (fileName.contains("checked")) {
-				stateListDrawable.addState(
-						new int[] { android.R.attr.state_checked }, drawable);
+				stateListDrawable.addState(new int[] { android.R.attr.state_checked }, drawable);
 			} else if (fileName.contains("selected")) {
-				stateListDrawable.addState(
-						new int[] { android.R.attr.state_selected }, drawable);
+				stateListDrawable.addState(new int[] { android.R.attr.state_selected }, drawable);
 			} else if (fileName.contains("normal")) {
 				stateListDrawable.addState(new int[] { 0 }, drawable);
 			}
