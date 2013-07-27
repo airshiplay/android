@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -51,7 +53,7 @@ public class DrawableUtil {
 	 *            bitmap为经过编译的PNG文件 命令如下：aapt c -v -S /path/resource/source -C
 	 *            /path/resource/destination
 	 * @param res
-	 * @return
+	 * @return {@link BitmapDrawable} or {@link NinePatchDrawable}
 	 */
 	public static Drawable getDrawable(Bitmap bitmap, Resources res) {
 		byte[] chunk = bitmap.getNinePatchChunk();
@@ -86,7 +88,7 @@ public class DrawableUtil {
 	 * @param res
 	 * @param resId
 	 *            bitmap图片 资源id
-	 * @return
+	 * @return  {@link BitmapDrawable} or {@link NinePatchDrawable}
 	 */
 	public static Drawable getDrawable(Bitmap bitmap, Resources res, int resId) {
 		Rect padding = new Rect();
@@ -145,7 +147,7 @@ public class DrawableUtil {
 	 *            /path/resource/source -C /path/resource/destination
 	 * @param prefix
 	 *            图片文件名前缀
-	 * @return
+	 * @return  {@link BitmapDrawable} or {@link NinePatchDrawable} or {@link StateListDrawable}
 	 */
 	public static Drawable getDrawable(String path, final String prefix, Resources res) {
 		File[] files = new File(path).listFiles(new FileFilter() {
@@ -160,6 +162,7 @@ public class DrawableUtil {
 		if (files.length == 1)
 			return getDrawable(BitmapUtil.getBitmap(files[0].getAbsolutePath()), res);
 		StateListDrawable stateListDrawable = new StateListDrawable();
+		Drawable endDrawable = null;
 		for (int i = 0; i < files.length; i++) {
 			Drawable drawable = getDrawable(BitmapUtil.getBitmap(files[i].getAbsolutePath()), res);
 			String fileName = files[i].getName();
@@ -176,16 +179,18 @@ public class DrawableUtil {
 			} else if (fileName.contains("disabled")) {
 				stateListDrawable.addState(new int[] { -android.R.attr.state_enabled }, drawable);
 			} else if (fileName.contains("normal")) {
-				stateListDrawable.addState(new int[] {}, drawable);
+				endDrawable = drawable;
 			} else {
-				stateListDrawable.addState(new int[] {}, drawable);
+				endDrawable = drawable;
 			}
 		}
+		if (endDrawable != null)
+			stateListDrawable.addState(new int[] {}, endDrawable);
 		return stateListDrawable;
 	}
 
 	/**
-	 * 支持Nine Patch File ;其他参考{@link DrawableUtil#getDrawable(String, String)}
+	 * 支持依据resId生成Nine Patch File ;其他参考{@link DrawableUtil#getDrawable(String, String)}
 	 * 
 	 * @param path
 	 *            图片存放文件夹
@@ -195,7 +200,7 @@ public class DrawableUtil {
 	 *            参考 {@link android.content.res.Resources}
 	 * @param resId
 	 *            本地图片资源id,判断是否为Nine Patch File,必须是单状态图片
-	 * @return
+	 * @return {@link BitmapDrawable} or {@link NinePatchDrawable} or {@link StateListDrawable}
 	 */
 	public static Drawable getDrawable(String path, final String prefix, Resources res, int resId) {
 		File[] files = new File(path).listFiles(new FileFilter() {
@@ -236,6 +241,7 @@ public class DrawableUtil {
 			return getBitmapDrawable(res, bitmap, bounds);
 		}
 		StateListDrawable stateListDrawable = new StateListDrawable();
+		Drawable endDrawable = null;
 		for (int i = 0; i < files.length; i++) {
 			Bitmap bitmap = BitmapUtil.getBitmap(files[i].getAbsolutePath(), res.getDisplayMetrics().density);
 			Drawable drawable;
@@ -258,11 +264,13 @@ public class DrawableUtil {
 			} else if (fileName.contains("disabled")) {
 				stateListDrawable.addState(new int[] { -android.R.attr.state_enabled }, drawable);
 			} else if (fileName.contains("normal")) {
-				stateListDrawable.addState(new int[] {}, drawable);
+				endDrawable = drawable;
 			} else {
-				stateListDrawable.addState(new int[] {}, drawable);
+				endDrawable = drawable;
 			}
 		}
+		if (endDrawable != null)
+			stateListDrawable.addState(new int[] {}, endDrawable);
 		return stateListDrawable;
 	}
 }

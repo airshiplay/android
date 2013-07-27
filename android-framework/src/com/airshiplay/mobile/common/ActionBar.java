@@ -1,4 +1,4 @@
-package com.airshiplay.framework.common;
+package com.airshiplay.mobile.common;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ActionBar {
-	private static void closeInputMethod(Activity activity) {
+	public static void closeInputMethod(Activity activity) {
 		if ((activity != null) && (activity.getCurrentFocus() != null)) {
 			InputMethodManager inputMethodManager = (InputMethodManager) activity
 					.getSystemService(Context.INPUT_METHOD_SERVICE);
