@@ -1,7 +1,10 @@
 package com.airshiplay.framework;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -59,6 +62,7 @@ public class MainUI extends Activity implements SystemEvent.EventListener,
 		}
 		Bitmap bit = BitmapUtil
 				.getBitmap("/sdcard/test_main_btn_bg_pressed.9.png");
+		DrawableUtil.getDrawable(bit, getResources());
 		background = DrawableUtil.getDrawable(bit, getResources(),
 				R.drawable.test_main_btn_bg_pressed);
 		v.setBackground(background);
