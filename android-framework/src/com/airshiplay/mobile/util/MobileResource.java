@@ -36,7 +36,9 @@ public class MobileResource {
 	 * 可以获取其他apk资源
 	 * 
 	 * @param res
+	 *            其他应用 Resource
 	 * @param pkg
+	 *            其他应用PackageName
 	 * @return
 	 */
 	public static MobileResource getInstance(Resources res, String pkg) {

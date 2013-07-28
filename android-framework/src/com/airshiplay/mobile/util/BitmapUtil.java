@@ -108,8 +108,7 @@ public class BitmapUtil {
 		return options;
 	}
 
-	public static void postScale(String loadFilePath, String saveFilePath,
-			int h, int w) {
+	public static void postScale(String loadFilePath, String saveFilePath, int h, int w) {
 		Bitmap bitmap = BitmapLoader.getBitmapFromDisk(loadFilePath);
 		if (bitmap != null)
 			saveBitmap(zoomImage(bitmap, w, h), saveFilePath);
@@ -128,19 +127,16 @@ public class BitmapUtil {
 			if (!bitmap.isRecycled()) {
 				try {
 					Bitmap.Config localConfig = Bitmap.Config.ARGB_8888;
-					Bitmap resultBitmap = Bitmap.createBitmap(
-							bitmap.getWidth(), bitmap.getHeight(), localConfig);
+					Bitmap resultBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), localConfig);
 					Canvas canvas = new Canvas(resultBitmap);
 					Paint paint = new Paint();
-					Rect rectSrc = new Rect(0, 0, bitmap.getWidth(),
-							bitmap.getHeight());
+					Rect rectSrc = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 					RectF rectFDst = new RectF(rectSrc);
 					paint.setAntiAlias(true);
 					canvas.drawARGB(0, 0, 0, 0);
 					paint.setColor(-12434878);
 					canvas.drawRoundRect(rectFDst, radius, radius, paint);
-					paint.setXfermode(new PorterDuffXfermode(
-							PorterDuff.Mode.SRC_IN));
+					paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 					canvas.drawBitmap(bitmap, rectSrc, rectFDst, paint);
 					bitmap.recycle();
 					return resultBitmap;
@@ -155,14 +151,11 @@ public class BitmapUtil {
 
 	public static Bitmap zoomImage(Bitmap bitmap) {
 		if (bitmap != null) {
-			float scale = getBalance(width, height, bitmap.getHeight(),
-					bitmap.getWidth());
+			float scale = getBalance(width, height, bitmap.getHeight(), bitmap.getWidth());
 			Matrix localMatrix = new Matrix();
 			localMatrix.postScale(scale, scale);
 			try {
-				Bitmap localBitmap1 = Bitmap.createBitmap(bitmap, 0, 0,
-						bitmap.getWidth(), bitmap.getHeight(), localMatrix,
-						true);
+				Bitmap localBitmap1 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), localMatrix, true);
 				return localBitmap1;
 			} catch (OutOfMemoryError e) {
 				e.printStackTrace();
@@ -173,13 +166,11 @@ public class BitmapUtil {
 
 	public static Bitmap zoomImage(Bitmap bitmap, int w, int h) {
 		if (bitmap != null) {
-			float scale = getBalance(h, w, bitmap.getHeight(),
-					bitmap.getWidth());
+			float scale = getBalance(h, w, bitmap.getHeight(), bitmap.getWidth());
 			Matrix matrix = new Matrix();
 			matrix.postScale(scale, scale);
 			try {
-				Bitmap bmap = Bitmap.createBitmap(bitmap, 0, 0,
-						bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+				Bitmap bmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 				if (bitmap != null)
 					bitmap.recycle();
 				return bmap;
@@ -200,9 +191,7 @@ public class BitmapUtil {
 				try {
 					Matrix matrix = new Matrix();
 					matrix.setRotate(rotate);
-					Bitmap bmap = Bitmap
-							.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-									bitmap.getHeight(), matrix, true);
+					Bitmap bmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 					return bmap;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -221,9 +210,7 @@ public class BitmapUtil {
 				try {
 					Matrix matrix = new Matrix();
 					matrix.postScale(scale, scale);
-					Bitmap bmap = Bitmap
-							.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-									bitmap.getHeight(), matrix, true);
+					Bitmap bmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 					return bmap;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -236,12 +223,21 @@ public class BitmapUtil {
 	}
 
 	/**
+	 * 根据图片路径解析图片,默认资源图片为HDPI;若图片存放路径为drawable-*dpi,则解析为相应的DPI {@link Bitmap}
+	 * 
 	 * @param pathName
+	 *            /drawable-hdpi/***.png
 	 * @return
 	 */
 	public static Bitmap getBitmap(String pathName) {
 		Options opts = new Options();
-		opts.inDensity = DisplayMetrics.DENSITY_HIGH;
+		if (pathName.contains("drawable-hdpi"))
+			opts.inDensity = DisplayMetrics.DENSITY_HIGH;
+		else if (pathName.contains("drawable-xhdpi")) {
+			opts.inDensity = DisplayMetrics.DENSITY_XHIGH;
+		} else {
+			opts.inDensity = DisplayMetrics.DENSITY_HIGH;
+		}
 		opts.inTargetDensity = (int) (ScreenUtil.density * DisplayMetrics.DENSITY_DEFAULT);
 		return BitmapFactory.decodeFile(pathName, opts);
 	}

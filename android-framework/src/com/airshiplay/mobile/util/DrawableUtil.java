@@ -56,6 +56,8 @@ public class DrawableUtil {
 	 * @return {@link BitmapDrawable} or {@link NinePatchDrawable}
 	 */
 	public static Drawable getDrawable(Bitmap bitmap, Resources res) {
+		if(null==bitmap)
+			return null;
 		byte[] chunk = bitmap.getNinePatchChunk();
 		if (chunk != null && NinePatch.isNinePatchChunk(chunk)) {
 			Rect padding = new Rect();

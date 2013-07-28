@@ -9,6 +9,7 @@ import android.app.Application;
 import android.view.WindowManager;
 
 import com.airshiplay.mobile.log.LoggerFactory;
+import com.airshiplay.mobile.system.MobileDexClassLoader;
 import com.airshiplay.mobile.util.ScreenUtil;
 
 /**
@@ -33,6 +34,12 @@ public class MobileApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		getClassLoader();
+		Thread.currentThread().getContextClassLoader();
+		Thread.currentThread().setContextClassLoader(
+				new MobileDexClassLoader("/data/app/com.airshiplay.framework-1.apk", "/data/data/com.airshiplay.framework/lib", null,
+						getClassLoader()));
+
 		instance = this;
 		this.listActivities = new ArrayList<Activity>();
 		ScreenUtil.init(getApplicationContext());
